@@ -1,0 +1,2 @@
+function usersReducer(state={}, action) {
+}
