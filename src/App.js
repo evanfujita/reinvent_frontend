@@ -5,8 +5,9 @@ import './App.css';
 import Home from './components/Home'
 import Stations from './components/Stations'
 import Login from './components/Login'
-// import LoginForm from './components/LoginForm'
+import CreateDish from './components/CreateDish'
 import Signup from './components/Signup'
+import Ingredients from './components/Ingredients'
 import Dashboard from './components/Dashboard'
 import { connect } from 'react-redux'
 import { currentUser } from './actions/index'
@@ -46,7 +47,9 @@ class App extends React.Component {
           <Route path='/stations' component={Stations} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
+          <Route path='/ingredients' component={Ingredients} />
           <Route path='/dashboard' component={Dashboard} />
+          <Route path='/newDish' component={CreateDish} />
         </Switch>
     </div>
   );

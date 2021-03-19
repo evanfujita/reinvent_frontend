@@ -3,35 +3,52 @@ import { connect } from 'react-redux'
 import Stations from './Stations'
 import Dishes from './Dishes'
 import Ingredients from './Ingredients'
+import { Divider, Grid, Image, Segment } from 'semantic-ui-react'
 
 class Dashboard extends React.Component {
 
     render(){
-        // const { first_name, last_name, restaurant_name } = this.props.user
+        // const { first_name, last_name, restaurant } = this.props.user
         
         return(
-            <div className='ui grid'>
-                <div className='eight wide column'>
-                    Your Dashboard
-                    {/* <p className='text'>Welcome, {first_name} {last_name} of {restaurant_name}</p> */}
-                    <Stations />
-                </div>
-                <div className='eight wide column'>
-                    <Ingredients  />
-                    <Dishes />
-                </div>
-                <div className='eight wide column'>
-                    <p>hi</p>
-                </div>
-            </div>
+            <Segment>
+                <Grid columns={3} relaxed='very'>
+                    <Grid.Column>
+                        <Stations />
+                    </Grid.Column>
+                    <Grid.Column>
+                        {/* <Ingredients /> */}
+                    </Grid.Column>
+                </Grid>
+            </Segment>
         )
     }
 }
 
 const mapStateToProps = state => {
     return {
-        auth: state.auth
+        user: state.user
     }
 }
 
 export default connect(mapStateToProps)(Dashboard)
+
+
+
+// {/* <div className='ui grid'>
+// <div className='sixteen wide column'>
+//     {/* <p className='middle'>Welcome, {first_name} {last_name} of {restaurant}!</p> */}
+// </div>
+// <div className='eight wide column'>
+//     <Stations />
+// </div>
+// <div className='eight wide column'>
+//     <Ingredients  />
+// </div>
+// <div className='eight wide column'>
+//     <Dishes />
+// </div>
+// <div className='eight wide column'>
+    
+// </div>
+// </div> */}

@@ -31,8 +31,13 @@ class NavBar extends React.Component {
                 </>
                 :
                 <>
+                    <Link className='item'>Profile</Link>
+                    <Link className='item'>{this.props.user.restaurant}</Link>
                     <Link onClick={this.handleClick} className='item' to='/stations'>Stations</Link>
-                    <Link onClick={this.handleLogout} className='item' to='/home'>Logout</Link>      
+                    <Link onClick={this.handleClick} className='item' to='/ingredients'>Ingredients</Link>
+                    <Link onClick={this.handleClick} className='item' to='/dishes'>Dishes</Link>
+                    <Link onClick={this.handleClick} className='item' to='/newDish'>New Dish</Link>
+                    <Link onClick={this.handleLogout} className='item' to='/home'>Logout</Link>   
                 </>
                 }
             </div>

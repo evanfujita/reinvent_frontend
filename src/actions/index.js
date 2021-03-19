@@ -40,3 +40,10 @@ export const addIngredient = ingredient => {
         ingredient: ingredient
     }
 }
+
+export const selectCategory = category => {
+    return {
+        type: 'SELECT_CATEGORY',
+        category: category
+    }
+}
