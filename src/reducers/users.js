@@ -10,11 +10,7 @@ function user(state=null, action) {
                 restaurant: action.user.restaurant_name
             }
 
-        // case 'CURRENT_USER':
-        //     console.log('current user success', action.user)
-        //     return [...state, action.user]
-
-        case 'REMOVE_USER':
+        case 'LOGOUT':
             return {}
 
         default:
