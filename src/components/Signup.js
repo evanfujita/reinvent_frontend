@@ -1,11 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { loginSuccess } from '../actions/index'
+import { Form } from 'semantic-ui-react'
 
 class Signup extends React.Component{
 
     constructor(){
         super()
         this.state = {
+            first_name: '',
+            last_name: '',
+            restaurant_name: '',
             username: '',
             password: '',
             password_confirmation: ''
@@ -23,6 +28,9 @@ class Signup extends React.Component{
         const value = this.state
         
         this.setState({
+            first_name: '',
+            last_name: '',
+            restaurant_name: '',
             username: '',
             password: '',
             password_confirmation: ''
@@ -43,31 +51,30 @@ class Signup extends React.Component{
         fetch('http://localhost:3000/users', reqObj)
         .then(resp => resp.json())
         .then(user => {
-            console.log(user)
+            this.props.loginSuccess(user)
+            this.props.history.push('/stations')
         })
     }
 
 render(){
     return(
-        <form class='ui form' onSubmit={this.handleSubmit} >
-            <div class='fields'>
-            <div class='field'>
-                <input onChange={this.handleChange} type='text' name='username' value={this.state.username} placeholder='username'/>
-            </div>
-            <div class='field'>
-                <input onChange={this.handleChange} type='text' name='password' value={this.state.password} placeholder='password'/>
-            </div>
-            <div class='field'>
-                <input onChange={this.handleChange} type='text' name='password_confirmation' value={this.state.password_confirmation} placeholder='confirm password'/>
-            </div>
-            <div class='field'>
-            <input class='ui submit button' type='submit' name='submit' value='Register'/>
-            </div>
-            </div>
-        </form>
+        <Form onSubmit={this.handleSubmit} >    
+            <Form.Group widths='equal'>
+                <Form.Field onChange={this.handleChange} type='text' name='first_name' value={this.state.first_name} placeholder='first name'/>
+                <Form.Input onChange={this.handleChange} type='text' name='last_name' value={this.state.last_name} placeholder='last name'/>
+                <Form.Input onChange={this.handleChange} type='text' name='restaurant_name' value={this.state.restaurant_name} placeholder='restaurant name'/>
+                <Form.Input onChange={this.handleChange} type='text' name='username' value={this.state.username} placeholder='username'/>
+                <Form.Input onChange={this.handleChange} type='password' name='password' value={this.state.password} placeholder='password'/>
+                <Form.Input onChange={this.handleChange} type='password' name='password_confirmation' value={this.state.password_confirmation} placeholder='confirm password'/>
+                <Form.Input id='form-button-control-public' type='submit' name='submit' value='Register'/>
+            </Form.Group>
+        </Form>
      )
     }   
 }
 
+const mapDispatchToProps = {
+    loginSuccess: loginSuccess
+}
 
-export default Signup 
+export default connect(null, mapDispatchToProps)(Signup)

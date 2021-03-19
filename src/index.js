@@ -6,7 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { BrowserRouter } from 'react-router-dom'
-import rootReducer from './reducers/Index'
+import rootReducer from './reducers/index'
+import 'semantic-ui-css/semantic.min.css'
+
 
 let store = createStore(rootReducer, 
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

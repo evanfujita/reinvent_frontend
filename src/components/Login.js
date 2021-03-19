@@ -1,14 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { loginSuccess } from '../actions/index'
+import { Form } from 'semantic-ui-react'
+
 
 class Login extends React.Component{
-
-    constructor(){
-        super()
-        this.state = {
-            username: '',
-            password: ''
-        }
+    state = {
+        username: '',
+        password: '',
+        error: ''
     }
 
     handleChange = event => {
@@ -29,37 +29,59 @@ class Login extends React.Component{
     }
 
     handleLogin = value => {
-        const reqObj = {
+        const reqObj = { 
             method: 'POST',
             headers: {
-                // Authorization: `Bearer ${token}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(value)
         }
 
-        fetch('http://localhost:3000/', reqObj)
+        fetch('http://localhost:3000/auth', reqObj)
         .then(resp => resp.json())
         .then(user => {
-
+            console.log (user.user, '---')
+            if (user.error) {
+                this.setState({
+                    error: user.error
+                })
+            } else {
+                this.props.loginSuccess(user.user)
+                localStorage.setItem('token', user.token)
+                
+                this.setState({
+                    username: '',
+                    password: ''
+                })
+                this.props.history.push('/dashboard') 
+            }
         })
     }
 
     render(){
         return(
-            <form class="ui six wide column form"  >
-                <div class='fields'>
 
-                    <div class='field'>
-                        <input onChange={this.handleChange} type='text' name='username' value={this.state.username} placeholder='username'/>
-                    </div>
-                    <div class='field'>
-                        <input onChange={this.handleChange} type='password' name='password' value={this.state.password} placeholder='password'/>
-                    </div>
-                    <input class='ui submit button' type='submit' name='username' value='Login'/>
-                </div>
-            </form>
+        <div className='form'>
+            <h3>Login</h3>
+            { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null }
+            <Form onSubmit={this.handleSubmit} >
+                    <Form.Input
+                        fluid
+                        onChange={this.handleChange}
+                        type='text' name='username'
+                        value={this.state.username}
+                        placeholder='username'/>
+                    <Form.Input className='field' onChange={this.handleChange} type='password' name='password' value={this.state.password} placeholder='password'/>
+                    <input className='ui submit button' type='submit' name='username' value='Login'/>
+                
+            </Form>
+        </div>
         )}   
     }
 
 
-export default Login
+const mapDispatchToProps = {
+    loginSuccess: loginSuccess
+}
+
+export default connect(null, mapDispatchToProps)(Login)

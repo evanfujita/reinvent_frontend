@@ -1,9 +1,15 @@
-
 import { combineReducers } from 'redux'
-import usersReducer from './usersReducer'
+import userReducer from './users'
+import authReducer from './auth'
+import stationsReducer from './stations'
+import categoriesReducer from './categories'
+import ingredientsReducer from './ingredients'
 
-const rootReducer = combineReducers({
-  users: usersReducer
+export default combineReducers({
+  user: userReducer,
+  auth: authReducer,
+  stations: stationsReducer,
+  categories: categoriesReducer,
+  // ingredients: ingredientsReducer
 })
 
-export default rootReducer;

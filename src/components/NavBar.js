@@ -1,14 +1,42 @@
 import React from 'react'
-import { NavLink, Router } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const NavBar = () => {
-    return(
-    <div>
-            <NavLink to='/stations'>Stations</NavLink>
-            <NavLink to='/login'>Login</NavLink>
-            <NavLink to='/signup'>Signup</NavLink>
-    </div>
-    )
+class NavBar extends React.Component {
+    
+    state = {
+        ['/']: false,
+        ['/stations']: false,
+        ['/login']: false,
+        ['/signup']: false,
+    }
+
+    handleClick = (event) => {
+        
+        this.setState({
+            [!event.target.pathname]: false,
+            [event.target.pathname]: true,
+        })
+    }
+
+    handleLogout = () => {
+        this.props.history.push('/home')
+        localStorage.clear()
+    }
+
+    render(){
+    
+        const activeItem = this.state['/'] ? 'active item' : 'item'
+
+
+        return(
+            <div className="ui pointing right menu">
+                <Link onClick={this.handleClick} className='item 'to='/'>Home</Link>
+                <Link onClick={this.handleClick} className='item' to='/stations'>Stations</Link>
+                <Link onClick={this.handleClick} className='item' to='/login'>Login</Link>
+                <Link onClick={this.handleClick} className='item' to='/signup'>Signup</Link>
+                <Link onClick={this.handleLogout} className='item' to='/home'>Logout</Link>
+            </div>
+    )}
 }
 
 export default NavBar
