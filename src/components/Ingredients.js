@@ -27,6 +27,7 @@ class Ingredients extends React.Component{
     }
 
     handleChange = (event) => {
+        // debugger
         const id = parseInt(event.target.id)
         this.setState({
             categoryId: event.target.id,
@@ -37,64 +38,61 @@ class Ingredients extends React.Component{
 
     }
 
-    
-
-    ingredientOptions = () => {
-        let ingredients = []
-        if(this.state.categoryId !== 0){
-            this.props.ingredients.filter(ingredient => {
-                if(ingredient.category_id === this.state.categoryId){
-                    ingredients.push({key: ingredient.id, id: ingredient.id, text: ingredient.name})
-                }
-            })         
-        } else {
-        
-            this.props.ingredients.map(ingredient => {
-            ingredients.push({key: ingredient.id, id: ingredient.id, text: ingredient.name})
-            }
-        )
+    handleIngredientsChange = event => {
+        this.setState({
+            ingredients: event.target.innerText
+        })
     }
-    return ingredients
-}
+
     render(){
         
+        const ingredientsSelector = (
+            this.state.categoryId !== 0
+            ? 
+            this.props.ingredients.filter(ingredient => (ingredient.category_id === this.state.categoryId))
+            :
+            this.props.ingredients
+        )
+
        const categoryOptions = this.props.categories.map(category => {
-        
-            return {key: category.id, id: category.id, text: category.name}
+            return {key: category.id, id: category.id, text: category.name, value: category.id}
         })
 
+        const ingredientOptions = ingredientsSelector.map(ingredient => { 
+            
+            return {key: ingredient.id, id: ingredient.id, text: ingredient.name, value: ingredient.id}
+        })
 
         return(
             <Grid columns={2}>
                 <Grid.Row>
-                <Grid.Column>
-                <Dropdown 
-                placeholder='categories'
-                search
-                selection
-                options={categoryOptions}  
-                onChange={this.handleChange}
-                value={this.state.categories}
-                />
-                </Grid.Column>
-                <Grid.Column>
-                <Dropdown 
-                size='tiny'
-                placeholder='ingredients'
-                search
-                selection
-                options={this.ingredientOptions()}  
-                // onChange={this.handleChange}
-                // value={this.state.search}
-                />
-                </Grid.Column>
-                </Grid.Row>
-                
-                
+                    <Grid.Column>
+                        <Dropdown 
+                            placeholder='categories'
+                            
+                            search
+                            selection
+                            options={categoryOptions}  
+                            onChange={this.handleChange}
+                            text={this.state.categories}
+                        />
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Dropdown 
+                            size='tiny'
+                            placeholder='ingredients'
+                            search
+                            selection
+                            options={ingredientOptions}  
+                            onChange={this.handleIngredientsChange}
+                            text={this.state.ingredients}
+                        />
+                        </Grid.Column>
+                    </Grid.Row>
                 <Grid.Row>
                     <Grid.Column>
-                
-                </Grid.Column>
+                        
+                    </Grid.Column>
                 </Grid.Row>
                 
             </Grid>
