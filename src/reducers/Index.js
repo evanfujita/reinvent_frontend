@@ -10,6 +10,6 @@ export default combineReducers({
   auth: authReducer,
   stations: stationsReducer,
   categories: categoriesReducer,
-  // ingredients: ingredientsReducer
+  ingredients: ingredientsReducer
 })
 

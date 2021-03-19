@@ -19,3 +19,24 @@ export const logout = () => {
         user: {}
     }
 }
+
+export const addDish = dish => {
+    return {
+        type: 'ADD_DISH',
+        dish
+    }
+}
+
+export const addStation = station => {
+    return {
+        type: 'ADD_STATION',
+        station
+    }
+}
+
+export const addIngredient = ingredient => {
+    return {
+        type: 'ADD_INGREDIENT',
+        ingredient: ingredient
+    }
+}

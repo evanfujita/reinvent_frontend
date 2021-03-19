@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Stations from './Stations'
+import Dishes from './Dishes'
+import Ingredients from './Ingredients'
 
 class Dashboard extends React.Component {
 
@@ -15,8 +17,8 @@ class Dashboard extends React.Component {
                     <Stations />
                 </div>
                 <div className='eight wide column'>
-                    <Stations  />
-                    <Stations />
+                    <Ingredients  />
+                    <Dishes />
                 </div>
                 <div className='eight wide column'>
                     <p>hi</p>

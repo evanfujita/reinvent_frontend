@@ -1,7 +1,8 @@
 const ingredients = (state = [], action) => {
     switch(action.type){
-        case 'LOGIN_SUCCESS':
-            return action.user.ingredients
+        case 'ADD_INGREDIENT':
+            console.log('ingredients success', action.ingredient)
+            return action.ingredient
         default:
             return state
     }

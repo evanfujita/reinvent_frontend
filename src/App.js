@@ -14,12 +14,8 @@ import { currentUser } from './actions/index'
 class App extends React.Component {
   componentDidMount(){
     const token = localStorage.getItem('token')
-
-    // debugger
-    
     
     if(!localStorage.getItem('token')){
-             //token not recognized here?
       this.props.history.push('/home')
     } else {
     

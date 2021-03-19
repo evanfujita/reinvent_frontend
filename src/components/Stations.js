@@ -1,9 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Dropdown, Menu } from 'semantic-ui-react'
+import { addStation } from '../actions/index'
 
 
 class Stations extends React.Component{
+    componentDidMount(){
+        this.props.stations.forEach(station => {
+            fetch('http://localhost:3000/stations/')
+            .then(resp => resp.json())
+            .then(station=> {
+                this.props.addStation(station)
+                debugger
+            })
+        })
+    }
     
     handleChange = (event) => {
         console.log(event.target.innerText)
@@ -27,4 +38,8 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Stations)
+const mapDispatchToProps = {
+    addStation: addStation
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Stations)
