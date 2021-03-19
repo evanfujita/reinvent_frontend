@@ -59,9 +59,10 @@ class Ingredients extends React.Component{
         })
 
         const ingredientOptions = ingredientsSelector.map(ingredient => { 
-            
             return {key: ingredient.id, id: ingredient.id, text: ingredient.name, value: ingredient.id}
         })
+
+        const displayIngredients = ingredientsSelector.map(ingredient => {return <p>{ingredient.name}: {ingredient.quantity} {ingredient.quantity_unit}</p>})
 
         return(
             <Grid columns={2}>
@@ -91,7 +92,7 @@ class Ingredients extends React.Component{
                     </Grid.Row>
                 <Grid.Row>
                     <Grid.Column>
-                        
+                        {displayIngredients}
                     </Grid.Column>
                 </Grid.Row>
                 
