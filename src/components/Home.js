@@ -1,5 +1,7 @@
 
 const Home = () => {
+
+
     return(
         <div>
             Welcome to ReInvent(ory)

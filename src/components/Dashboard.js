@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Stations from './Stations'
 import Dishes from './Dishes'
 import Ingredients from './Ingredients'
+
 import { Divider, Grid, Image, Segment } from 'semantic-ui-react'
 
 class Dashboard extends React.Component {
@@ -13,12 +14,22 @@ class Dashboard extends React.Component {
         return(
             <Segment>
                 <Grid columns={3} relaxed='very'>
-                    <Grid.Column>
-                        <Stations />
+                  <Grid.Row>
+                    <Grid.Column color='orange'>
+                      <Stations />
                     </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
                     <Grid.Column>
-                        {/* <Ingredients /> */}
+                      <Dishes />
                     </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column color='grey'>
+                      <Ingredients />
+                        Hello
+                    </Grid.Column>
+                  </Grid.Row>
                 </Grid>
             </Segment>
         )

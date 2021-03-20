@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Dropdown, Grid, Menu } from 'semantic-ui-react'
-import { addStation } from '../actions/index'
-
+import { renderStations } from '../actions/stations'
+import { setStation } from '../actions/stations'
 class Stations extends React.Component{
 
     state = {
@@ -10,36 +10,30 @@ class Stations extends React.Component{
     }
 
     componentDidMount(){
-        this.props.stations.forEach(station => {
-            fetch('http://localhost:3000/stations/')
-            .then(resp => resp.json())
-            .then(station=> {
-                this.props.addStation(station)
-            })
+        fetch('http://localhost:3000/stations/')
+        .then(resp => resp.json())
+        .then(stations=> {
+            this.props.renderStations(stations)
         })
     }
     
     handleChange = (event) => {
-        this.setState({
-            showArea: event.target.innerText
-        })
+        const id = parseInt(event.target.id)
+        this.props.setStation(id)
     }
     
     render(){
         const display = this.props.stations.map(station => {
-           return {key: station.id, text: station.name, value: station.id}
+           return {key: station.id, id: station.id, text: station.name, value: station.id}
         })
 
-        const show = () => {<div>  </div>}
-
         return(
-            <Grid columns={3} divided>
+            <Grid columns={2} divided>
                 <Grid.Row>
                     <Grid.Column>
                     <Dropdown onChange={this.handleChange} text='Stations' options={display} simple item />
                     </Grid.Column>
                     <Grid.Column>
-                        <br/>
                         {this.state.showArea}
                     </Grid.Column>
                 </Grid.Row>
@@ -62,7 +56,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    addStation: addStation
+    renderStations,
+    setStation
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Stations)

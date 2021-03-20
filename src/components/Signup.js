@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { loginSuccess } from '../actions/index'
+import { loginSuccess } from '../actions/login'
 import { Form } from 'semantic-ui-react'
 
 class Signup extends React.Component{

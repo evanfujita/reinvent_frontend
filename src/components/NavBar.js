@@ -1,5 +1,5 @@
 import React from 'react'
-import { logout } from '../actions/index'
+import { logout } from '../actions/login'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 

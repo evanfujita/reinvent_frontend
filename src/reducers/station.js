@@ -1,14 +1,14 @@
-const dishes = (state = [], action) => {
+const station = (state = 0, action) => {
     switch(action.type){
         case 'LOGIN_SUCCESS':
-        
+            return state
+        case 'SET_STATION':
+            return action.station
         case 'LOGOUT':
             return []
-        case 'RENDER_DISHES':
-            return action.dishes
         default:
             return state
     }
 }
 
-export default dishes
+export default station

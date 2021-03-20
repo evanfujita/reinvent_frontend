@@ -5,9 +5,11 @@ import './App.css';
 import Home from './components/Home'
 import Stations from './components/Stations'
 import Login from './components/Login'
+import Dishes from './components/Dishes'
 import CreateDish from './components/CreateDish'
 import Signup from './components/Signup'
 import Ingredients from './components/Ingredients'
+import AddIngredient from './components/AddIngredient'
 import Dashboard from './components/Dashboard'
 import { connect } from 'react-redux'
 import { currentUser } from './actions/index'
@@ -30,7 +32,6 @@ class App extends React.Component {
     fetch('http://localhost:3000/current_user', reqObj)
     .then(resp => resp.json())
     .then(user => {
-    
       this.props.currentUser(user)
       this.props.history.push('/dashboard')
     })
@@ -49,7 +50,9 @@ class App extends React.Component {
           <Route path='/signup' component={Signup} />
           <Route path='/ingredients' component={Ingredients} />
           <Route path='/dashboard' component={Dashboard} />
+          <Route path='/dishes' component={Dishes} />  
           <Route path='/newDish' component={CreateDish} />
+          <Route exact path='/addIngredient' component={AddIngredient} />
         </Switch>
     </div>
   );

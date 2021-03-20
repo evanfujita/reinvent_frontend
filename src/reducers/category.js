@@ -1,7 +1,7 @@
-const category = (state = 1, action) => {
+const category = (state = 0, action) => {
     switch(action.type){
         case 'LOGIN_SUCCESS':
-            return 1
+            return null
         case 'SELECT_CATEGORY':
             return action.category
         case 'LOGOUT':

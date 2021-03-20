@@ -1,7 +1,10 @@
 const ingredients = (state = [], action) => {
     switch(action.type){
+        case 'RENDER_INGREDIENTS':
+            console.log('ingredients success', action.ingredients)
+            return action.ingredients
+        
         case 'ADD_INGREDIENT':
-            console.log('ingredients success', action.ingredient)
             return action.ingredient
         default:
             return state
