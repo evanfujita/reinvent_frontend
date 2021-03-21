@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { Dropdown, Grid, Menu } from 'semantic-ui-react'
 import { renderStations } from '../actions/stations'
 import { setStation } from '../actions/stations'
-class Stations extends React.Component{
+
+class StationsViewer extends React.Component{
 
     state = {
         showArea: null
@@ -18,14 +19,18 @@ class Stations extends React.Component{
     }
     
     handleChange = (event) => {
+        
         const id = parseInt(event.target.id)
         this.props.setStation(id)
     }
     
     render(){
         const display = this.props.stations.map(station => {
+            // debugger
            return {key: station.id, id: station.id, text: station.name, value: station.id}
         })
+
+        const station = this.props.stations.filter(station => station.id === this.props.station)
 
         return(
             <Grid columns={2} divided>
@@ -34,12 +39,12 @@ class Stations extends React.Component{
                     <Dropdown onChange={this.handleChange} text='Stations' options={display} simple item />
                     </Grid.Column>
                     <Grid.Column>
-                        {this.state.showArea}
+                        {station}
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column>
-                        {this.state.showArea}
+                        {station}
                     </Grid.Column>
                 </Grid.Row>
 
@@ -51,7 +56,8 @@ class Stations extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        stations: state.stations
+        stations: state.stations,
+        station: state.station
     }
 }
 
@@ -60,4 +66,4 @@ const mapDispatchToProps = {
     setStation
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Stations)
+export default connect(mapStateToProps, mapDispatchToProps)(StationsViewer)

@@ -41,7 +41,7 @@ class Login extends React.Component{
         fetch('http://localhost:3000/auth', reqObj)
         .then(resp => resp.json())
         .then(user => {
-            console.log (user.user, '---')    // CONSOLE LOG
+            // console.log (user.user, '---')    // CONSOLE LOG
             if (user.error) {
                 this.setState({
                     error: user.error

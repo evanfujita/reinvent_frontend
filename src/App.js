@@ -3,7 +3,7 @@ import NavBar from './components/NavBar'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import './App.css';
 import Home from './components/Home'
-import Stations from './components/Stations'
+import StationsViewer from './components/StationsViewer'
 import Login from './components/Login'
 import Dishes from './components/Dishes'
 import CreateDish from './components/CreateDish'
@@ -45,7 +45,7 @@ class App extends React.Component {
       </header>
         <Switch>
           <Route exact path='/home' component={Home} />
-          <Route path='/stations' component={Stations} />
+          <Route path='/stations' component={StationsViewer} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
           <Route path='/ingredients' component={Ingredients} />

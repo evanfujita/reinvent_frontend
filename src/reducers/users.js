@@ -3,7 +3,7 @@ function user(state=null, action) {
         case 'LOGIN_SUCCESS':
         case 'CURRENT_USER':
             
-            console.log('user login success', action.user) //CONSOLE LOG
+            // console.log('user login success', action.user) //CONSOLE LOG
             
             return {
                 first_name: action.user.first_name,

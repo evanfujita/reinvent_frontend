@@ -6,9 +6,9 @@ export const currentUser = user => {
     }
 }
 
-export const selectCategory = category => {
+export const setPage = page => {
     return {
-        type: 'SELECT_CATEGORY',
-        category: category
+        type: 'SET_PAGE',
+        page
     }
 }

@@ -1,10 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { renderIngredients } from '../actions/ingredients'
-import { selectCategory } from '../actions/index'
-import { Menu, Dropdown, Divider, Grid} from 'semantic-ui-react'
-
-
+import { selectCategory } from '../actions/categories'
+import { Dropdown, Grid} from 'semantic-ui-react'
 
 class Ingredients extends React.Component{
     constructor(){

@@ -7,6 +7,8 @@ import categoriesReducer from './categories'
 import ingredientsReducer from './ingredients'
 import categoryReducer from './category'
 import dishesReducer from './dishes'
+import navbarReducer from './navbar'
+import pageReducer from './page'
 
 export default combineReducers({
   user: userReducer,
@@ -16,6 +18,8 @@ export default combineReducers({
   categories: categoriesReducer,
   ingredients: ingredientsReducer,
   category: categoryReducer,
-  dishes: dishesReducer
+  dishes: dishesReducer,
+  page: pageReducer
+  // navbar: navbarReducer
 })
 

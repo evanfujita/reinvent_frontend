@@ -4,37 +4,51 @@ import { Dropdown } from 'semantic-ui-react'
 
 class CreateDish extends React.Component{
     
-    state = {
-        ingredients: []
+    constructor(){
+        super()
+        this.state = {
+            ingredients: []
+        }
+    }
+
+    handleChange = (event) => {
+        debugger
+        if(event.targe.className === 'delete icon'){
+
+
+        }
+
+        const id = parseInt(event.target.id)
+        this.setState({
+            ...this.state, 
+            ingredients: [...this.state.ingredients, id]
+        })
     }
     
     render(){
         
-        // const options = this.props.ingredients.map(ingredient => {
-        //     return {key: ingredient.id, value: ingredient.id, text: ingredient.name}
-        // }
+        const options = this.props.ingredients.map(ingredient => {
+            return {key: ingredient.id, id: ingredient.id, text: ingredient.name, value: ingredient.id}
+        })
 
         return(
             <div>
-                CREATE A DISH!
-
-            Select Ingredients
+            <p>Select Ingredients</p>
                 <Dropdown 
-              placeholder='ingredients'
-              fluid
-              search
-              selection
-            //   options={options}  
-              onChange={this.handleChange}
-              value={this.state.search}
-            />
+                    onChange={this.handleChange}
+                    placeholder='ingredients'
+                    multiple
+                    fluid
+                    search
+                    selection
+                    options={options}  
+                    onChange={this.handleChange}
+                    value={this.state.search}
+                />  
             </div>
         )
     }
 }
-
-
-
 
 
 const mapStateToProps = state => {
@@ -46,6 +60,5 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
 
 }
-
 
 export default connect(mapStateToProps)(CreateDish)
