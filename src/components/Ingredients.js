@@ -49,7 +49,6 @@ class Ingredients extends React.Component{
             <Grid columns={1}>
                 <Grid.Row>
                         <Dropdown 
-                            size='tiny'
                             placeholder='ingredients'
                             search
                             selection

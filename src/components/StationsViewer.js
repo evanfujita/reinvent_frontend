@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import { Dropdown, Grid, Menu } from 'semantic-ui-react'
 import { renderStations } from '../actions/stations'
 import { setStation } from '../actions/stations'
+import Station from './Station'
 
 class StationsViewer extends React.Component{
 
     state = {
-        showArea: null
+        station: {}
     }
 
     componentDidMount(){
@@ -17,39 +18,45 @@ class StationsViewer extends React.Component{
             this.props.renderStations(stations)
         })
     }
-    
-    handleChange = (event) => {
-        
+
+    handleClick = event => {
         const id = parseInt(event.target.id)
         this.props.setStation(id)
+        const stationInfo = this.props.stations.find(station => station.id === this.props.station)
+        this.setState({
+            station: stationInfo
+        })
+        debugger
     }
     
     render(){
-        const display = this.props.stations.map(station => {
-            // debugger
-           return {key: station.id, id: station.id, text: station.name, value: station.id}
+        const selectedStation = this.props.station
+        const showStations = this.props.stations.map(station => 
+            
+            { 
+                 return (
+                <Menu.Item
+                    key={station.id}
+                    name={station.name}
+                    id={station.id}
+                    active={selectedStation === station.id}
+                    onClick={this.handleClick} 
+                />
+            )
         })
-
-        const station = this.props.stations.filter(station => station.id === this.props.station)
 
         return(
             <Grid columns={2} divided>
                 <Grid.Row>
-                    <Grid.Column>
-                    <Dropdown onChange={this.handleChange} text='Stations' options={display} simple item />
-                    </Grid.Column>
-                    <Grid.Column>
-                        {station}
-                    </Grid.Column>
+                    <Menu pointing secondary>{showStations} </Menu>
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column>
-                        {station}
+
                     </Grid.Column>
                 </Grid.Row>
 
             </Grid>
-
         )
     }
 }
