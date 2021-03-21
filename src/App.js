@@ -8,7 +8,7 @@ import Login from './components/Login'
 import Dishes from './components/Dishes'
 import CreateDish from './components/CreateDish'
 import Signup from './components/Signup'
-import Ingredients from './components/Ingredients'
+import IngredientsContainer from './components/IngredientsContainer'
 import AddIngredient from './components/AddIngredient'
 import Dashboard from './components/Dashboard'
 import { connect } from 'react-redux'
@@ -48,7 +48,7 @@ class App extends React.Component {
           <Route path='/stations' component={StationsViewer} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
-          <Route path='/ingredients' component={Ingredients} />
+          <Route path='/ingredients' component={IngredientsContainer} />
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/dishes' component={Dishes} />  
           <Route path='/newDish' component={CreateDish} />

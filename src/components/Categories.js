@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { selectCategory } from '../actions/categories'
 import { Dropdown, Grid} from 'semantic-ui-react'
 
-class Ingredients extends React.Component{
+class Categories extends React.Component{
     constructor(){
         super()
         this.state = {

@@ -1,14 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { renderIngredients } from '../actions/ingredients'
-import { Dropdown, Grid} from 'semantic-ui-react'
+import { Dropdown, Menu, Grid} from 'semantic-ui-react'
 
-
-
-class Ingredients extends React.Component{
+class IngredientsContainer extends React.Component{
     constructor(){
         super()
         this.state = {
+            category: null,
             ingredients: ''
         }
     }
@@ -29,7 +28,19 @@ class Ingredients extends React.Component{
         })
     }
 
+    handleClick = event => {
+        const id = parseInt(event.target.id)
+        this.setState({
+            category: id
+        })
+    }
+
     render(){
+        const activeItem = this.state.category
+
+        const displayCategories = this.props.categories.map(category => {
+            return(<Menu.Item name={category.name} id={category.id} active={activeItem === category.id} onClick={this.handleClick} />)
+        })
         
         const ingredientsSelector = (
             this.props.category !== 0
@@ -46,20 +57,15 @@ class Ingredients extends React.Component{
         const displayIngredients = ingredientsSelector.map(ingredient => {return <p>{ingredient.name}: {ingredient.quantity} {ingredient.quantity_unit}</p>})
 
         return(
-            <Grid columns={1}>
+            <Grid>
                 <Grid.Row>
-                        <Dropdown 
-                            placeholder='ingredients'
-                            search
-                            selection
-                            options={ingredientOptions}  
-                            onChange={this.handleIngredientsChange}
-                            text={this.state.ingredients}
-                        />
+                    <Menu pointing secondary>
+                        {displayCategories}
+                    </Menu>
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column>
-                        {displayIngredients}
+                        {/* {displayIngredients} */}
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
@@ -71,7 +77,8 @@ class Ingredients extends React.Component{
 const mapStateToProps = state => {
     return {
         ingredients: state.ingredients,
-        category: state.category
+        category: state.category,
+        categories: state.categories
     }
 }
 
@@ -80,5 +87,14 @@ const mapDispatchToProps = {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Ingredients)
+export default connect(mapStateToProps, mapDispatchToProps)(IngredientsContainer)
 
+
+{/* <Dropdown 
+placeholder='ingredients'
+search
+selection
+options={ingredientOptions}  
+onChange={this.handleIngredientsChange}
+text={this.state.ingredients}
+/> */}

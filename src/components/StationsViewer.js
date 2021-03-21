@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Dropdown, Grid, Menu } from 'semantic-ui-react'
+import { Grid, Menu } from 'semantic-ui-react'
 import { renderStations } from '../actions/stations'
 import { setStation } from '../actions/stations'
 import Station from './Station'
