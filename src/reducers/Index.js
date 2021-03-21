@@ -8,6 +8,7 @@ import ingredientsReducer from './ingredients'
 import categoryReducer from './category'
 import dishesReducer from './dishes'
 import navbarReducer from './navbar'
+import quantityReducer from './ingredientQuantity'
 
 
 export default combineReducers({
@@ -19,6 +20,7 @@ export default combineReducers({
   ingredients: ingredientsReducer,
   category: categoryReducer,
   dishes: dishesReducer,
+  ingredientQuantity: quantityReducer
   
   // navbar: navbarReducer
 })

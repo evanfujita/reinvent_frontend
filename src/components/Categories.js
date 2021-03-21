@@ -13,7 +13,6 @@ class Categories extends React.Component{
     }
 
     handleChange = (event) => {
-        // debugger
         const id = parseInt(event.target.id)
         this.setState({
             categoryId: event.target.id,

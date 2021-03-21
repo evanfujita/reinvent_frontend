@@ -1,13 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { renderIngredients } from '../actions/ingredients'
-import { Dropdown, Menu, Grid} from 'semantic-ui-react'
+import { Form, Button, Menu, Grid} from 'semantic-ui-react'
+import { selectCategory } from '../actions/categories'
+import category from '../reducers/category'
+import IngredientForm from './IngredientForm'
 
 class IngredientsContainer extends React.Component{
     constructor(){
         super()
         this.state = {
-            category: null,
+            category: 0,
             ingredients: ''
         }
     }
@@ -35,6 +38,10 @@ class IngredientsContainer extends React.Component{
         })
     }
 
+    handleSubmit = () => {
+        debugger
+    }
+
     render(){
         const activeItem = this.state.category
 
@@ -43,32 +50,33 @@ class IngredientsContainer extends React.Component{
         })
         
         const ingredientsSelector = (
-            this.props.category !== 0
+            this.state.category !== 0
             ? 
-            this.props.ingredients.filter(ingredient => (ingredient.category_id === this.props.category))
+            this.props.ingredients.filter(ingredient => ingredient.category_id == this.state.category)
             :
             this.props.ingredients
         )
 
-        const ingredientOptions = ingredientsSelector.map(ingredient => { 
-            return {key: ingredient.id, id: ingredient.id, text: ingredient.name, value: ingredient.id}
-        })
-
-        const displayIngredients = ingredientsSelector.map(ingredient => {return <p>{ingredient.name}: {ingredient.quantity} {ingredient.quantity_unit}</p>})
+        const ingredientList = ingredientsSelector.map(ingredient => <p>{ingredient.name} - {ingredient.quantity}{ingredient.quantity_unit} </p> )
+        const form = ingredientsSelector.map(ingredient => <IngredientForm ingredient={ingredient} />)
 
         return(
-            <Grid>
-                <Grid.Row>
-                    <Menu pointing secondary>
-                        {displayCategories}
-                    </Menu>
-                </Grid.Row>
-                <Grid.Row>
-                    <Grid.Column>
-                        {/* {displayIngredients} */}
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+            
+        <div>
+            <div>
+                <Menu tabular>
+                    <Menu.Item name={'All'} id={0} active={activeItem === 0} onClick={this.handleClick} />
+                    {displayCategories}
+                </Menu>
+            </div>
+            <div>
+                <Form>
+                {form}
+                <Button onClick={this.handleSubmit} type='submit'>Submit</Button>
+                </Form>
+            </div>
+        </div>
+           
         )
     }
 }
@@ -83,18 +91,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    renderIngredients
+    renderIngredients,
+    selectCategory
 }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientsContainer)
-
-
-{/* <Dropdown 
-placeholder='ingredients'
-search
-selection
-options={ingredientOptions}  
-onChange={this.handleIngredientsChange}
-text={this.state.ingredients}
-/> */}
