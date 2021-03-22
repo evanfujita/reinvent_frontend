@@ -2,7 +2,7 @@ import React from 'react'
 import { logout } from '../actions/login'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom' 
-import { Menu } from 'semantic-ui-react'
+import { Menu, Icon, Label } from 'semantic-ui-react'
 
 class NavBar extends React.Component {
 
@@ -32,7 +32,10 @@ class NavBar extends React.Component {
                 :
                 <>
                     <Menu.Item name='profile' onClick={this.handleClick} active={page === '/profile'} id='profile' />
-                    <Menu.Item name='orderList' onClick={this.handleClick} active={page === '/orderList'} id='orderList' />
+                    <Menu.Item name='orderList' onClick={this.handleClick} active={page === '/orderList'} id='orderList'>
+                        OrderList
+                        <Label circular color='red' floating ></Label>
+                    </Menu.Item>
                     <Menu.Item name='stations' onClick={this.handleClick}  active={page === '/stations'} id='stations' />
                     <Menu.Item name='ingredients' onClick={this.handleClick}  active={page === '/ingredients'} id='ingredients' />
                     <Menu.Item name='dishes' onClick={this.handleClick}  active={page === '/dishes'} id='dishes' />
