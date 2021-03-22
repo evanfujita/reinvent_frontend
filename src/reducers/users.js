@@ -2,9 +2,6 @@ function user(state=null, action) {
     switch(action.type) {
         case 'LOGIN_SUCCESS':
         case 'CURRENT_USER':
-            
-            // console.log('user login success', action.user) //CONSOLE LOG
-            
             return {
                 first_name: action.user.first_name,
                 last_name: action.user.last_name,
@@ -13,7 +10,7 @@ function user(state=null, action) {
             }
 
         case 'LOGOUT':
-            return {}
+            return null
 
         default:
             return state

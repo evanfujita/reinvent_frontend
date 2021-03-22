@@ -6,13 +6,13 @@ import DishComponents from './DishComponents'
 
 class Dishes extends React.Component{
 
-componentDidMount(){
-    fetch('http://localhost:3000/dishes')
-    .then(resp => resp.json())
-    .then(dishes => {
-        this.props.renderDishes(dishes)
-    })
-}
+// componentDidMount(){
+//     fetch('http://localhost:3000/dishes')
+//     .then(resp => resp.json())
+//     .then(dishes => {
+//         this.props.renderDishes(dishes)
+//     })
+// }
 
 render(){
     const displayDishes = this.props.dishes.map(dish => {

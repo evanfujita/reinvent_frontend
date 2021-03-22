@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { renderIngredients } from '../actions/ingredients'
-import { Form, Button, Menu } from 'semantic-ui-react'
+import { Form, Button, Menu, Grid } from 'semantic-ui-react'
 import { selectCategory } from '../actions/categories'
 import category from '../reducers/category'
 import IngredientForm from './IngredientForm'
@@ -12,19 +11,10 @@ class IngredientsContainer extends React.Component{
         this.state = {
             category: 0,
             ingredients: '',
-            active: false
+            active: false,
+            view: false
         }
     }
-
-    componentDidMount(){
-        
-        fetch('http://localhost:3000/ingredients')
-        .then(resp => resp.json())
-        .then(ingredients => {
-            this.props.renderIngredients(ingredients)
-        })
-    }
-
    
     handleIngredientsChange = event => {
         this.setState({
@@ -40,11 +30,6 @@ class IngredientsContainer extends React.Component{
     }
 
     handleSubmit = () => {
-        console.log(this.props.ingredientQuantity)
-        this.updateFetch()
-    }
-
-    updateFetch = () => {
         let reqObj
         
         this.props.ingredientQuantity.forEach(ingredient => {
@@ -58,8 +43,8 @@ class IngredientsContainer extends React.Component{
             }
             fetch(`http://localhost:3000/ingredients/${ingredient.ingredient}`, reqObj)
             .then(resp => resp.json())
-            .then(data => {
-                debugger
+            .then(ingredient => {
+                
             })
         })
         
@@ -71,9 +56,21 @@ class IngredientsContainer extends React.Component{
         })
     }
 
+    handleIngredient = () => {
+
+    }
+
+
+    handleViewIngredients = () => {
+        this.setState({
+            view: !this.state.view
+        })
+    }
+
     render(){
         const activeItem = this.state.category
         const active = this.state.active
+        const displayIngredients = this.state.view ? this.display : null
 
         const displayCategories = this.props.categories.map(category => {
             return(<Menu.Item name={category.name} id={category.id} active={activeItem === category.id} onClick={this.handleClick} />)
@@ -89,7 +86,7 @@ class IngredientsContainer extends React.Component{
 
         const ingredientList = ingredientsSelector.map(ingredient => <p>{ingredient.name} - {ingredient.quantity}{ingredient.quantity_unit} </p> )
         const form = ingredientsSelector.map(ingredient => <IngredientForm ingredient={ingredient} />)
-        
+
         const toggleForm = (
             this.state.active
             ?
@@ -101,21 +98,31 @@ class IngredientsContainer extends React.Component{
             ingredientList
         )
 
+        const toggleView = (
+            this.state.view 
+            ?
+            toggleForm
+            :
+            null
+        )
+
     return(
             
-        <div>
-            <div>
+        <Grid columns={2}>
+            <Grid.Column>
                 <Menu tabular>
                     <Menu.Item name={'All'} id={0} active={activeItem === 0} onClick={this.handleClick} />
                     {displayCategories}
                 </Menu>
-            </div>
-            <div>
-                <br/>
+                <Button toggle active={active} onClick={this.handleViewIngredients}>{this.state.view ? 'Hide' : 'View'}</Button>
                 <Button toggle active={active} onClick={this.handleToggle}>Edit</Button>
-                { toggleForm }
-            </div>
-        </div>
+                <Button onClick={this.handleAddIngredient}>Add Ingredient</Button>
+                { toggleView }
+            </Grid.Column>
+            <Grid.Column>
+                <br/>
+            </Grid.Column>
+        </Grid>
         )
     }
 }
@@ -125,13 +132,14 @@ const mapStateToProps = state => {
         ingredients: state.ingredients,
         category: state.category,
         categories: state.categories,
-        ingredientQuantity: state.ingredientQuantity
+        ingredientQuantity: state.ingredientQuantity,
+        
     }
 }
 
 const mapDispatchToProps = {
-    renderIngredients,
-    selectCategory
+    selectCategory,
+    
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientsContainer)

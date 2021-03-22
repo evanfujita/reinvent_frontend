@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { loginSuccess } from '../actions/login'
 import { Form } from 'semantic-ui-react'
+import { renderDishes } from '../actions/dishes'
+import { renderIngredients } from '../actions/ingredients'
 
 
 
@@ -11,6 +13,24 @@ class Login extends React.Component{
         password: '',
         error: ''
     }
+
+    fetchDishes = () => {
+        fetch('http://localhost:3000/dishes')
+        .then(resp => resp.json())
+        .then(dishes => {
+            this.props.renderDishes(dishes)
+        })
+    }
+
+    fetchIngredients = () => {
+        fetch('http://localhost:3000/ingredients')
+        .then(resp => resp.json())
+        .then(ingredients => {
+            this.props.renderIngredients(ingredients)
+        })
+    }
+
+
 
     handleChange = event => {
         this.setState({
@@ -41,7 +61,6 @@ class Login extends React.Component{
         fetch('http://localhost:3000/auth', reqObj)
         .then(resp => resp.json())
         .then(user => {
-            // console.log (user.user, '---')    // CONSOLE LOG
             if (user.error) {
                 this.setState({
                     error: user.error
@@ -54,8 +73,9 @@ class Login extends React.Component{
                     username: '',
                     password: ''
                 })
-                this.props.history.push('/dashboard') 
-                
+                this.props.history.push('/dashboard')
+                this.fetchDishes()
+                this.fetchIngredients()
             }
         })
     }
@@ -83,7 +103,9 @@ class Login extends React.Component{
 
 
 const mapDispatchToProps = {
-    loginSuccess: loginSuccess
+    loginSuccess: loginSuccess,
+    renderDishes: renderDishes,
+    renderIngredients: renderIngredients
 }
 
 export default connect(null, mapDispatchToProps)(Login)

@@ -35,6 +35,7 @@ class App extends React.Component {
       this.props.currentUser(user)
       this.props.history.push('/dashboard')
     })
+  
   }
 }
   render(){

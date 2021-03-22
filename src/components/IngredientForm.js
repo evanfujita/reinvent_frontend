@@ -31,20 +31,19 @@ class IngredientForm extends React.Component {
     const ingredientQuantity = `${quantity_unit}`
     
     return(
-        <Form>
-            <Form.Group inline>
-                <Form.Input 
-                    increment={1}
-                    label={ingredientName}
-                    id={id}
-                    placeholder={ingredientQuantity} 
-                    value={this.state.value}
-                    width={16}     
-                    onChange={this.handleChange}
-                    onBlur={this.handleBlur}
-                />
-            </Form.Group>
-        </Form>
+        
+        <Form.Group inline>
+            <Form.Input 
+                label={ingredientName}
+                id={id}
+                placeholder={ingredientQuantity} 
+                value={this.state.value}
+                width={16}     
+                onChange={this.handleChange}
+                onBlur={this.handleBlur}
+            />
+        </Form.Group>
+        
     )}
 }
 

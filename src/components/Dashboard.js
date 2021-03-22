@@ -29,14 +29,11 @@ class Dashboard extends React.Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              { <Dishes /> }
-              
-
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              hello
+              
             </Grid.Column>
           </Grid.Row>
         </Grid>
