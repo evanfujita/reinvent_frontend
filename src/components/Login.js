@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { loginSuccess } from '../actions/login'
 import { Form } from 'semantic-ui-react'
 import { renderDishes } from '../actions/dishes'
-import { renderIngredients } from '../actions/ingredients'
-
+import { lowIngredient, renderIngredients } from '../actions/ingredients'
 
 
 class Login extends React.Component{
@@ -27,6 +26,12 @@ class Login extends React.Component{
         .then(resp => resp.json())
         .then(ingredients => {
             this.props.renderIngredients(ingredients)
+            ingredients.forEach(ingredient => {
+                if(ingredient.quantity < ingredient.par){
+                    this.props.lowIngredient(ingredient)
+                }
+            })
+
         })
     }
 
@@ -103,9 +108,10 @@ class Login extends React.Component{
 
 
 const mapDispatchToProps = {
-    loginSuccess: loginSuccess,
-    renderDishes: renderDishes,
-    renderIngredients: renderIngredients
+    loginSuccess,
+    renderDishes,
+    renderIngredients,
+    lowIngredient
 }
 
 export default connect(null, mapDispatchToProps)(Login)

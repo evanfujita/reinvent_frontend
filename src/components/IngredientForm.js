@@ -7,7 +7,8 @@ class IngredientForm extends React.Component {
  
     state = {
         id: this.props.ingredient.id,
-        quantity: null
+        quantity: null,
+        updated: []
     }
 
     handleChange = event => {
@@ -31,11 +32,10 @@ class IngredientForm extends React.Component {
         fetch(`http://localhost:3000/ingredients/${id}`, reqObj)
         .then(resp => resp.json())
         .then(ingredient => {
-            // debugger
             this.props.updateIngredient(ingredient)
-            // if(ingredient.quantity < ingredient.par){
-                lowIngredient(ingredient)
-            // }
+            if(ingredient.quantity < ingredient.par){
+                this.props.lowIngredient(ingredient)
+            }
         })
         
     }
@@ -50,6 +50,7 @@ class IngredientForm extends React.Component {
         <Form.Group inline>
             <Form.Input 
                 label={ingredientName}
+                color='red'
                 id={id}
                 placeholder={ingredientQuantity} 
                 value={this.state.value}

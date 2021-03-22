@@ -18,6 +18,7 @@ class NavBar extends React.Component {
 
     render(){
         const page = this.props.history.location.pathname
+        const label = this.props.lowIngredients ? <Label color='red' tag>{this.props.lowIngredients.length}</Label> : null
 
         return(
             <div>
@@ -34,7 +35,7 @@ class NavBar extends React.Component {
                     <Menu.Item name='profile' onClick={this.handleClick} active={page === '/profile'} id='profile' />
                     <Menu.Item name='orderList' onClick={this.handleClick} active={page === '/orderList'} id='orderList'>
                         OrderList 
-                        <Label color='red' tag >12</Label>
+                        { label }
                     </Menu.Item>
                     <Menu.Item name='stations' onClick={this.handleClick}  active={page === '/stations'} id='stations' />
                     <Menu.Item name='ingredients' onClick={this.handleClick}  active={page === '/ingredients'} id='ingredients' />
@@ -51,7 +52,8 @@ class NavBar extends React.Component {
 const mapStateToProps = state => {
     return {
         user: state.user,
-        ingredients: state.ingredients
+        ingredients: state.ingredients,
+        lowIngredients: state.lowIngredients
     }
 }
 

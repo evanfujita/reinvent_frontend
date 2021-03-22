@@ -5,8 +5,7 @@ class OrderList extends React.Component {
     
     
     render(){
-        const lowIngredients = this.props.ingredients.filter(ingredient => ingredient.quantity < ingredient.par)
-        const ingredients = lowIngredients.map(ingredient => <li>{ingredient.name}</li>)
+        const ingredients = this.props.lowIngredients.map(ingredient => <li>{ingredient.name}</li>)
 
         return(
             <div>
@@ -19,7 +18,8 @@ class OrderList extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        ingredients: state.ingredients
+        ingredients: state.ingredients,
+        lowIngredients: state.lowIngredients
     }
 }
 
