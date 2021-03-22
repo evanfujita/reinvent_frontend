@@ -21,19 +21,18 @@ class Dashboard extends React.Component {
               <StationsViewer />
             </Grid.Column>
             <Grid.Column>
+            </Grid.Column>
+            <Grid.Column>
+              {/* <IngredientsContainer /> */}
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
               <Dishes />
-            </Grid.Column>
-            <Grid.Column>
-              <IngredientsContainer />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-              
             </Grid.Column>
           </Grid.Row>
         </Grid>

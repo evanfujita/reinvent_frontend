@@ -11,6 +11,7 @@ import Signup from './components/Signup'
 import IngredientsContainer from './components/IngredientsContainer'
 import AddIngredient from './components/AddIngredient'
 import Dashboard from './components/Dashboard'
+import OrderList from './components/OrderList'
 import { connect } from 'react-redux'
 import { currentUser } from './actions/index'
 
@@ -53,6 +54,7 @@ class App extends React.Component {
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/dishes' component={Dishes} />  
           <Route path='/newDish' component={CreateDish} />
+          <Route path='/orderList' component={OrderList} />
           <Route exact path='/addIngredient' component={AddIngredient} />
         </Switch>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addIngredient } from '../actions/ingredients'
-import { Form, Radio, Button } from 'semantic-ui-react'
+import { Dropdown, Form, Button } from 'semantic-ui-react'
 
 class AddIngredient extends React.Component {
     
@@ -9,18 +9,52 @@ class AddIngredient extends React.Component {
         name: '',
         quantity: '',
         quantity_unit: '',
-        par: 0,
-        category_id: 0
+        par: '',
+        category_id: ''
+    }
+
+    handleChange = event => {
+        this.setState({
+            [event.target.id]: event.target.value
+        })
+    }
+
+    handleDropdownChange = event => {
+        const id = event.target.id
+        this.setState({
+            category_id: id
+        })
+    }
+
+    handleSubmit = () => {
+        const reqObj = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state)
+        }
+
+        fetch('http://localhost:3000/ingredients', reqObj)
+        .then(resp => resp.json())
+        .then(ingredient => {
+            this.setState({})
+            // debugger
+        })
+
     }
     
     render(){
-
-        const categories = this.props.categories.map(category => {
+        const { name, quantity, quantity_unit, par } = this.state
+        
+        const categoriesOptions = this.props.categories.map(category => {
             return(
-                <Form.Field 
-                control={Radio}
-                label={category.name}
-                />
+                {
+                    key: category.id,
+                    text: category.name,
+                    id: category.id,
+                    value: category.id
+                }
             )
         })
 
@@ -30,29 +64,43 @@ class AddIngredient extends React.Component {
                 <Form>
                     <Form.Input 
                         label='Ingredient Name'
+                        id='name'
                         placeholder='Ingredient Name'
+                        onChange={this.handleChange}
+                        value={name}
                     />
                     <Form.Input 
                         label='Ingredient Quantity'
+                        id='quantity'
                         placeholder='Ingredient Quantity'
+                        onChange={this.handleChange}
+                        value={quantity}
                     />
                     <Form.Input 
                         label='Ingredient Unit of Measurement'
+                        id='quantity_unit'
                         placeholder='Ingredient Unit of Measurement'
+                        onChange={this.handleChange}
+                        value={quantity_unit}
                     />
                     <Form.Input 
                         label='Ingredient Par'
+                        id='par'
                         placeholder='Ingredient Par'
+                        onChange={this.handleChange}
+                        value={par}
                     />
-                      <Form.Input
-                        label='Ingredient Par'
-                        placeholder='Ingredient Par'
+                    <label>Category</label>
+                    <Dropdown 
+                        placeholder='Select a Category'
+                        fluid
+                        selection
+                        options={categoriesOptions}
+                        onChange={this.handleDropdownChange}
                     />
-                    <Form.Group>
-                        Category:
-                        {categories}       
-                    </Form.Group>
-                    <Form.Field control={Button}>Submit</Form.Field>
+                    <br/>
+
+                    <Form.Field onClick={this.handleSubmit} control={Button}>Submit</Form.Field>
                 </Form>
             </div>
         )
@@ -71,3 +119,5 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddIngredient)
+
+

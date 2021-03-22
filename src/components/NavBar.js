@@ -32,7 +32,7 @@ class NavBar extends React.Component {
                 :
                 <>
                     <Menu.Item name='profile' onClick={this.handleClick} active={page === '/profile'} id='profile' />
-                    <Menu.Item name='restaurant' onClick={this.handleClick} active={page === '/restaurant'} id='restaurant' />
+                    <Menu.Item name='orderList' onClick={this.handleClick} active={page === '/orderList'} id='orderList' />
                     <Menu.Item name='stations' onClick={this.handleClick}  active={page === '/stations'} id='stations' />
                     <Menu.Item name='ingredients' onClick={this.handleClick}  active={page === '/ingredients'} id='ingredients' />
                     <Menu.Item name='dishes' onClick={this.handleClick}  active={page === '/dishes'} id='dishes' />
