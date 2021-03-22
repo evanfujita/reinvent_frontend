@@ -18,7 +18,11 @@ class IngredientForm extends React.Component {
     }
 
     handleBlur = event => {
+
+        const id = parseInt(event.target.id)
+        if(event.target.value.length !== 0){
         this.props.changeIngredientQuantity(this.state)
+        } 
     }
  
     render(){

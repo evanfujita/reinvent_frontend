@@ -41,6 +41,28 @@ class IngredientsContainer extends React.Component{
 
     handleSubmit = () => {
         console.log(this.props.ingredientQuantity)
+        this.updateFetch()
+    }
+
+    updateFetch = () => {
+        let reqObj
+        
+        this.props.ingredientQuantity.forEach(ingredient => {
+            // debugger
+            reqObj = {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({quantity: ingredient.quantity})
+            }
+            fetch(`http://localhost:3000/ingredients/${ingredient.ingredient}`, reqObj)
+            .then(resp => resp.json())
+            .then(data => {
+                debugger
+            })
+        })
+        
     }
 
     handleToggle = () => {
@@ -77,11 +99,9 @@ class IngredientsContainer extends React.Component{
             </Form>
             :
             ingredientList
-            
         )
 
-
-        return(
+    return(
             
         <div>
             <div>
@@ -89,17 +109,16 @@ class IngredientsContainer extends React.Component{
                     <Menu.Item name={'All'} id={0} active={activeItem === 0} onClick={this.handleClick} />
                     {displayCategories}
                 </Menu>
-                <Button toggle active={active} onClick={this.handleToggle}>Edit</Button>
             </div>
             <div>
+                <br/>
+                <Button toggle active={active} onClick={this.handleToggle}>Edit</Button>
                 { toggleForm }
             </div>
         </div>
-           
         )
     }
 }
-
 
 const mapStateToProps = state => {
     return {
@@ -112,9 +131,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     renderIngredients,
-    selectCategory,
-    
+    selectCategory
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientsContainer)
