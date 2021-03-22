@@ -11,14 +11,13 @@ class IngredientForm extends React.Component {
     }
 
     handleChange = event => {
+        
         this.setState({
             quantity: event.target.value
         })
     }
 
     handleBlur = event => {
-        // debugger
-        const { ingredientQuantity } = this.props
         this.props.changeIngredientQuantity(this.state)
     }
  
@@ -31,6 +30,7 @@ class IngredientForm extends React.Component {
         <Form>
             <Form.Group inline>
                 <Form.Input 
+                    increment={1}
                     label={ingredientName}
                     id={id}
                     placeholder={ingredientQuantity} 
@@ -54,4 +54,4 @@ const mapDispatchToProps = {
     changeIngredientQuantity
 }
 
-export default connect(null, mapDispatchToProps)(IngredientForm)
+export default connect(mapStateToProps, mapDispatchToProps)(IngredientForm)

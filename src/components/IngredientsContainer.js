@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { renderIngredients } from '../actions/ingredients'
-import { Form, Button, Menu, Grid} from 'semantic-ui-react'
+import { Form, Button, Menu } from 'semantic-ui-react'
 import { selectCategory } from '../actions/categories'
 import category from '../reducers/category'
 import IngredientForm from './IngredientForm'
@@ -11,7 +11,8 @@ class IngredientsContainer extends React.Component{
         super()
         this.state = {
             category: 0,
-            ingredients: ''
+            ingredients: '',
+            active: false
         }
     }
 
@@ -39,11 +40,18 @@ class IngredientsContainer extends React.Component{
     }
 
     handleSubmit = () => {
-        debugger
+        console.log(this.props.ingredientQuantity)
+    }
+
+    handleToggle = () => {
+        this.setState({
+            active: !this.state.active
+        })
     }
 
     render(){
         const activeItem = this.state.category
+        const active = this.state.active
 
         const displayCategories = this.props.categories.map(category => {
             return(<Menu.Item name={category.name} id={category.id} active={activeItem === category.id} onClick={this.handleClick} />)
@@ -59,6 +67,19 @@ class IngredientsContainer extends React.Component{
 
         const ingredientList = ingredientsSelector.map(ingredient => <p>{ingredient.name} - {ingredient.quantity}{ingredient.quantity_unit} </p> )
         const form = ingredientsSelector.map(ingredient => <IngredientForm ingredient={ingredient} />)
+        
+        const toggleForm = (
+            this.state.active
+            ?
+            <Form>
+            {form}
+            <Button onClick={this.handleSubmit} type='submit'>Submit</Button>
+            </Form>
+            :
+            ingredientList
+            
+        )
+
 
         return(
             
@@ -68,12 +89,10 @@ class IngredientsContainer extends React.Component{
                     <Menu.Item name={'All'} id={0} active={activeItem === 0} onClick={this.handleClick} />
                     {displayCategories}
                 </Menu>
+                <Button toggle active={active} onClick={this.handleToggle}>Edit</Button>
             </div>
             <div>
-                <Form>
-                {form}
-                <Button onClick={this.handleSubmit} type='submit'>Submit</Button>
-                </Form>
+                { toggleForm }
             </div>
         </div>
            
@@ -86,13 +105,15 @@ const mapStateToProps = state => {
     return {
         ingredients: state.ingredients,
         category: state.category,
-        categories: state.categories
+        categories: state.categories,
+        ingredientQuantity: state.ingredientQuantity
     }
 }
 
 const mapDispatchToProps = {
     renderIngredients,
-    selectCategory
+    selectCategory,
+    
 }
 
 
