@@ -23,6 +23,7 @@ class Dashboard extends React.Component {
             <Grid.Column>
             </Grid.Column>
             <Grid.Column>
+              
               {/* <IngredientsContainer /> */}
             </Grid.Column>
           </Grid.Row>

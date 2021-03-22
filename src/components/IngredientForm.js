@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Form } from 'semantic-ui-react'
-import { changeIngredientQuantity } from '../actions/ingredients'
+import { updateIngredient, lowIngredient, changeIngredientQuantity } from '../actions/ingredients'
 
 class IngredientForm extends React.Component {
  
@@ -20,9 +20,24 @@ class IngredientForm extends React.Component {
     handleBlur = event => {
 
         const id = parseInt(event.target.id)
-        if(event.target.value.length !== 0){
-        this.props.changeIngredientQuantity(this.state)
-        } 
+
+        const reqObj = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({quantity: this.state.quantity})
+        }
+        fetch(`http://localhost:3000/ingredients/${id}`, reqObj)
+        .then(resp => resp.json())
+        .then(ingredient => {
+            // debugger
+            this.props.updateIngredient(ingredient)
+            // if(ingredient.quantity < ingredient.par){
+                lowIngredient(ingredient)
+            // }
+        })
+        
     }
  
     render(){
@@ -54,7 +69,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    changeIngredientQuantity
+    changeIngredientQuantity,
+    updateIngredient,
+    lowIngredient
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientForm)

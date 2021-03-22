@@ -14,6 +14,8 @@ import Dashboard from './components/Dashboard'
 import OrderList from './components/OrderList'
 import { connect } from 'react-redux'
 import { currentUser } from './actions/index'
+import { renderIngredients } from './actions/ingredients'
+import { renderDishes } from './actions/dishes'
 
 class App extends React.Component {
   componentDidMount(){
@@ -36,9 +38,25 @@ class App extends React.Component {
       this.props.currentUser(user)
       this.props.history.push('/dashboard')
     })
+    
+    fetch('http://localhost:3000/ingredients')
+    .then(resp => resp.json())
+    .then(ingredients => {
+        this.props.renderIngredients(ingredients)
+        //add dispatch to send items to store of low ingredients
+    })
+
+    fetch('http://localhost:3000/dishes')
+    .then(resp => resp.json())
+    .then(dishes => {
+        this.props.renderDishes(dishes)
+    })
   
   }
 }
+
+
+
   render(){
   return (
     <div className="App">
@@ -63,7 +81,9 @@ class App extends React.Component {
 }
 
 const mapDispatchToProps = {
-  currentUser: currentUser
+  currentUser,
+  renderIngredients,
+  renderDishes
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(App));

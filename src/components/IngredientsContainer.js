@@ -31,26 +31,6 @@ class IngredientsContainer extends React.Component{
         })
     }
 
-    handleSubmit = () => {
-        let reqObj
-        
-        this.props.ingredientQuantity.forEach(ingredient => {
-            // debugger
-            reqObj = {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({quantity: ingredient.quantity})
-            }
-            fetch(`http://localhost:3000/ingredients/${ingredient.ingredient}`, reqObj)
-            .then(resp => resp.json())
-            .then(ingredient => {
-                
-            })
-        })
-        
-    }
 
     handleToggle = () => {
         this.setState({
@@ -74,7 +54,7 @@ class IngredientsContainer extends React.Component{
     render(){
         const activeItem = this.state.category
         const active = this.state.active
-        const displayIngredients = this.state.view ? this.display : null
+        // const displayIngredients = this.state.view ? this.display : null
 
         const displayCategories = this.props.categories.map(category => {
             return(<Menu.Item name={category.name} id={category.id} active={activeItem === category.id} onClick={this.handleClick} />)
@@ -96,7 +76,6 @@ class IngredientsContainer extends React.Component{
             ?
             <Form>
             {form}
-            <Button onClick={this.handleSubmit} type='submit'>Submit</Button>
             </Form>
             :
             ingredientList

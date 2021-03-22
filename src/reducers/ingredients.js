@@ -3,18 +3,21 @@ const ingredients = (state = [], action) => {
         case 'RENDER_INGREDIENTS':
             return action.ingredients
         case 'UPDATE_INGREDIENT':
-            const newState = state.ingredients.map(ingredient => {
+            console.log(state)
+            const newState = state.map(ingredient => {
                 if(ingredient.id === action.ingredient.id){
                     return action.ingredient
+                } else {
+                    return ingredient
                 }})
             
-            return {
-                ...state,
-                ingredients: newState
-            }
+            return newState
+                
+            
             
        case 'ADD_INGREDIENT':
             return [...state, action.ingredient]
+            
 
         case 'LOGOUT':
             return []

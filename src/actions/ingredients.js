@@ -6,7 +6,6 @@ export const renderIngredients = ingredients => {
 }
 
 export const updateIngredient = ingredient => {
-    
     return {
         type: 'UPDATE_INGREDIENT',
         ingredient: ingredient
@@ -23,6 +22,13 @@ export const changeIngredientQuantity = (ingredientQuantity) => {
 export const addIngredient = ingredient => {
     return {
         type: 'ADD_INGREDIENT',
+        ingredient: ingredient
+    }
+}
+
+export const lowIngredient = ingredient => {
+    return {
+        type: 'LOW_INGREDIENT',
         ingredient: ingredient
     }
 }

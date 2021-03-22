@@ -33,8 +33,8 @@ class NavBar extends React.Component {
                 <>
                     <Menu.Item name='profile' onClick={this.handleClick} active={page === '/profile'} id='profile' />
                     <Menu.Item name='orderList' onClick={this.handleClick} active={page === '/orderList'} id='orderList'>
-                        OrderList
-                        <Label circular color='red' floating ></Label>
+                        OrderList 
+                        <Label color='red' tag >12</Label>
                     </Menu.Item>
                     <Menu.Item name='stations' onClick={this.handleClick}  active={page === '/stations'} id='stations' />
                     <Menu.Item name='ingredients' onClick={this.handleClick}  active={page === '/ingredients'} id='ingredients' />
@@ -51,6 +51,7 @@ class NavBar extends React.Component {
 const mapStateToProps = state => {
     return {
         user: state.user,
+        ingredients: state.ingredients
     }
 }
 
