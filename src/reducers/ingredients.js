@@ -14,7 +14,7 @@ const ingredients = (state = [], action) => {
             }
             
        case 'ADD_INGREDIENT':
-            return action.ingredient
+            return [...state, action.ingredient]
 
         case 'LOGOUT':
             return []

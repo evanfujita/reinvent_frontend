@@ -34,12 +34,18 @@ class AddIngredient extends React.Component {
             },
             body: JSON.stringify(this.state)
         }
+        this.setState({
+            name: '',
+            quantity: '',
+            quantity_unit: '',
+            par: '',
+            category_id: ''
+        })
 
         fetch('http://localhost:3000/ingredients', reqObj)
         .then(resp => resp.json())
         .then(ingredient => {
-            this.setState({})
-            // debugger
+            this.props.addIngredient(ingredient)
         })
 
     }
