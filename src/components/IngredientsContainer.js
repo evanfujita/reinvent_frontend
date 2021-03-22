@@ -4,6 +4,7 @@ import { Form, Button, Menu, Grid } from 'semantic-ui-react'
 import { selectCategory } from '../actions/categories'
 import category from '../reducers/category'
 import IngredientForm from './IngredientForm'
+import AddIngredient from './AddIngredient'
 
 class IngredientsContainer extends React.Component{
     constructor(){
@@ -12,7 +13,8 @@ class IngredientsContainer extends React.Component{
             category: 0,
             ingredients: '',
             active: false,
-            view: false
+            viewIngredients: false,
+            viewAddIngredient: false
         }
     }
    
@@ -56,8 +58,10 @@ class IngredientsContainer extends React.Component{
         })
     }
 
-    handleIngredient = () => {
-
+    handleAddIngredient = () => {
+        this.setState({
+            viewAddIngredient: !this.state.viewAddIngredient
+        })
     }
 
 
@@ -98,10 +102,18 @@ class IngredientsContainer extends React.Component{
             ingredientList
         )
 
-        const toggleView = (
+        const toggleViewIngredients = (
             this.state.view 
             ?
             toggleForm
+            :
+            null
+        )
+
+        const toggleViewAddIngredient = (
+            this.state.viewAddIngredient
+            ?
+            <AddIngredient />
             :
             null
         )
@@ -117,10 +129,10 @@ class IngredientsContainer extends React.Component{
                 <Button toggle active={active} onClick={this.handleViewIngredients}>{this.state.view ? 'Hide' : 'View'}</Button>
                 <Button toggle active={active} onClick={this.handleToggle}>Edit</Button>
                 <Button onClick={this.handleAddIngredient}>Add Ingredient</Button>
-                { toggleView }
+                { toggleViewIngredients }
             </Grid.Column>
             <Grid.Column>
-                <br/>
+                { toggleViewAddIngredient }
             </Grid.Column>
         </Grid>
         )
