@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { loginSuccess } from '../actions/login'
 import { Form } from 'semantic-ui-react'
-import { renderDishes } from '../actions/dishes'
 import { lowIngredient, renderIngredients } from '../actions/ingredients'
 
 
@@ -11,14 +10,6 @@ class Login extends React.Component{
         username: '',
         password: '',
         error: ''
-    }
-
-    fetchDishes = () => {
-        fetch('http://localhost:3000/dishes')
-        .then(resp => resp.json())
-        .then(dishes => {
-            this.props.renderDishes(dishes)
-        })
     }
 
     fetchIngredients = () => {
@@ -79,7 +70,6 @@ class Login extends React.Component{
                     password: ''
                 })
                 this.props.history.push('/dashboard')
-                this.fetchDishes()
                 this.fetchIngredients()
             }
         })
@@ -109,7 +99,6 @@ class Login extends React.Component{
 
 const mapDispatchToProps = {
     loginSuccess,
-    renderDishes,
     renderIngredients,
     lowIngredient
 }

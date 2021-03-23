@@ -3,19 +3,15 @@ import NavBar from './components/NavBar'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import './App.css';
 import Home from './components/Home'
-import StationsViewer from './components/StationsViewer'
 import Login from './components/Login'
-import Dishes from './components/Dishes'
-import CreateDish from './components/CreateDish'
 import Signup from './components/Signup'
 import IngredientsContainer from './components/IngredientsContainer'
-import AddIngredient from './components/AddIngredient'
 import Dashboard from './components/Dashboard'
 import OrderList from './components/OrderList'
 import { connect } from 'react-redux'
 import { currentUser } from './actions/index'
-import { renderIngredients } from './actions/ingredients'
-import { renderDishes } from './actions/dishes'
+import { lowIngredient, renderIngredients } from './actions/ingredients'
+
 
 class App extends React.Component {
   componentDidMount(){
@@ -43,17 +39,14 @@ class App extends React.Component {
     .then(resp => resp.json())
     .then(ingredients => {
         this.props.renderIngredients(ingredients)
-        //add dispatch to send items to store of low ingredients
+        ingredients.map(ingredient => {
+          if(ingredient.quantity < ingredient.par){
+            this.props.lowIngredient(ingredient)
+          }
+        })
     })
 
-    fetch('http://localhost:3000/dishes')
-    .then(resp => resp.json())
-    .then(dishes => {
-        this.props.renderDishes(dishes)
-    })
-  
-  }
-}
+}}
 
 
 
@@ -65,15 +58,11 @@ class App extends React.Component {
       </header>
         <Switch>
           <Route exact path='/home' component={Home} />
-          <Route path='/stations' component={StationsViewer} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
           <Route path='/ingredients' component={IngredientsContainer} />
           <Route path='/dashboard' component={Dashboard} />
-          <Route path='/dishes' component={Dishes} />  
-          <Route path='/newDish' component={CreateDish} />
           <Route path='/orderList' component={OrderList} />
-          <Route exact path='/addIngredient' component={AddIngredient} />
         </Switch>
     </div>
   );
@@ -83,7 +72,7 @@ class App extends React.Component {
 const mapDispatchToProps = {
   currentUser,
   renderIngredients,
-  renderDishes
+  lowIngredient
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(App));

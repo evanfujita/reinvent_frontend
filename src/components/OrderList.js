@@ -1,17 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { List } from 'semantic-ui-react'
 
 class OrderList extends React.Component {
     
     
     render(){
-        const ingredients = this.props.lowIngredients.map(ingredient => <li>{ingredient.name}</li>)
+        const ingredients = this.props.lowIngredients.map(ingredient => <List.Item>{ingredient.name}</List.Item>)
 
         return(
-            <div>
-                These Items Need To Be Ordered:
+            <>
+            <List>
+            <List.Item>
+                <List.Content>
+                    <List.Header>
+                        Items To Order:
+                    </List.Header>
+                </List.Content>
+            </List.Item>
                 {ingredients}
-            </div>
+            </List>
+            </>
         )
     }
 }

@@ -1,11 +1,13 @@
+import React from 'react'
+import { Image } from 'semantic-ui-react'
 
 const Home = () => {
 
-
     return(
         <div>
-            Welcome to ReInvent(ory)
+            Inventory Reinvented
         </div>
     )
 }
+
 export default Home

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form } from 'semantic-ui-react'
+import { Form, Grid } from 'semantic-ui-react'
 import { updateIngredient, lowIngredient, changeIngredientQuantity } from '../actions/ingredients'
 
 class IngredientForm extends React.Component {
@@ -8,7 +8,8 @@ class IngredientForm extends React.Component {
     state = {
         id: this.props.ingredient.id,
         quantity: null,
-        updated: []
+        updated: [],
+        active: false
     }
 
     handleChange = event => {
@@ -47,17 +48,29 @@ class IngredientForm extends React.Component {
     
     return(
         
-        <Form.Group inline>
-            <Form.Input 
-                label={ingredientName}
-                color='red'
-                id={id}
-                placeholder={ingredientQuantity} 
-                value={this.state.value}
-                width={16}     
-                onChange={this.handleChange}
-                onBlur={this.handleBlur}
-            />
+        <Form.Group>
+            <Grid columns={2}>
+                <Grid.Column>
+                    {name}
+                </Grid.Column>
+                <Grid.Column align='right'>
+                </Grid.Column>
+                <Grid.Column>
+                    <Form.Input 
+                        width={16}     
+                        id={id}
+                        placeholder={ingredientQuantity} 
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        onBlur={this.handleBlur}
+                    />
+                </Grid.Column>
+                <Grid.Column>
+                </Grid.Column>
+
+
+            
+            </Grid>
         </Form.Group>
         
     )}

@@ -23,7 +23,6 @@ class NavBar extends React.Component {
         return(
             <div>
                 <Menu pointing>
-                <Menu.Item name='home' onClick={this.handleClick} active={page === '/home'} id='home' />
                 
                 { !this.props.user ? 
                 <>
@@ -32,16 +31,16 @@ class NavBar extends React.Component {
                 </>
                 :
                 <>
-                    <Menu.Item name='profile' onClick={this.handleClick} active={page === '/profile'} id='profile' />
+                    <Menu.Item name='dashboard' onClick={this.handleClick} active={page === '/dashboard'} id='dashboard' />
+                    <Menu.Item name='ingredients' onClick={this.handleClick}  active={page === '/ingredients'} id='ingredients' />
                     <Menu.Item name='orderList' onClick={this.handleClick} active={page === '/orderList'} id='orderList'>
                         OrderList 
                         { label }
                     </Menu.Item>
-                    <Menu.Item name='stations' onClick={this.handleClick}  active={page === '/stations'} id='stations' />
-                    <Menu.Item name='ingredients' onClick={this.handleClick}  active={page === '/ingredients'} id='ingredients' />
-                    <Menu.Item name='dishes' onClick={this.handleClick}  active={page === '/dishes'} id='dishes' />
-                    <Menu.Item name='newDish' onClick={this.handleClick}  active={page === '/newDish'} id='newDish' />
-                    <Menu.Item name='logout' onClick={this.handleLogout}  active={page === '/logout'} id='logout' />
+                    <Menu.Menu position='right'>
+                        <Menu.Item name='profile' onClick={this.handleClick} active={page === '/profile'} id='profile' />
+                        <Menu.Item name='logout' onClick={this.handleLogout}  active={page === '/logout'} id='logout' />
+                    </Menu.Menu>
                 </>
                 }
                 </Menu>

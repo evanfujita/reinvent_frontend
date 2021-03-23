@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Button, Menu, Grid } from 'semantic-ui-react'
+import { List, Form, Button, Menu, Grid } from 'semantic-ui-react'
 import { selectCategory } from '../actions/categories'
-import category from '../reducers/category'
 import IngredientForm from './IngredientForm'
 import AddIngredient from './AddIngredient'
+import Ingredient from './Ingredient'
+import IngredientInfo from './IngredientInfo'
 
 class IngredientsContainer extends React.Component{
     constructor(){
@@ -14,9 +15,12 @@ class IngredientsContainer extends React.Component{
             ingredients: '',
             active: false,
             viewIngredients: false,
-            viewAddIngredient: false
+            viewAddIngredient: false,
+            displayIngredientInfo: false,
+            ingredientInfo: null
         }
     }
+    
    
     handleIngredientsChange = event => {
         this.setState({
@@ -51,10 +55,18 @@ class IngredientsContainer extends React.Component{
         })
     }
 
+    handleIngredientClick = event => {
+        const id = parseInt(event.target.id)
+        const ingredient = this.props.ingredients.find(ingredient => ingredient.id === id)
+        this.setState({
+            ingredientInfo: ingredient,
+            displayIngredientInfo: true
+        })
+    }
+
     render(){
         const activeItem = this.state.category
         const active = this.state.active
-        // const displayIngredients = this.state.view ? this.display : null
 
         const displayCategories = this.props.categories.map(category => {
             return(<Menu.Item name={category.name} id={category.id} active={activeItem === category.id} onClick={this.handleClick} />)
@@ -68,35 +80,15 @@ class IngredientsContainer extends React.Component{
             this.props.ingredients
         )
 
-        const ingredientList = ingredientsSelector.map(ingredient => <p>{ingredient.name} - {ingredient.quantity}{ingredient.quantity_unit} </p> )
+        const ingredientList = ingredientsSelector.map(ingredient => <Ingredient ingredientInfo={ingredient} handleIngredientClick={this.handleIngredientClick}/> )
         const form = ingredientsSelector.map(ingredient => <IngredientForm ingredient={ingredient} />)
-
-        const toggleForm = (
-            this.state.active
-            ?
-            <Form>
-            {form}
-            </Form>
-            :
-            ingredientList
-        )
-
-        const toggleViewIngredients = (
-            this.state.view 
-            ?
-            toggleForm
-            :
-            null
-        )
-
-        const toggleViewAddIngredient = (
-            this.state.viewAddIngredient
-            ?
-            <AddIngredient />
-            :
-            null
-        )
-
+        
+        //togglers
+        const toggleForm = this.state.active ? <Form>{form}</Form> : <List>{ingredientList}</List>
+        const toggleViewIngredients = this.state.view ? toggleForm : null
+        const toggleViewAddIngredient = this.state.viewAddIngredient ? <AddIngredient /> : null
+        const toggleIngredientInformation = this.state.displayIngredientInfo ? <IngredientInfo ingredient={this.state.ingredientInfo} /> : null
+        
     return(
             
         <Grid columns={2}>
@@ -108,9 +100,11 @@ class IngredientsContainer extends React.Component{
                 <Button toggle active={active} onClick={this.handleViewIngredients}>{this.state.view ? 'Hide' : 'View'}</Button>
                 <Button toggle active={active} onClick={this.handleToggle}>Edit</Button>
                 <Button onClick={this.handleAddIngredient}>Add Ingredient</Button>
+               
                 { toggleViewIngredients }
             </Grid.Column>
             <Grid.Column>
+                { toggleIngredientInformation }
                 { toggleViewAddIngredient }
             </Grid.Column>
         </Grid>
