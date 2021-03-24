@@ -1,26 +1,37 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { List } from 'semantic-ui-react'
+import { List, Grid, Menu } from 'semantic-ui-react'
 
 class OrderList extends React.Component {
     
+    state = {
+        activeItem: 'all'
+    }
+
+    handleClick = event => {
+        this.setState({
+            activeItem: event.target.id
+        })
+    }
     
     render(){
-        const ingredients = this.props.lowIngredients.map(ingredient => <List.Item>{ingredient.name}</List.Item>)
+        const { activeItem } = this.state
+        const categories = this.props.categories.map(category => <Menu.Item key={category.id} name={category.name} id={category.id} active={activeItem === category.id} onClick={this.handleClick} />)        
+        const categorizedIngredients = this.props.lowIngredients.filter(ingredient => activeItem === ingredient.category_id || activeItem === 'all' ? ingredient : null)
+        const ingredients = categorizedIngredients.map(ingredient => <List.Item key={ingredient.id}>{ingredient.name}</List.Item>)
 
         return(
-            <>
-            <List>
-            <List.Item>
-                <List.Content>
-                    <List.Header>
-                        Items To Order:
-                    </List.Header>
-                </List.Content>
-            </List.Item>
-                {ingredients}
-            </List>
-            </>
+            <Grid>
+                <Menu pointing secondary vertical>
+                <Menu.Item name='All' id='all' active={activeItem === 'all'} onClick={this.handleClick} />
+                    {categories}
+                </Menu>
+                <Grid.Column>
+                    <List>
+                        {ingredients}
+                    </List>
+                </Grid.Column>
+            </Grid>
         )
     }
 }
@@ -28,7 +39,8 @@ class OrderList extends React.Component {
 const mapStateToProps = state => {
     return {
         ingredients: state.ingredients,
-        lowIngredients: state.lowIngredients
+        lowIngredients: state.lowIngredients,
+        categories: state.categories
     }
 }
 

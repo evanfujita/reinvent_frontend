@@ -39,11 +39,9 @@ class App extends React.Component {
     .then(resp => resp.json())
     .then(ingredients => {
         this.props.renderIngredients(ingredients)
-        ingredients.map(ingredient => {
-          if(ingredient.quantity < ingredient.par){
-            this.props.lowIngredient(ingredient)
-          }
-        })
+        ingredients.forEach(ingredient => 
+          ingredient.quantity < ingredient.par ? this.props.lowIngredient(ingredient) : null
+        )
     })
 
 }}

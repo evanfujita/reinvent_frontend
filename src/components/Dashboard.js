@@ -12,7 +12,7 @@ class Dashboard extends React.Component {
         <Grid columns={3}>
           <Grid.Row> 
             <Grid.Column>
-  
+            
             </Grid.Column>
             <Grid.Column>
             </Grid.Column>

@@ -47,7 +47,6 @@ class AddIngredient extends React.Component {
         .then(ingredient => {
             this.props.addIngredient(ingredient)
         })
-
     }
     
     render(){
@@ -65,34 +64,34 @@ class AddIngredient extends React.Component {
         })
 
         return(
-            <div>
-                NEW INGREDIENT
-                <Form>
+            <div align='left'>
+                <label>add ingredient</label>
+                <Form align='left'>
                     <Form.Input 
-                        label='Ingredient Name'
+                        label='Name'
                         id='name'
-                        placeholder='Ingredient Name'
+                        placeholder='Name'
                         onChange={this.handleChange}
                         value={name}
                     />
                     <Form.Input 
-                        label='Ingredient Quantity'
+                        label='Quantity'
                         id='quantity'
-                        placeholder='Ingredient Quantity'
+                        placeholder='Quantity'
                         onChange={this.handleChange}
                         value={quantity}
                     />
                     <Form.Input 
-                        label='Ingredient Unit of Measurement'
+                        label='Unit of Measurement'
                         id='quantity_unit'
-                        placeholder='Ingredient Unit of Measurement'
+                        placeholder='Unit of Measurement'
                         onChange={this.handleChange}
                         value={quantity_unit}
                     />
                     <Form.Input 
-                        label='Ingredient Par'
+                        label='Par'
                         id='par'
-                        placeholder='Ingredient Par'
+                        placeholder='Par'
                         onChange={this.handleChange}
                         value={par}
                     />
@@ -106,7 +105,7 @@ class AddIngredient extends React.Component {
                     />
                     <br/>
 
-                    <Form.Field onClick={this.handleSubmit} control={Button}>Submit</Form.Field>
+                    <Form.Field onClick={this.handleSubmit} control={Button}>Create Ingredient</Form.Field>
                 </Form>
             </div>
         )

@@ -1,26 +1,47 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Grid } from 'semantic-ui-react'
-import { updateIngredient, lowIngredient, changeIngredientQuantity } from '../actions/ingredients'
+import { Form, Icon } from 'semantic-ui-react'
+import { updateIngredient, changeIngredientQuantity } from '../actions/ingredients'
+import { selectIngredient } from '../actions/selections'
 
 class IngredientForm extends React.Component {
- 
+   
     state = {
-        id: this.props.ingredient.id,
+        id: null,
         quantity: null,
         updated: [],
         active: false
     }
 
-    handleChange = event => {
+    resetForm = event => {
+        event.target.value = ''
+    }
+
+    handleBlur = event => {
+        if(event.target.value !== ''){
+            this.handleFetch(event)
+        }
+    }
+
+    handleFocus = event => {
+        const id = parseInt(event.target.id)
         
+        const selectedIngredient = this.props.ingredients.find(ingredient => ingredient.id === id)
+        this.props.selectIngredient(selectedIngredient)
+        this.setState({
+            ...this.state,
+            id: selectedIngredient.id
+        })
+    }
+
+    handleChange = event => {
+        // debugger
         this.setState({
             quantity: event.target.value
         })
     }
 
-    handleBlur = event => {
-
+    handleFetch = event => {
         const id = parseInt(event.target.id)
 
         const reqObj = {
@@ -34,58 +55,48 @@ class IngredientForm extends React.Component {
         .then(resp => resp.json())
         .then(ingredient => {
             this.props.updateIngredient(ingredient)
-            if(ingredient.quantity < ingredient.par){
-                this.props.lowIngredient(ingredient)
-            }
+            this.setState({
+                active: true
+            })
+            this.resetForm(event)
         })
-        
     }
- 
-    render(){
-    const { name, id, quantity, quantity_unit } = this.props.ingredient
-    const ingredientName = `${name}: ${quantity}`
-    const ingredientQuantity = `${quantity_unit}`
+
     
-    return(
-        
-        <Form.Group>
-            <Grid columns={2}>
-                <Grid.Column>
-                    {name}
-                </Grid.Column>
-                <Grid.Column align='right'>
-                </Grid.Column>
-                <Grid.Column>
-                    <Form.Input 
-                        width={16}     
-                        id={id}
-                        placeholder={ingredientQuantity} 
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                        onBlur={this.handleBlur}
-                    />
-                </Grid.Column>
-                <Grid.Column>
-                </Grid.Column>
-
-
-            
-            </Grid>
-        </Form.Group>
-        
+    render(){
+        const { name, id, quantity, quantity_unit } = this.props.ingredient
+        const active = this.state.active ? <Icon name='check circle outline' color='green'/> : null
+    
+    return(         
+        <Form.Field inline>
+            <label>{name} ({quantity_unit}) {active}</label>
+            <input 
+                width={4}
+                id={id}
+                placeholder={quantity} 
+                onChange={this.handleChange}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur} 
+                type='number' 
+            />
+        </Form.Field> 
     )}
 }
 
 const mapStateToProps = state => {
     return {
-        ingredientQuantity: state.ingredientQuantity
+        ingredientQuantity: state.ingredientQuantity,
+        ingredients: state.ingredients,
+        selectedIngredient: state.selections.ingredient
     }
 }
 
 const mapDispatchToProps = {
     changeIngredientQuantity,
     updateIngredient,
-    lowIngredient
+    selectIngredient
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientForm)
+
+        

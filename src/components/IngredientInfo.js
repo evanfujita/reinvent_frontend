@@ -1,38 +1,52 @@
 import React from 'react'
 import { List, Button } from 'semantic-ui-react'
+import UpdateIngredientForm from './UpdateIngredientForm'
 
 class IngredientInfo extends React.Component {
 
+    state = {
+        edit: false,
+        name: '',
+        quantity_unit: '',
+        par: ''
+    }
+    
     handleEdit = event => {
+        this.setState({
+            edit: !this.state.edit
+        })
+    }
+
+    handleChange = event => {
+        debugger
+    }
+
+    handleDelete = event => {
 
     }
 
+    
+    
+    
     render(){
-
         const { name, quantity, quantity_unit, par } = this.props.ingredient
+        const toggleEdit =    
+            this.state.edit
+            ?
+            <UpdateIngredientForm />
+            :
+            <List>
+                <List.Item>Quantity: {quantity} {quantity_unit}</List.Item>
+                <List.Item>Par: {par} {quantity_unit}</List.Item>
+            </List>
 
         return(
-            <List>
-                <List.Content>
-                    <List.Item>
-                        <br/>
-                        <List.Header>{name}</List.Header>
-                    </List.Item>
-                </List.Content>
-                <List.Content>
-                    <List.Item>
-                        <br/>
-                        Amount: {quantity} {quantity_unit}
-                    </List.Item>
-                </List.Content>
-                <List.Content>
-                    <List.Item>
-                        <br/>
-                        Par: {par} {quantity_unit}
-                    </List.Item>
-                </List.Content><br/>
+            <div>
+                {name}<br/><br/>
                 <Button onClick={this.handleEdit}>Edit</Button>
-            </List>
+                <Button onClick={this.handleDelete}>Delete</Button><br/>
+                {toggleEdit}
+            </div>
         )
     }
 }
