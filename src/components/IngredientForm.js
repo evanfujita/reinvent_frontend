@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Form, Icon } from 'semantic-ui-react'
-import { updateIngredient, changeIngredientQuantity } from '../actions/ingredients'
+import { updateIngredient, updateIngredientQuantity } from '../actions/ingredients'
 import { selectIngredient } from '../actions/selections'
 
 class IngredientForm extends React.Component {
@@ -54,7 +54,7 @@ class IngredientForm extends React.Component {
         fetch(`http://localhost:3000/ingredients/${id}`, reqObj)
         .then(resp => resp.json())
         .then(ingredient => {
-            this.props.updateIngredient(ingredient)
+            this.props.updateIngredientQuantity(ingredient)
             this.setState({
                 active: true
             })
@@ -87,16 +87,15 @@ const mapStateToProps = state => {
     return {
         ingredientQuantity: state.ingredientQuantity,
         ingredients: state.ingredients,
-        selectedIngredient: state.selections.ingredient
+        selectedIngredient: state.selections.ingredient,
+        category: state.selections.ingredient
     }
 }
 
 const mapDispatchToProps = {
-    changeIngredientQuantity,
+    updateIngredientQuantity,
     updateIngredient,
     selectIngredient
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientForm)
-
-        

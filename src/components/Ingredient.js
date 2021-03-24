@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const Ingredient = props => {
     const { id, name, quantity, quantity_unit } = props.ingredientInfo
     return (

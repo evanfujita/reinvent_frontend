@@ -1,9 +1,10 @@
 import React from 'react'
-import { updateIngredient } from '../actions/ingredients'
+import { updateIngredientQuantity } from '../actions/ingredients'
 import { connect } from 'react-redux'
 import { Button, Form } from 'semantic-ui-react'
+import { updateIngredient } from '../actions/ingredients'
 
-class UpdateIngredientForm extends React.Component {
+class IngredientUpdateForm extends React.Component {
     
     state = {
         id: this.props.ingredient.id,
@@ -40,6 +41,33 @@ class UpdateIngredientForm extends React.Component {
             })
         }
     }
+
+    handleSubmit = (event) => {
+        let ingredient = this.props.ingredient
+        for (const property in this.state){
+            if(this.state[property] !== ''){
+                ingredient[property] = this.state[property]
+            } else {
+                ingredient[property] = ingredient[property]
+            }
+        }
+        
+        const reqObj = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ingredient)
+        }
+        
+        fetch(`http://localhost:3000/ingredients/${ingredient.id}`, reqObj)
+        .then(resp => resp.json())
+        .then(ingredient => {
+            debugger
+            this.props.updateIngredient(ingredient)
+        })  
+        
+    }
         
 
     render(){
@@ -47,18 +75,18 @@ class UpdateIngredientForm extends React.Component {
         return(
             <Form>
                 <Form.Field>
-                    <label verticalAlign='middle'>Name</label>
+                    <label>Name</label>
                     <input name='name' onBlur={this.blurValidation} onChange={this.handleChange} placeholder={name} value={this.state.name} />
                 </Form.Field>
                 <Form.Field>
-                    <label verticalAlign='middle'>Unit of Measurement</label>
+                    <label>Unit of Measurement</label>
                     <input name='quantity_unit' onChange={this.handleChange} placeholder={quantity_unit} value={this.state.quantity_unit} />
                 </Form.Field>
                 <Form.Field>
-                    <label verticalAlign='middle'>Par</label>
+                    <label>Par</label>
                     <input name='par' onChange={this.handleChange} placeholder={par} value={this.state.par} />
                 </Form.Field>
-                <Button type='submit'>Update Ingredient</Button>
+                <Button type='submit' onClick={this.handleSubmit}>Update Ingredient</Button>
             </Form>
         )
     }
@@ -74,4 +102,4 @@ const mapDispatchToProps = {
     updateIngredient
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateIngredientForm)
+export default connect(mapStateToProps, mapDispatchToProps)(IngredientUpdateForm)

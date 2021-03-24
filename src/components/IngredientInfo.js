@@ -1,6 +1,6 @@
 import React from 'react'
 import { List, Button } from 'semantic-ui-react'
-import UpdateIngredientForm from './UpdateIngredientForm'
+import IngredientUpdateForm from './IngredientUpdateForm'
 
 class IngredientInfo extends React.Component {
 
@@ -33,7 +33,7 @@ class IngredientInfo extends React.Component {
         const toggleEdit =    
             this.state.edit
             ?
-            <UpdateIngredientForm />
+            <IngredientUpdateForm />
             :
             <List>
                 <List.Item>Quantity: {quantity} {quantity_unit}</List.Item>

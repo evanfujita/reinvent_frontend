@@ -1,6 +1,4 @@
 import React from 'react'
-import { Menu, Dropdown } from 'semantic-ui-react'
-
 
 class LoginForm extends React.Component {
 

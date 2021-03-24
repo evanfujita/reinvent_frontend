@@ -1,19 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Button, Menu, Grid } from 'semantic-ui-react'
-import { selectCategory } from '../actions/categories'
-import { selectIngredient } from '../actions/selections'
+import { Form, Button, Grid } from 'semantic-ui-react'
+import { selectCategory, selectIngredient } from '../actions/selections'
 import IngredientForm from './IngredientForm'
 import AddIngredient from './AddIngredient'
 import Ingredient from './Ingredient'
 import IngredientInfo from './IngredientInfo'
-import IngredientsDropdown from './IngredientsDropdown'
+import CategoryMenuBar from './CategoryMenuBar'
+
 
 class IngredientsContainer extends React.Component{
     constructor(){
         super()
         this.state = {
-            category: 0,
             ingredients: '',
             active: false,
             viewIngredients: false,
@@ -28,14 +27,6 @@ class IngredientsContainer extends React.Component{
             ingredients: event.target.innerText
         })
     }
-
-    handleClick = event => {
-        const id = parseInt(event.target.id)
-        this.setState({
-            category: id
-        })
-    }
-
 
     handleToggle = () => {
         this.setState({
@@ -66,24 +57,13 @@ class IngredientsContainer extends React.Component{
         })
     }
 
-    // handleUntoggleIngredient = () => {
-    //     this.setState({
-    //         displayIngredientInfo: false
-    //     })
-    // }
-
     render(){
-        const activeItem = this.state.category
         const active = this.state.active
-
-        const displayCategories = this.props.categories.map(category => {
-            return(<Menu.Item key={category.id} name={category.name} id={category.id} active={activeItem === category.id} onClick={this.handleClick} />)
-        })
         
         const ingredientsSelector = (
-            this.state.category !== 0
+            this.props.category !== 0
             ? 
-            this.props.ingredients.filter(ingredient => parseInt(ingredient.category_id) === this.state.category)
+            this.props.ingredients.filter(ingredient => parseInt(ingredient.category_id) === this.props.category)
             :
             this.props.ingredients
         )
@@ -95,28 +75,23 @@ class IngredientsContainer extends React.Component{
         const toggleForm = this.state.active ? <Form>{form}</Form> : <Form align='left'><Form.Field>{ingredientList}</Form.Field></Form>
         const toggleViewIngredients = this.state.view ? toggleForm : null
         const toggleViewAddIngredient = this.state.viewAddIngredient ? <AddIngredient /> : null
-        const toggleIngredientInformation = this.state.displayIngredientInfo ? <IngredientInfo key={this.state.ingredientInfo.id} handleUntoggleIngredient={this.handleUntoggleIngredient} ingredient={this.state.ingredientInfo} /> : null
+        const toggleIngredientInformation = this.state.displayIngredientInfo ? <IngredientInfo key={this.state.ingredientInfo.id} ingredient={this.state.ingredientInfo} /> : null
         
     return(
             
         <Grid columns={2} >
             <Grid.Row>
-                <Grid.Column color='red'>
-                    <Menu tabular>
-                        <Menu.Item name={'All'} id={0} active={activeItem === 0} onClick={this.handleClick} />
-                        {displayCategories}
-                    </Menu>
-                    <Button toggle active={active} onClick={this.handleViewIngredients}>{this.state.view ? 'Hide' : 'View'}</Button>
+                <Grid.Column>
+                    <CategoryMenuBar />
+                    <Button toggle active={active} onClick={this.handleViewIngredients}>{this.state.view ? 'Hide' : 'Overview'}</Button>
                     <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
                     <Button onClick={this.handleAddIngredient}>Add Ingredient</Button>
-                    
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                <IngredientsDropdown ingredients={ingredientsSelector} />
+                {/* <IngredientsDropdown ingredients={ingredientsSelector} /> */}
                     { toggleViewIngredients }
-                    {/* { toggleViewIngredients } */}
                 </Grid.Column>
                 <Grid.Column>
                     { toggleIngredientInformation }
@@ -131,17 +106,15 @@ class IngredientsContainer extends React.Component{
 const mapStateToProps = state => {
     return {
         ingredients: state.ingredients,
-        category: state.category,
+        category: state.selections.category,
         categories: state.categories,
         ingredientQuantity: state.ingredientQuantity,
-        
     }
 }
 
 const mapDispatchToProps = {
     selectCategory,
-    selectIngredient
-    
+    selectIngredient   
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientsContainer)

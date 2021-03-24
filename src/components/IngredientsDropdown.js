@@ -10,7 +10,6 @@ class IngredientsDropdown extends React.Component {
                 id: ingredient.id,
                 value: ingredient.id            
             }
-
         })
         return(
             <Dropdown placeholder='ingredients' search selection options={ingredientsOptions} />

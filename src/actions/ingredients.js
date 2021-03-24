@@ -12,10 +12,10 @@ export const updateIngredient = ingredient => {
     }
 }
 
-export const changeIngredientQuantity = (ingredientQuantity) => {
+export const updateIngredientQuantity = (ingredient) => {
     return {
         type: 'UPDATE_INGREDIENT_QUANTITY',
-        ingredientQuantity: ingredientQuantity
+        ingredient: ingredient
     }
 }
 

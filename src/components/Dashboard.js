@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import { Grid } from 'semantic-ui-react'
 
 class Dashboard extends React.Component {
