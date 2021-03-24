@@ -69,7 +69,6 @@ class IngredientUpdateForm extends React.Component {
         
     }
         
-
     render(){
         const { name, quantity_unit, par } = this.props.ingredient
         return(

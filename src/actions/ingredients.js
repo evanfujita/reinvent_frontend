@@ -26,6 +26,13 @@ export const addIngredient = ingredient => {
     }
 }
 
+export const deleteIngredient = ingredient => {
+    return {
+        type: 'DELETE_INGREDIENT',
+        ingredient: ingredient
+    }
+}
+
 export const lowIngredient = ingredient => {
     return {
         type: 'LOW_INGREDIENT',

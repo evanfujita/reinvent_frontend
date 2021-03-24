@@ -35,7 +35,6 @@ class IngredientForm extends React.Component {
     }
 
     handleChange = event => {
-        // debugger
         this.setState({
             quantity: event.target.value
         })

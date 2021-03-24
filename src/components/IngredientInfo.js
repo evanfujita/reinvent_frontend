@@ -1,6 +1,8 @@
 import React from 'react'
 import { List, Button } from 'semantic-ui-react'
 import IngredientUpdateForm from './IngredientUpdateForm'
+import { connect } from 'react-redux'
+import { deleteIngredient } from '../actions/ingredients'
 
 class IngredientInfo extends React.Component {
 
@@ -17,17 +19,19 @@ class IngredientInfo extends React.Component {
         })
     }
 
-    handleChange = event => {
-        debugger
+    handleDelete = () => {
+        const id = this.props.selectedIngredient.id
+
+        fetch(`http://localhost:3000/ingredients/${id}`, {method: 'DELETE'})
+        .then(resp => resp.json())
+        .then(data => {
+            if(data.message){
+                this.props.deleteIngredient(id)
+            }
+        })
+
     }
 
-    handleDelete = event => {
-
-    }
-
-    
-    
-    
     render(){
         const { name, quantity, quantity_unit, par } = this.props.ingredient
         const toggleEdit =    
@@ -51,4 +55,14 @@ class IngredientInfo extends React.Component {
     }
 }
 
-export default IngredientInfo
+const mapStateToProps = state => {
+    return {
+        selectedIngredient: state.selections.ingredient
+    } 
+}
+
+const mapDispatchToProps = {
+    deleteIngredient
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(IngredientInfo)
