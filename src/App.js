@@ -8,6 +8,7 @@ import Signup from './components/Signup'
 import IngredientsContainer from './components/IngredientsContainer'
 import Dashboard from './components/Dashboard'
 import OrderList from './components/OrderList'
+import ProfileEdit from './components/ProfileEdit'
 import { connect } from 'react-redux'
 import { currentUser } from './actions/index'
 import { lowIngredient, renderIngredients } from './actions/ingredients'
@@ -59,6 +60,7 @@ class App extends React.Component {
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
           <Route path='/ingredients' component={IngredientsContainer} />
+          <Route path='/updateProfile' component={ProfileEdit} />
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/orderList' component={OrderList} />
         </Switch>

@@ -3,6 +3,7 @@ import { logout } from '../actions/login'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom' 
 import { Menu, Label} from 'semantic-ui-react'
+import ProfileDropdown from './ProfileDropdown'
 
 class NavBar extends React.Component {
 
@@ -18,7 +19,7 @@ class NavBar extends React.Component {
 
     render(){
         const page = this.props.history.location.pathname
-        const label = this.props.lowIngredients ? <Label color='red' tag>{this.props.lowIngredients.length}</Label> : null
+        const label = this.props.lowIngredients.length > 0 ? <Label floating circular color='red' >{this.props.lowIngredients.length}</Label> : null
 
         return(
             <div>
@@ -38,7 +39,9 @@ class NavBar extends React.Component {
                         { label }
                     </Menu.Item>
                     <Menu.Menu position='right'>
-                        <Menu.Item name='profile' onClick={this.handleClick} active={page === '/profile'} id='profile' />
+                        <Menu.Item>
+                            <ProfileDropdown />
+                        </Menu.Item>
                         <Menu.Item name='logout' onClick={this.handleLogout}  active={page === '/logout'} id='logout' />
                     </Menu.Menu>
                 </>

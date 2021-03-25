@@ -22,7 +22,7 @@ class OrderList extends React.Component {
 
         return(
             <Grid>
-                <Menu pointing secondary vertical>
+                <Menu className='text' pointing secondary vertical>
                 <Menu.Item name='All' id='all' active={activeItem === 'all'} onClick={this.handleClick} />
                     {categories}
                 </Menu>

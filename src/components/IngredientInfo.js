@@ -8,9 +8,7 @@ class IngredientInfo extends React.Component {
 
     state = {
         edit: false,
-        name: '',
-        quantity_unit: '',
-        par: ''
+        confirmDelete: false
     }
     
     handleEdit = event => {
@@ -19,7 +17,14 @@ class IngredientInfo extends React.Component {
         })
     }
 
+
     handleDelete = () => {
+        this.setState({
+            confirmDelete: !this.state.confirmDelete
+        })
+    }
+
+    handleConfirmDelete = () => {
         const id = this.props.selectedIngredient.id
 
         fetch(`http://localhost:3000/ingredients/${id}`, {method: 'DELETE'})
@@ -29,11 +34,11 @@ class IngredientInfo extends React.Component {
                 this.props.deleteIngredient(id)
             }
         })
-
     }
 
     render(){
         const { name, quantity, quantity_unit, par } = this.props.ingredient
+        const toggleConfirmDelete = this.state.confirmDelete ? <Button onClick={this.handleConfirmDelete}>Are you Sure?</Button> : null
         const toggleEdit =    
             this.state.edit
             ?
@@ -44,11 +49,14 @@ class IngredientInfo extends React.Component {
                 <List.Item>Par: {par} {quantity_unit}</List.Item>
             </List>
 
+
         return(
             <div>
                 {name}<br/><br/>
                 <Button onClick={this.handleEdit}>Edit</Button>
-                <Button onClick={this.handleDelete}>Delete</Button><br/>
+                <Button onClick={this.handleDelete}>Delete</Button>
+                {toggleConfirmDelete}
+                <br/><br/>
                 {toggleEdit}
             </div>
         )
