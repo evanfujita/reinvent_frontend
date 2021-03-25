@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Dropdown, Button } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 class Profile extends React.Component {
@@ -21,8 +21,7 @@ class Profile extends React.Component {
                     <Dropdown.Item text={restaurant_name} />
                     <Dropdown.Item onClick={this.handleClick} text='Edit User' />
                 </Dropdown.Menu>
-            </Dropdown>
-            
+            </Dropdown>   
         )
     }
 }

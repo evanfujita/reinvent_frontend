@@ -1,5 +1,5 @@
 import React from 'react'
-import { logout } from '../actions/login'
+import { logout } from '../actions/user'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom' 
 import { Menu, Label} from 'semantic-ui-react'

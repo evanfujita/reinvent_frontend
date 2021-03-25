@@ -1,5 +1,4 @@
 import React from 'react'
-import { updateIngredientQuantity } from '../actions/ingredients'
 import { connect } from 'react-redux'
 import { Button, Form } from 'semantic-ui-react'
 import { updateIngredient } from '../actions/ingredients'
