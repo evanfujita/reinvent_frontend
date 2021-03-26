@@ -38,8 +38,19 @@ class IngredientInfo extends React.Component {
 
     render(){
         const { name, quantity, quantity_unit, par } = this.props.ingredient
-        const toggleConfirmDelete = this.state.confirmDelete ? <Button onClick={this.handleConfirmDelete}>Are you Sure?</Button> : null
-        const toggleEdit =    
+        const toggleConfirmDelete = this.state.confirmDelete 
+            ? 
+            <>
+            <Button color='red' onClick={this.handleConfirmDelete}>Are you Sure?</Button> 
+            <Button onClick={this.handleDelete}>Cancel</Button> 
+            </>
+            : 
+            <>
+            <Button onClick={this.handleEdit}>Edit</Button>
+            <Button color='red' onClick={this.handleDelete}>Delete</Button>
+            </>
+
+        const toggleEdit =  
             this.state.edit
             ?
             <IngredientUpdateForm />
@@ -51,10 +62,9 @@ class IngredientInfo extends React.Component {
 
 
         return(
-            <div>
+            <div align='left'>
                 {name}<br/><br/>
-                <Button onClick={this.handleEdit}>Edit</Button>
-                <Button onClick={this.handleDelete}>Delete</Button>
+
                 {toggleConfirmDelete}
                 <br/><br/>
                 {toggleEdit}

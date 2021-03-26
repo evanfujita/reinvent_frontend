@@ -34,6 +34,7 @@ class NavBar extends React.Component {
                 <>
                     <Menu.Item name='dashboard' onClick={this.handleClick} active={page === '/dashboard'} id='dashboard' />
                     <Menu.Item name='ingredients' onClick={this.handleClick}  active={page === '/ingredients'} id='ingredients' />
+                    <Menu.Item name='vendors' onClick={this.handleClick}  active={page === '/vendors'} id='vendors' />
                     <Menu.Item name='orderList' onClick={this.handleClick} active={page === '/orderList'} id='orderList'>
                         OrderList 
                         { label }

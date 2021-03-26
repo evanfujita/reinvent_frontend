@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { loginSuccess } from '../actions/user'
 import { Form } from 'semantic-ui-react'
 import { lowIngredient, renderIngredients } from '../actions/ingredients'
+import { renderVendors } from '../actions/vendors'
 
 
 class Login extends React.Component{
@@ -22,7 +23,14 @@ class Login extends React.Component{
                     this.props.lowIngredient(ingredient)
                 }
             })
+        })
+    }
 
+    fetchVendors = () => {
+        fetch('http://localhost:3000/vendors')
+        .then(resp => resp.json())
+        .then(vendors => {
+          this.props.renderVendors(vendors)
         })
     }
 
@@ -69,9 +77,12 @@ class Login extends React.Component{
                 })
                 this.props.history.push('/dashboard')
                 this.fetchIngredients()
+                this.fetchVendors()
             }
         })
     }
+
+
 
     render(){
         return(
@@ -98,7 +109,8 @@ class Login extends React.Component{
 const mapDispatchToProps = {
     loginSuccess,
     renderIngredients,
-    lowIngredient
+    lowIngredient,
+    renderVendors
 }
 
 export default connect(null, mapDispatchToProps)(Login)

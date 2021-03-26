@@ -31,7 +31,7 @@ class ProfileEdit extends React.Component {
             }
         }
 
-        // this.updateFetch(updatedUser, id)
+        this.updateFetch(updatedUser, id)
 
         this.props.updateUser(updatedUser)
         this.setState({
@@ -83,7 +83,7 @@ class ProfileEdit extends React.Component {
             : 
             <>
             <Button type='submit' onClick={this.handleSubmit}>Update Information</Button><br/><br/>
-            <Button color='red' onClick={this.handleDelete}>Delete</Button>
+            <Button color='red' onClick={this.handleDelete}>Delete User</Button>
             </>
 
         return(
@@ -124,7 +124,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    updateUser
+    updateUser,
+    logout
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileEdit)

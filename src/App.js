@@ -9,10 +9,11 @@ import IngredientsContainer from './components/IngredientsContainer'
 import Dashboard from './components/Dashboard'
 import OrderList from './components/OrderList'
 import ProfileEdit from './components/ProfileEdit'
+import VendorsContainer from './components/VendorsContainer'
 import { connect } from 'react-redux'
 import { currentUser } from './actions/index'
 import { lowIngredient, renderIngredients } from './actions/ingredients'
-
+import { renderVendors } from './actions/vendors'
 
 class App extends React.Component {
   componentDidMount(){
@@ -45,6 +46,12 @@ class App extends React.Component {
         )
     })
 
+    fetch('http://localhost:3000/vendors')
+    .then(resp => resp.json())
+    .then(vendors => {
+      this.props.renderVendors(vendors)
+    })
+
 }}
 
 
@@ -63,6 +70,7 @@ class App extends React.Component {
           <Route path='/updateProfile' component={ProfileEdit} />
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/orderList' component={OrderList} />
+          <Route path='/vendors' component={VendorsContainer} />
         </Switch>
     </div>
   );
@@ -72,7 +80,8 @@ class App extends React.Component {
 const mapDispatchToProps = {
   currentUser,
   renderIngredients,
-  lowIngredient
+  lowIngredient,
+  renderVendors
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(App));
