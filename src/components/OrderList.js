@@ -16,15 +16,15 @@ class OrderList extends React.Component {
     
     render(){
         const { activeItem } = this.state
-        const categories = this.props.categories.map(category => <Menu.Item key={category.id} name={category.name} id={category.id} active={activeItem === category.id} onClick={this.handleClick} />)        
         const categorizedIngredients = this.props.lowIngredients.filter(ingredient => activeItem === ingredient.category_id || activeItem === 'all' ? ingredient : null)
         const ingredients = categorizedIngredients.map(ingredient => <List.Item key={ingredient.id}>{ingredient.name}</List.Item>)
-
+        const vendors = this.props.vendors.map(vendor => <Menu.Item key={vendor.id} name={vendor.name} id={vendor.id} active={activeItem === vendor.id} onClick={this.handleClick} />) 
         return(
             <Grid>
                 <Menu className='text' pointing secondary vertical>
                 <Menu.Item name='All' id='all' active={activeItem === 'all'} onClick={this.handleClick} />
-                    {categories}
+                    
+                    {vendors}
                 </Menu>
                 <Grid.Column>
                     <List>
@@ -40,7 +40,8 @@ const mapStateToProps = state => {
     return {
         ingredients: state.ingredients,
         lowIngredients: state.lowIngredients,
-        categories: state.categories
+        categories: state.categories,
+        vendors: state.vendors
     }
 }
 
