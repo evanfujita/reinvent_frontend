@@ -3,6 +3,8 @@ function vendor(state=[], action){
 
         case 'RENDER_VENDORS':
             return action.vendors
+        case 'ADD_VENDOR':
+            return [...state, action.vendor]
 
         default:
             return state

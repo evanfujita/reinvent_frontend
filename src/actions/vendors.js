@@ -4,3 +4,10 @@ export const renderVendors = vendors => {
         vendors
     }
 }
+
+export const addVendor = vendor => {
+    return {
+        type: 'ADD_VENDOR',
+        vendor
+    }
+}

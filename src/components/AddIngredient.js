@@ -10,7 +10,8 @@ class AddIngredient extends React.Component {
         quantity: '',
         quantity_unit: '',
         par: '',
-        category_id: ''
+        category_id: '',
+        vendor_id: ''
     }
 
     handleChange = event => {
@@ -53,14 +54,22 @@ class AddIngredient extends React.Component {
         const { name, quantity, quantity_unit, par } = this.state
         
         const categoriesOptions = this.props.categories.map(category => {
-            return(
-                {
-                    key: category.id,
-                    text: category.name,
-                    id: category.id,
-                    value: category.id
-                }
-            )
+            return{
+                key: category.id,
+                text: category.name,
+                id: category.id,
+                value: category.id
+            }
+            
+        })
+
+        const vendorsOptions = this.props.vendors.map(vendor => {
+            return{
+                key: vendor.id,
+                text: vendor.name,
+                id: vendor.id,
+                value: vendor.id
+            }
         })
 
         return(
@@ -102,6 +111,14 @@ class AddIngredient extends React.Component {
                         selection
                         options={categoriesOptions}
                         onChange={this.handleDropdownChange}
+                    /><br/>
+                    <label>Vendor</label>
+                    <Dropdown 
+                        placeholder='Select a Vendor'
+                        fluid
+                        selection
+                        options={vendorsOptions}
+                        onChange={this.handleDropdownChange}
                     />
                     <br/>
 
@@ -115,7 +132,8 @@ class AddIngredient extends React.Component {
 const mapStateToProps = state => {
     return {
         categories: state.categories,
-        ingredients: state.ingredients
+        ingredients: state.ingredients,
+        vendors: state.vendors
     }
 }
 

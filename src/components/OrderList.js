@@ -18,10 +18,10 @@ class OrderList extends React.Component {
         const { activeItem } = this.state
         const categorizedIngredients = this.props.lowIngredients.filter(ingredient => activeItem === ingredient.category_id || activeItem === 'all' ? ingredient : null)
         const ingredients = categorizedIngredients.map(ingredient => <List.Item key={ingredient.id}>{ingredient.name}</List.Item>)
-        const vendors = this.props.vendors.map(vendor => <Menu.Item key={vendor.id} name={vendor.name} id={vendor.id} active={activeItem === vendor.id} onClick={this.handleClick} />) 
+        const vendors = this.props.vendors.map(vendor => <Menu.Item key={vendor.id} name={vendor.name} id={vendor.name} active={activeItem === vendor.name} onClick={this.handleClick} />) 
         return(
             <Grid>
-                <Menu className='text' pointing secondary vertical>
+                <Menu align='left' className='text' pointing secondary vertical>
                 By Vendor:
                 <Menu.Item name='All' id='all' active={activeItem === 'all'} onClick={this.handleClick} />
                     {vendors}
