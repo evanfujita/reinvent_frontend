@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Button } from 'semantic-ui-react'
+import Email from './Email'
+
 
 class Dashboard extends React.Component {
 
@@ -11,7 +13,7 @@ class Dashboard extends React.Component {
         <Grid columns={3}>
           <Grid.Row> 
             <Grid.Column>
-            
+                <Email />
             </Grid.Column>
             <Grid.Column>
             </Grid.Column>

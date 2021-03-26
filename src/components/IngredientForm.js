@@ -18,7 +18,7 @@ class IngredientForm extends React.Component {
     }
 
     handleBlur = event => {
-        // debugger
+        
         if(event.target.value !== ''){
             this.handleFetch(event)
         }

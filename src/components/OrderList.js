@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { List, Grid, Menu } from 'semantic-ui-react'
+import { List, Grid, Menu, Button } from 'semantic-ui-react'
+import Email from './Email'
+import emailjs from 'emailjs-com'
 
 class OrderList extends React.Component {
     
@@ -15,10 +17,15 @@ class OrderList extends React.Component {
     }
     
     render(){
-        const { activeItem } = this.state
-        const categorizedIngredients = this.props.lowIngredients.filter(ingredient => activeItem === ingredient.category_id || activeItem === 'all' ? ingredient : null)
+        const activeItem = this.state.activeItem
+        const categorizedIngredients = this.props.lowIngredients.filter(ingredient => {
+            return (
+            activeItem === ingredient.vendor_id || activeItem === 'all' ? ingredient : null
+            )
+           })
+        
         const ingredients = categorizedIngredients.map(ingredient => <List.Item key={ingredient.id}>{ingredient.name}</List.Item>)
-        const vendors = this.props.vendors.map(vendor => <Menu.Item key={vendor.id} name={vendor.name} id={vendor.name} active={activeItem === vendor.name} onClick={this.handleClick} />) 
+        const vendors = this.props.vendors.map(vendor => <Menu.Item key={vendor.id} name={vendor.name} id={vendor.id} active={activeItem == vendor.id} onClick={this.handleClick} />) 
         return(
             <Grid>
                 <Menu align='left' className='text' pointing secondary vertical>
@@ -29,6 +36,7 @@ class OrderList extends React.Component {
                 <Grid.Column>
                     <List>
                         {ingredients}
+                        <Email />
                     </List>
                 </Grid.Column>
             </Grid>
