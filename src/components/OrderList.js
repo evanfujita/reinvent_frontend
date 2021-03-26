@@ -22,8 +22,8 @@ class OrderList extends React.Component {
         return(
             <Grid>
                 <Menu className='text' pointing secondary vertical>
+                By Vendor:
                 <Menu.Item name='All' id='all' active={activeItem === 'all'} onClick={this.handleClick} />
-                    
                     {vendors}
                 </Menu>
                 <Grid.Column>

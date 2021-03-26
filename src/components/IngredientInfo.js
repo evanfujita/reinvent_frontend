@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, Button } from 'semantic-ui-react'
+import { List, Button, Popup } from 'semantic-ui-react'
 import IngredientUpdateForm from './IngredientUpdateForm'
 import { connect } from 'react-redux'
 import { deleteIngredient } from '../actions/ingredients'
@@ -38,17 +38,22 @@ class IngredientInfo extends React.Component {
 
     render(){
         const { name, quantity, quantity_unit, par } = this.props.ingredient
-        const toggleConfirmDelete = this.state.confirmDelete 
-            ? 
-            <>
-            <Button color='red' onClick={this.handleConfirmDelete}>Are you Sure?</Button> 
-            <Button onClick={this.handleDelete}>Cancel</Button> 
-            </>
-            : 
-            <>
-            <Button onClick={this.handleEdit}>Edit</Button>
-            <Button color='red' onClick={this.handleDelete}>Delete</Button>
-            </>
+
+            const deleteIngredient = () => (
+                <>
+                <Button onClick={this.handleEdit}>Edit</Button>
+                <Popup
+                    content={
+                        <>
+                          <Button color='red' onClick={this.handleConfirmDelete}>Delete {name}?</Button> 
+                        </>
+                        }
+                        on='click'
+                        popper={{ id: 'popper-container', style: { zIndex : 2000 } }}
+                        trigger={<Button color='red'>Delete</Button>}
+                />
+                </>
+            )
 
         const toggleEdit =  
             this.state.edit
@@ -59,13 +64,12 @@ class IngredientInfo extends React.Component {
                 <List.Item>Quantity: {quantity} {quantity_unit}</List.Item>
                 <List.Item>Par: {par} {quantity_unit}</List.Item>
             </List>
-
-
+            
         return(
             <div align='left'>
                 {name}<br/><br/>
 
-                {toggleConfirmDelete}
+                {deleteIngredient()}
                 <br/><br/>
                 {toggleEdit}
             </div>
