@@ -4,7 +4,7 @@ import { loginSuccess } from '../actions/user'
 import { Form } from 'semantic-ui-react'
 import { lowIngredient, renderIngredients } from '../actions/ingredients'
 import { renderVendors } from '../actions/vendors'
-
+import { renderOrders } from '../actions/orders'
 
 class Login extends React.Component{
     state = {
@@ -31,6 +31,14 @@ class Login extends React.Component{
         .then(resp => resp.json())
         .then(vendors => {
           this.props.renderVendors(vendors)
+        })
+    }
+
+    fetchOrders = () => {
+        fetch('http://localhost:3000/orders')
+        .then(resp => resp.json())
+        .then(orders => {
+          this.props.renderOrders(orders)
         })
     }
 
@@ -78,6 +86,7 @@ class Login extends React.Component{
                 this.props.history.push('/dashboard')
                 this.fetchIngredients()
                 this.fetchVendors()
+                this.fetchOrders()
             }
         })
     }
@@ -110,7 +119,8 @@ const mapDispatchToProps = {
     loginSuccess,
     renderIngredients,
     lowIngredient,
-    renderVendors
+    renderVendors,
+    renderOrders
 }
 
 export default connect(null, mapDispatchToProps)(Login)

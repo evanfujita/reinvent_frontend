@@ -14,6 +14,7 @@ import { connect } from 'react-redux'
 import { currentUser } from './actions/index'
 import { lowIngredient, renderIngredients } from './actions/ingredients'
 import { renderVendors } from './actions/vendors'
+import { renderOrders } from './actions/orders'
 
 class App extends React.Component {
   componentDidMount(){
@@ -52,9 +53,12 @@ class App extends React.Component {
       this.props.renderVendors(vendors)
     })
 
+    fetch('http://localhost:3000/orders')
+    .then(resp => resp.json())
+    .then(orders => {
+      this.props.renderOrders(orders)
+    })
 }}
-
-
 
   render(){
   return (
@@ -81,7 +85,8 @@ const mapDispatchToProps = {
   currentUser,
   renderIngredients,
   lowIngredient,
-  renderVendors
+  renderVendors,
+  renderOrders
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(App));

@@ -6,6 +6,7 @@ import lowIngredientsReducer from './lowIngredients'
 import categoriesReducer from './categories'
 import selectionsReducer from './selections'
 import vendorsReducer from './vendors'
+import ordersReducer from './orders'
 
 
 export default combineReducers({
@@ -15,6 +16,7 @@ export default combineReducers({
   ingredients: ingredientsReducer,
   lowIngredients: lowIngredientsReducer,
   selections: selectionsReducer,
-  vendors: vendorsReducer
+  vendors: vendorsReducer,
+  orders: ordersReducer
 })
 

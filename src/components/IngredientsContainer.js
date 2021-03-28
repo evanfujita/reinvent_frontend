@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Button, Grid } from 'semantic-ui-react'
+import { Form, Button, Grid, Modal } from 'semantic-ui-react'
 import { selectCategory, selectIngredient } from '../actions/selections'
 import IngredientForm from './IngredientForm'
 import AddIngredient from './AddIngredient'
@@ -18,7 +18,8 @@ class IngredientsContainer extends React.Component{
             viewIngredients: false,
             viewAddIngredient: false,
             displayIngredientInfo: false,
-            ingredientInfo: null
+            ingredientInfo: null,
+            ingredientId: null
         }
     }
    
@@ -77,6 +78,13 @@ class IngredientsContainer extends React.Component{
         const toggleViewAddIngredient = this.state.viewAddIngredient ? <AddIngredient /> : null
         const toggleIngredientInformation = this.state.displayIngredientInfo ? <IngredientInfo key={this.state.ingredientInfo.id} ingredient={this.state.ingredientInfo} /> : null
         
+        // const viewer = <Modal
+        //         trigger={<Button>Take Inventory</Button>}
+        //         header={ingredientInfo.name}
+        //         content='update'
+        //         actions=
+        //     />
+
     return(
             
         <Grid columns={2} >

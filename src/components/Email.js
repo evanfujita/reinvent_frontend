@@ -1,9 +1,13 @@
 import React from 'react'
 import emailjs from 'emailjs-com'
 import { connect } from 'react-redux'
-import { Button } from 'semantic-ui-react'
+import { Button, Message } from 'semantic-ui-react'
 
 class Email extends React.Component {
+
+    state = {
+      emailMessage: false
+    }
 
     handleClick = () => {
         
@@ -18,13 +22,20 @@ class Email extends React.Component {
         const templateID = 'template_emjv768'
         const userID = 'user_2aDBcZXjpPvZLRGDXPzBX'
         
-        emailjs.send(serviceID, templateID, templateParams, userID)
+        // emailjs.send(serviceID, templateID, templateParams, userID)
+        this.setState({
+          emailMessage: true
+        })
       }
 
     render(){
+      
+      const successMessage = this.state.emailMessage ? <Message success header='Email Successful!' content='Your Order Was Sent to ...' /> : null
+
         return(
             <div>
               <Button onClick={this.handleClick}>Email</Button>
+              {successMessage}
             </div>
         )
     }
@@ -32,7 +43,7 @@ class Email extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.user,   
+        user: state.user
     }
 }
 
