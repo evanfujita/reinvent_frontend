@@ -20,6 +20,19 @@ class NavBar extends React.Component {
     render(){
         const page = this.props.history.location.pathname
         const label = this.props.lowIngredients.length > 0 ? <Label floating circular color='red' >{this.props.lowIngredients.length}</Label> : null
+        const pendingOrder = this.props.pendingOrder.length > 0
+            ? 
+            <Menu.Item 
+            name='pendingOrderList' 
+            onClick={this.handleClick} 
+            active={page === '/orderList'} 
+            id='pendingOrderList'>
+                Pending Order
+                <Label floating circular color='yellow' >{this.props.pendingOrder.length}</Label>
+            </Menu.Item>
+        
+         : 
+         null
 
         return(
             <div>
@@ -38,7 +51,9 @@ class NavBar extends React.Component {
                     <Menu.Item name='orderList' onClick={this.handleClick} active={page === '/orderList'} id='orderList'>
                         OrderList 
                         { label }
+                        
                     </Menu.Item>
+                        {pendingOrder}
                     <Menu.Menu position='right'>
                         <Menu.Item>
                             <ProfileDropdown />
@@ -56,7 +71,8 @@ const mapStateToProps = state => {
     return {
         user: state.user,
         ingredients: state.ingredients,
-        lowIngredients: state.lowIngredients
+        lowIngredients: state.lowIngredients,
+        pendingOrder: state.pendingOrder
     }
 }
 

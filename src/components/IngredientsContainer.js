@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Button, Grid, Modal } from 'semantic-ui-react'
+import { Form, Button, Grid } from 'semantic-ui-react'
 import { selectCategory, selectIngredient } from '../actions/selections'
 import IngredientForm from './IngredientForm'
 import AddIngredient from './AddIngredient'
 import Ingredient from './Ingredient'
 import IngredientInfo from './IngredientInfo'
 import CategoryMenuBar from './CategoryMenuBar'
+import IngredientsDropdown from './IngredientsDropdown'
 
 
 class IngredientsContainer extends React.Component{
@@ -17,7 +18,7 @@ class IngredientsContainer extends React.Component{
             active: false,
             viewIngredients: false,
             viewAddIngredient: false,
-            displayIngredientInfo: false,
+            displayIngredientInfo: false, 
             ingredientInfo: null,
             ingredientId: null
         }
@@ -77,13 +78,6 @@ class IngredientsContainer extends React.Component{
         const toggleViewIngredients = this.state.view ? toggleForm : null
         const toggleViewAddIngredient = this.state.viewAddIngredient ? <AddIngredient /> : null
         const toggleIngredientInformation = this.state.displayIngredientInfo ? <IngredientInfo key={this.state.ingredientInfo.id} ingredient={this.state.ingredientInfo} /> : null
-        
-        // const viewer = <Modal
-        //         trigger={<Button>Take Inventory</Button>}
-        //         header={ingredientInfo.name}
-        //         content='update'
-        //         actions=
-        //     />
 
     return(
             
@@ -98,7 +92,7 @@ class IngredientsContainer extends React.Component{
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                {/* <IngredientsDropdown ingredients={ingredientsSelector} /> */}
+                <IngredientsDropdown ingredients={ingredientsSelector} />
                     { toggleViewIngredients }
                 </Grid.Column>
                 <Grid.Column>

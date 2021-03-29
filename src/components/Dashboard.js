@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, Button } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import Email from './Email'
 
 

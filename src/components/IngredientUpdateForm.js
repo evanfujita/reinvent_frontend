@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Form } from 'semantic-ui-react'
-import { updateIngredient } from '../actions/ingredients'
 
 class IngredientUpdateForm extends React.Component {
     
@@ -46,9 +45,9 @@ class IngredientUpdateForm extends React.Component {
         for (const property in this.state){
             if(this.state[property] !== ''){
                 ingredient[property] = this.state[property]
-            } else {
-                ingredient[property] = ingredient[property]
             }
+                // ingredient[property] = ingredient[property]
+            
         }
         
         const reqObj = {
@@ -96,8 +95,6 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = {
-    updateIngredient
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(IngredientUpdateForm)
+
+export default connect(mapStateToProps)(IngredientUpdateForm)

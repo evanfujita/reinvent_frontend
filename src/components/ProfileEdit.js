@@ -26,9 +26,7 @@ class ProfileEdit extends React.Component {
         for (const property in this.state){
             if(this.state[property] !== ''){
                 updatedUser[property] = this.state[property]
-            } else {
-                updatedUser[property] = updatedUser[property]
-            }
+            } //updatedUser[property] = updatedUser[property]
         }
 
         this.updateFetch(updatedUser, id)

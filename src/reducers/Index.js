@@ -7,6 +7,7 @@ import categoriesReducer from './categories'
 import selectionsReducer from './selections'
 import vendorsReducer from './vendors'
 import ordersReducer from './orders'
+import pendingOrderReducer from './pendingOrder'
 
 
 export default combineReducers({
@@ -17,6 +18,7 @@ export default combineReducers({
   lowIngredients: lowIngredientsReducer,
   selections: selectionsReducer,
   vendors: vendorsReducer,
-  orders: ordersReducer
+  orders: ordersReducer,
+  pendingOrder: pendingOrderReducer
 })
 
