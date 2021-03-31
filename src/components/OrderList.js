@@ -5,29 +5,50 @@ import NotesForm from './NotesForm'
 import Email from './Email'
 import OrderListItem from './OrderListItem'
 import { parMeter } from '../actions/index'
+import { selectVendor } from '../actions/selections'
 
 class OrderList extends React.Component {
     
     state = {
         vendorId: 'all',
+        ingredients: [],
         orderAbovePar: 0,
         notesForm: false,
         notes: ''
     }
 
-
     handleClick = event => {
+        const vendor = this.props.vendors.find(vendor => vendor.id === parseInt(event.target.id))
         this.setState({
             vendorId: event.target.id
         })
+        // debugger
+        
+        this.props.selectVendor(vendor)
     }
 
     handleMeterChange = event => {
         const meter = parseInt(event.target.value)
-        this.setState({
-            orderAbovePar: meter
-        })
         this.props.parMeter(meter)
+    }
+
+    // handleChange = event => {
+    //     const id = parseInt(event.target.id)
+
+    //     if(event.target.checked){
+    //         this.setState({
+    //             ingredients: [...this.state.ingredients, id]
+    //         })
+    //     } else {
+    //         let newState = this.state.ingredients.filter(ingredient => ingredient !== id)
+    //         this.setState({
+    //             ingredients: newState
+    //         })
+    //     }
+    // }
+
+    addIngredient = () => {
+        // debugger
     }
 
     handleNote = event => {
@@ -59,7 +80,7 @@ class OrderList extends React.Component {
 
         const { orderAbovePar } = this.state
         const displayIngredients = categorizedIngredients.map(ingredient => 
-            <OrderListItem key={ingredient.id} ingredient={ingredient} addIngredient={this.addIngredient} orderAbovePar={orderAbovePar} />
+            <OrderListItem key={ingredient.id} ingredient={ingredient} addIngredient={this.addIngredient} />
         )
             
             return(
@@ -84,14 +105,20 @@ class OrderList extends React.Component {
                     />
                     </Form>
                 </Grid.Column>
-                <Grid.Column width='8' align='left'>
+                <Grid.Column width={6} align='left'>
                     <List>
                         {displayIngredients}
+                        { this.state.vendorId !== 'all' ? 
+                        <>
                         <Button onClick={this.handleNote}>Add Note</Button>
                         <Email vendor={vendorInfo} ingredients={vendorIngredients} vendorId={this.state.vendorId} notes={this.state.notes} />
+                        </>
+                        :
+                        null
+                        }
                     </List>
                 </Grid.Column>
-                <Grid.Column>
+                <Grid.Column width={4}>
                     {this.state.notesForm
                      ?
                     <NotesForm handleNoteChange={this.handleNoteChange} />
@@ -115,7 +142,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    parMeter
+    parMeter,
+    selectVendor
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderList)

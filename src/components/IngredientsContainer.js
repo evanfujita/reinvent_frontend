@@ -48,16 +48,6 @@ class IngredientsContainer extends React.Component{
         })
     }
 
-    handleIngredientClick = event => {
-        const id = parseInt(event.target.id)
-        const ingredient = this.props.ingredients.find(ingredient => ingredient.id === id)
-        this.props.selectIngredient(ingredient)
-        
-        this.setState({
-            ingredientInfo: ingredient,
-            displayIngredientInfo: true
-        })
-    }
 
     render(){
         const active = this.state.active
@@ -70,7 +60,7 @@ class IngredientsContainer extends React.Component{
             this.props.ingredients
         )
 
-        const ingredientList = ingredientsSelector.map(ingredient => <Ingredient key={ingredient.id} ingredientInfo={ingredient} handleIngredientClick={this.handleIngredientClick}/> )
+        const ingredientList = ingredientsSelector.map(ingredient => <Ingredient key={ingredient.id} ingredientInfo={ingredient} /> )
         const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
         
         //togglers

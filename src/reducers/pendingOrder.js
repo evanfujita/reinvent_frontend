@@ -17,6 +17,9 @@ function pendingOrder(state=null, action) {
                 return (ingredient.ingredient.id !== action.ingredient.id)
             })
             return newState
+
+        case 'LOGOUT':
+            return []
         
         default:
             return state

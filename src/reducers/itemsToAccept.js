@@ -15,6 +15,10 @@ const itemsToAccept = (state=[], action) => {
             
             newState = state.filter(ingredient => ingredient.ingredient.id !== action.ingredient.id)
             return newState
+        
+        case 'LOGOUT':
+            return []
+            
         default:
             return state
     }

@@ -16,6 +16,7 @@ import { currentUser } from './actions/index'
 import { lowIngredient, renderIngredients } from './actions/ingredients'
 import { renderVendors } from './actions/vendors'
 import { renderOrders } from './actions/orders'
+import { abundantIngredient } from './actions/ingredients'
 
 class App extends React.Component {
   componentDidMount(){
@@ -42,11 +43,20 @@ class App extends React.Component {
     fetch('http://localhost:3000/ingredients')
     .then(resp => resp.json())
     .then(ingredients => {
-        this.props.renderIngredients(ingredients)
-        ingredients.forEach(ingredient => 
-          ingredient.quantity < ingredient.par ? this.props.lowIngredient(ingredient) : null
-        )
+      const sortedIngredients = ingredients.sort(function(a,b){
+        if(a.name < b.name) {return -1}
+        if(a.name > b.name) {return 1}
+        return 0
     })
+        this.props.renderIngredients(sortedIngredients)
+        sortedIngredients.forEach(ingredient => {
+          if(ingredient.quantity < ingredient.par) {
+            this.props.lowIngredient(ingredient)
+          } else if (ingredient.quantity > (ingredient.par * 4)){
+            this.props.abundantIngredient(ingredient)
+          }
+        })  
+      })
 
     fetch('http://localhost:3000/vendors')
     .then(resp => resp.json())
@@ -88,7 +98,8 @@ const mapDispatchToProps = {
   renderIngredients,
   lowIngredient,
   renderVendors,
-  renderOrders
+  renderOrders,
+  abundantIngredient
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(App));

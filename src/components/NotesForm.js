@@ -1,28 +1,18 @@
 import React from 'react'
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, TextArea } from 'semantic-ui-react'
 
 
 class NotesForm extends React.Component {
 
-    // state = {
-    //     note: ''
-    // }
-
-    // handleNoteChange = event => {
-    //     this.setState({
-    //         note: event.target.value
-    //     })
-    // }
-
     render(){
         return( 
-            <>
+            <Form.Group>
             <Form.Field>
-                <label>Add Note</label>
-                <input onChange={this.props.handleNoteChange} placeholder='note' />
-            </Form.Field>
+                <label>Add Note:</label><br/><br/>
+                <input type='area' onChange={this.props.handleNoteChange} placeholder='e.g., salmon filleted' />
+            </Form.Field><br/>
             <Button>Submit</Button>
-            </>
+            </Form.Group>
         )
     }
 }

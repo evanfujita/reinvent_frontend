@@ -1,18 +1,21 @@
 import React from 'react'
 import emailjs from 'emailjs-com'
 import { connect } from 'react-redux'
-import { Button, Message } from 'semantic-ui-react'
+import { Button, Message, Transition } from 'semantic-ui-react'
 import { deleteItem, pendingOrder } from '../actions/pendingOrder'
 
 
 class Email extends React.Component {
 
     state = {
-      emailMessage: false
+      emailMessage: false,
+      visible: false
     }
 
 
     handleClick = () => {
+      this.toggleVisibility()
+      
       const { first_name, restaurant_name } = this.props.user
       const { representative, email } = this.props.vendor
       const ingredients = this.props.ingredients.map(ingredient => 
@@ -39,6 +42,7 @@ class Email extends React.Component {
       this.setState({
         emailMessage: true
       })
+      setTimeout(() => {this.setState({visible: false})}, 2000) 
       
       this.props.pendingOrder(this.props.ingredients) 
       this.props.ingredients.map(ingredient => {
@@ -46,15 +50,20 @@ class Email extends React.Component {
       })
     }
 
+    toggleVisibility = () => this.setState((prevState) => ({ visible: !prevState.visible}))
+    
+
     render(){
+      const { visible } = this.state
       const content = this.state.emailMessage ? `Success - Your Order Was Sent to ${this.props.vendor.name}!` : null
-      const successMessage = this.state.emailMessage && parseInt(this.props.vendorId) === this.props.vendor.id
-      ? <Message size='mini' color='green'>{content}</Message> : null
+      // const successMessage = this.state.visible
+      // ? <Transition visible={visible} animation='scale' duration={500}><Message size='mini' color='green'>{content}</Message></Transition> : null
 
         return(
             <>
               <Button onClick={this.handleClick}>Email</Button>
-              {successMessage}
+              {/* {successMessage} */}
+              <Transition visible={visible} animation='scale' duration={500}><Message size='mini' color='green'>{content}</Message></Transition>
             </>
         )
     }
@@ -62,7 +71,8 @@ class Email extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.user, 
+        user: state.user,
+        selectedVendor: state.selections.vendor
     }
 }
 

@@ -5,6 +5,7 @@ import { Form } from 'semantic-ui-react'
 import { lowIngredient, renderIngredients } from '../actions/ingredients'
 import { renderVendors } from '../actions/vendors'
 import { renderOrders } from '../actions/orders'
+import { abundantIngredient } from '../actions/ingredients' 
 
 class Login extends React.Component{
     state = {
@@ -17,12 +18,20 @@ class Login extends React.Component{
         fetch('http://localhost:3000/ingredients')
         .then(resp => resp.json())
         .then(ingredients => {
-            this.props.renderIngredients(ingredients)
-            ingredients.forEach(ingredient => {
+            const sortedIngredients = ingredients.sort(function(a,b){
+                if(a.name < b.name) {return -1}
+                if(a.name > b.name) {return 1}
+                return 0
+            })
+            this.props.renderIngredients(sortedIngredients)
+            sortedIngredients.forEach(ingredient => {
                 if(ingredient.quantity < ingredient.par){
                     this.props.lowIngredient(ingredient)
+                } else if (ingredient.quantity > (ingredient.par * 2)){
+                        this.props.abundantIngredient(ingredient)
+                    }
                 }
-            })
+            )
         })
     }
 
@@ -120,7 +129,8 @@ const mapDispatchToProps = {
     renderIngredients,
     lowIngredient,
     renderVendors,
-    renderOrders
+    renderOrders,
+    abundantIngredient
 }
 
 export default connect(null, mapDispatchToProps)(Login)

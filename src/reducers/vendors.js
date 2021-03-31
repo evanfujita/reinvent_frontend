@@ -5,7 +5,8 @@ function vendor(state=[], action){
             return action.vendors
         case 'ADD_VENDOR':
             return [...state, action.vendor]
-
+        case 'LOGOUT':
+            return []
         default:
             return state
     }

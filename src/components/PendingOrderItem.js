@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Grid, Checkbox, Form } from 'semantic-ui-react'
+import { Segment, Grid, Checkbox, Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { itemsToAccept, itemsToDeny, acceptOrder } from '../actions/pendingOrder'
 import { updateIngredient, removeLowIngredient } from '../actions/ingredients'
@@ -27,15 +27,9 @@ class PendingOrderItem extends React.Component {
     }
 
     handleAccept = event => {
-        if(event.target.checked){
         this.props.itemsToAccept(this.state)
         this.handleUpdateIngredient(this.state)
         this.props.removeLowIngredient(this.state.ingredient)
-
-        } 
-        // else {
-        // this.props.itemsToDeny(this.state.ingredient)
-        // }
     }
 
     handleUpdateIngredient = ingredient => {
@@ -70,18 +64,26 @@ class PendingOrderItem extends React.Component {
         return(
             <Segment>
             <Grid columns={3}>
-           <Grid.Column width='8'>
-               <Checkbox key={id} id={id} label={name} onChange={this.handleAccept}  />
+           <Grid.Column verticalAlign='middle' width={6}>
+               {/* <Checkbox key={id} id={id} label={`${name} (${quantity_unit})`} onChange={this.handleAccept}  /> */}
+               {name} ({quantity_unit})
            </Grid.Column>
-           <Grid.Column align='right' width={2} inline>      
-                <Form.Field>
-                    <input width={2} placeholder={quantity} type='number' onChange={this.handleChange} value={quantity} step={1} />
-                    <label>{quantity_unit}</label>
-                </Form.Field>         
+           <Grid.Column align='right' width={4}>      
+                <Form.Input
+                    // type='number'
+                    id={id}
+                    onChange={this.handleChange}
+                    placeholder={quantity}
+                    value={quantity}
+                    min={0}
+                    step={1}
+                />
+                
            </Grid.Column>
-           <Grid.Column width='8'>
-               
-           </Grid.Column>
+                <Grid.Column width={4}>
+                    <Button id={id} key={id} onClick={this.handleAccept} position='right'>Accept</Button>
+                </Grid.Column>
+           
            </Grid>
        </Segment>
         )
