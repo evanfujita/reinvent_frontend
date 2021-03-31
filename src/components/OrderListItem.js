@@ -44,12 +44,12 @@ class OrderListItem extends React.Component {
         return(
             <Segment>
             <Grid columns={3}>
-           <Grid.Column width={8} verticalAlign='middle'>
-               <Button icon={icon} onClick={this.handleChange}></Button>
+           <Grid.Column verticalAlign='middle'>
+              
                <label>{`${name} (${quantity_unit})`}</label>
                {/* <Form.Field control={Checkbox} key={id} id={id} label={`${name} (${quantity_unit})`} onChange={this.handleChange} value='true'/> */}
            </Grid.Column>
-           <Grid.Column align='right' width={4}>
+           <Grid.Column align='right'>
                <Form.Input 
                     id={id}
                     type='number'
@@ -60,6 +60,9 @@ class OrderListItem extends React.Component {
                     step={1}
                />
                
+           </Grid.Column>
+           <Grid.Column align='right'>
+            <Button icon={icon} onClick={this.handleChange}></Button>
            </Grid.Column>
            </Grid>
         </Segment>
