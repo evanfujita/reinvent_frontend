@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Icon } from 'semantic-ui-react'
+import { Form, Icon, Segment } from 'semantic-ui-react'
 import { updateIngredient, updateIngredientQuantity } from '../actions/ingredients'
 import { selectIngredient } from '../actions/selections'
 
@@ -68,8 +68,10 @@ class IngredientForm extends React.Component {
         const active = this.state.active ? <Icon name='check circle outline' color='green'/> : null
     
     return(         
-        <Form.Field inline>
-            <label>{name} ({quantity_unit}) {active}</label>
+        <Segment>
+        <Form.Field align='left'>
+            <label>{active} {name} ({quantity_unit}) </label>
+            
             <input 
                 width={4}
                 id={id}
@@ -80,6 +82,7 @@ class IngredientForm extends React.Component {
                 type='number' 
             />
         </Form.Field> 
+        </Segment>
     )}
 }
 

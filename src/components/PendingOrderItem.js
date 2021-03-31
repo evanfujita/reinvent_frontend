@@ -15,7 +15,7 @@ class PendingOrderItem extends React.Component {
     componentDidMount(){
         this.setState({
             ingredient: this.props.ingredient.ingredient,
-            quantity: this.props.ingredient.ingredient.quantity
+            quantity: this.props.ingredient.quantity
         })
     }
 

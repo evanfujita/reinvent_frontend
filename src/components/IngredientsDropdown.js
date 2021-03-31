@@ -12,7 +12,7 @@ class IngredientsDropdown extends React.Component {
             }
         })
         return(
-            <Dropdown placeholder='ingredients' search selection options={ingredientsOptions} />
+            <Dropdown placeholder='ingredients' search selection options={ingredientsOptions} onChange={this.props.handleDropdownChange} />
         )
     }
 }

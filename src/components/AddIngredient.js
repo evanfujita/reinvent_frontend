@@ -74,31 +74,31 @@ class AddIngredient extends React.Component {
 
         return(
             <div align='left'>
-                <label>add ingredient</label>
+                <label position='right'>Add Ingredient:</label>
                 <Form align='left'>
+                    <label>Name</label>
                     <Form.Input 
-                        label='Name'
                         id='name'
                         placeholder='Name'
                         onChange={this.handleChange}
                         value={name}
                     />
+                    <label>Quantity</label>
                     <Form.Input 
-                        label='Quantity'
                         id='quantity'
                         placeholder='Quantity'
                         onChange={this.handleChange}
                         value={quantity}
                     />
+                    <label>Unit of Measurement</label>
                     <Form.Input 
-                        label='Unit of Measurement'
                         id='quantity_unit'
                         placeholder='Unit of Measurement'
                         onChange={this.handleChange}
                         value={quantity_unit}
                     />
+                    <label>Par</label>
                     <Form.Input 
-                        label='Par'
                         id='par'
                         placeholder='Par'
                         onChange={this.handleChange}

@@ -31,15 +31,6 @@ class PendingOrderContainer extends React.Component {
             })
         }
     }
-
-    // handleAcceptOrder = event => {
-    //     const vendorId = this.state.vendorId
-    //     const ingredientsToAccept = this.props.itemsToAccept.filter(ingredient => (vendorId === ingredient.ingredient.vendor_id || vendorId === 'all' ? ingredient : null))
-    //     ingredientsToAccept.forEach(ingredient=> {
-    //         this.handleUpdateIngredient(ingredient)
-    //     })
-    // }
-
     
     
     render(){

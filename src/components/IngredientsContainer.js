@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Button, Grid } from 'semantic-ui-react'
+import { Form, Button, Grid, Segment } from 'semantic-ui-react'
 import { selectCategory, selectIngredient } from '../actions/selections'
 import IngredientForm from './IngredientForm'
 import AddIngredient from './AddIngredient'
@@ -48,6 +48,17 @@ class IngredientsContainer extends React.Component{
         })
     }
 
+    handleDropdownChange = event => {
+        const id = parseInt(event.target.id)
+        
+        const ingredient = this.props.ingredients.find(ingredient => {
+            return ingredient.id === id
+        })
+        this.setState({
+            displayIngredientInfo: true,
+            ingredientInfo: ingredient
+        })
+    }
 
     render(){
         const active = this.state.active
@@ -60,7 +71,7 @@ class IngredientsContainer extends React.Component{
             this.props.ingredients
         )
 
-        const ingredientList = ingredientsSelector.map(ingredient => <Ingredient key={ingredient.id} ingredientInfo={ingredient} /> )
+        const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /> </Segment>)
         const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
         
         //togglers
@@ -73,23 +84,25 @@ class IngredientsContainer extends React.Component{
             
         <Grid columns={2} >
             <Grid.Row>
-                <Grid.Column>
+                <Grid.Column width={8} align='middle'>
                     <CategoryMenuBar />
                     <Button toggle active={active} onClick={this.handleViewIngredients}>{this.state.view ? 'Hide' : 'Overview'}</Button>
                     <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
-                    <Button onClick={this.handleAddIngredient}>Add Ingredient</Button>
+                    <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
+                    <IngredientsDropdown ingredients={ingredientsSelector} handleDropdownChange={this.handleDropdownChange} />
+                </Grid.Column>
+                <Grid.Column align='middle'>
+                    { toggleViewIngredients }
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-                <Grid.Column>
-                <IngredientsDropdown ingredients={ingredientsSelector} />
-                    { toggleViewIngredients }
-                </Grid.Column>
-                <Grid.Column>
-                    { toggleIngredientInformation }
+                <Grid.Column width={8}>
+
+                    { toggleIngredientInformation }<br/>
                     { toggleViewAddIngredient }
                 </Grid.Column>
             </Grid.Row>
+            
         </Grid>
         )
     }
