@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard'
 import OrderList from './components/OrderList'
 import ProfileEdit from './components/ProfileEdit'
 import VendorsContainer from './components/VendorsContainer'
+import PendingOrderContainer from './components/PendingOrderContainer'
 import { connect } from 'react-redux'
 import { currentUser } from './actions/index'
 import { lowIngredient, renderIngredients } from './actions/ingredients'
@@ -75,6 +76,7 @@ class App extends React.Component {
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/orderList' component={OrderList} />
           <Route path='/vendors' component={VendorsContainer} />
+          <Route path='/pendingOrder' component={PendingOrderContainer} />
         </Switch>
     </div>
   );

@@ -20,14 +20,14 @@ class NavBar extends React.Component {
     render(){
         const page = this.props.history.location.pathname
         const label = this.props.lowIngredients.length > 0 ? <Label floating circular color='red' >{this.props.lowIngredients.length}</Label> : null
-        const pendingOrder = this.props.pendingOrder.length > 0
+        const pendingOrder = this.props.pendingOrder
             ? 
             <Menu.Item 
-            name='pendingOrderList' 
+            name='pendingOrder' 
             onClick={this.handleClick} 
-            active={page === '/orderList'} 
-            id='pendingOrderList'>
-                Pending Order
+            active={page === '/pendingOrder'} 
+            id='pendingOrder'>
+                Pending Orders
                 <Label floating circular color='yellow' >{this.props.pendingOrder.length}</Label>
             </Menu.Item>
         

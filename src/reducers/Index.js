@@ -8,6 +8,9 @@ import selectionsReducer from './selections'
 import vendorsReducer from './vendors'
 import ordersReducer from './orders'
 import pendingOrderReducer from './pendingOrder'
+import parMeterReducer from './parMeter'
+import itemsToOrderReducer from './itemsToOrder'
+import itemsToAcceptReducer from './itemsToAccept'
 
 
 export default combineReducers({
@@ -19,6 +22,9 @@ export default combineReducers({
   selections: selectionsReducer,
   vendors: vendorsReducer,
   orders: ordersReducer,
-  pendingOrder: pendingOrderReducer
+  pendingOrder: pendingOrderReducer,
+  parMeter: parMeterReducer,
+  itemsToOrder: itemsToOrderReducer,
+  itemsToAccept: itemsToAcceptReducer
 })
 

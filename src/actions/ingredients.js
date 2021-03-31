@@ -39,3 +39,11 @@ export const lowIngredient = ingredient => {
         ingredient: ingredient
     }
 }
+
+export const removeLowIngredient = ingredient => {
+    return {
+        type: 'REMOVE_LOW_INGREDIENT',
+        ingredient
+    }
+}
+

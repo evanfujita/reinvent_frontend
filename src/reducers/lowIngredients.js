@@ -5,8 +5,6 @@ const lowIngredients = (state = [], action) => {
             return [...state, action.ingredient]
         case 'UPDATE_INGREDIENT_QUANTITY':
             let lowIngredients 
-            
-
             if (action.ingredient.quantity > action.ingredient.par){
                 lowIngredients = state.filter(ingredient => ingredient.id !== action.ingredient.id)
             } else if(state.find(ingredient => ingredient.id === action.ingredient.id)){
@@ -21,6 +19,9 @@ const lowIngredients = (state = [], action) => {
                 lowIngredients = [...state, action.ingredient]
             } 
         return lowIngredients
+
+        case 'REMOVE_LOW_INGREDIENT':
+            return state.filter(ingredient => ingredient.id !== action.ingredient.id)
 
         case 'LOGOUT':
             return []

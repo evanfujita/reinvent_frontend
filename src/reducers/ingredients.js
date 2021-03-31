@@ -4,6 +4,7 @@ const ingredients = (state = [], action) => {
         case 'RENDER_INGREDIENTS':
             return action.ingredients
             
+        case 'UPDATE_INGREDIENT_QUANTITY':
         case 'UPDATE_INGREDIENT':
             updatedIngredients = state.map(ingredient => {
                 if(ingredient.id === action.ingredient.id){
@@ -13,24 +14,14 @@ const ingredients = (state = [], action) => {
                 }
             })
             return updatedIngredients
-       
-        case 'UPDATE_INGREDIENT_QUANTITY':
-            const newState = state.map(ingredient => {
-                if(ingredient.id === action.ingredient.id){
-                    return action.ingredient
-                } else {
-                    return ingredient
-                }})
-            
-            return newState
-                
+    
         case 'ADD_INGREDIENT':
             return [...state, action.ingredient]
             
         case 'DELETE_INGREDIENT':
             updatedIngredients = state.filter(ingredient => ingredient.id !== action.ingredient)
             return updatedIngredients
-
+        
         case 'LOGOUT':
             return []
             

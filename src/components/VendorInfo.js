@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment } from 'semantic-ui-react'
+import { Segment, Button } from 'semantic-ui-react'
 
 class VendorInfo extends React.Component {
     
@@ -11,18 +11,22 @@ class VendorInfo extends React.Component {
 
         const { name, representative, phone, email } = this.props.vendor
         return(
-            <Segment basic inverse>
+            <Segment>
                 
-                <Segment inverted color='grey'>
+                <Segment >
                     {name}
                 </Segment>
                 
                 <Segment.Group inverted>
-                    <Segment basic stacked inverse> Representative: {representative}</Segment>
-                    <Segment basic stacked inverse>Phone Number: {phone}</Segment>
-                    <Segment basic stacked inverse>Email Address: {email}</Segment>
-                    <Segment basic stacked onClick={this.handleClick}>Edit</Segment>
-                    <Segment basic stacked type='button' onClick={this.handleClick}>Delete</Segment>
+                    <Segment> Representative: {representative}</Segment>
+                    <Segment>Phone Number: {phone}</Segment>
+                    <Segment>Email Address: {email}</Segment>
+                    <Segment>
+                        <Button.Group>
+                            <Button basic color='green' fluid onClick={this.handleClick}>Edit</Button>
+                            <Button fluid basic color='red' onClick={this.handleClick}>Delete</Button>
+                        </Button.Group>
+                    </Segment>
                 </Segment.Group>
             </Segment>
         )

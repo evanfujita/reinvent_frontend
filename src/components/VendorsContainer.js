@@ -25,18 +25,19 @@ class VendorsContainer extends React.Component {
     }
 
     render(){
-        const displayVendors = this.props.vendors.map(vendor => <Segment id={vendor.id} onClick={this.handleVendorClick}>{vendor.name}</Segment>)
+        const displayVendors = this.props.vendors.map(vendor => <Segment basic key={vendor.id} id={vendor.id} onClick={this.handleVendorClick}>{vendor.name}</Segment>)
         const vendorInfo = this.props.vendors.find(vendor => vendor.id === this.state.vendorId)
 
         return(
             <Grid>
                 <Grid.Row>
                 <Grid.Column width='4'>
-                <Segment basic inverse>
+                <Segment basic align='left'>
                     <header>
                         Vendors<br/><br/>
                     </header>
                 {displayVendors}
+                        <Button align='left' onClick={this.handleClick}>Add Vendor</Button>
                 </Segment>
                 </Grid.Column>
                 <Grid.Column width='6'>
@@ -46,7 +47,6 @@ class VendorsContainer extends React.Component {
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column width='4'>
-                        <Button onClick={this.handleClick}>Add Vendor</Button>
                     </Grid.Column>
                     <Grid.Column width='10'>
                     </Grid.Column>
