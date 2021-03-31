@@ -1,12 +1,11 @@
 import React from 'react'
-import { Segment, Grid, Checkbox, Form, Button } from 'semantic-ui-react'
+import { Segment, Grid, Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { itemsToAccept, itemsToDeny, acceptOrder } from '../actions/pendingOrder'
 import { updateIngredient, removeLowIngredient } from '../actions/ingredients'
 
 class PendingOrderItem extends React.Component {
 
-    
     state = {
         ingredient: this.props.ingredient.ingredient,
         quantity: null,
@@ -30,6 +29,11 @@ class PendingOrderItem extends React.Component {
         this.props.itemsToAccept(this.state)
         this.handleUpdateIngredient(this.state)
         this.props.removeLowIngredient(this.state.ingredient)
+    }
+
+    handleReject = () => {
+        const { ingredient } = this.props.ingredient
+        this.props.acceptOrder(ingredient)
     }
 
     handleUpdateIngredient = ingredient => {
@@ -64,13 +68,12 @@ class PendingOrderItem extends React.Component {
         return(
             <Segment>
             <Grid columns={3}>
-           <Grid.Column verticalAlign='middle' width={6}>
-               {/* <Checkbox key={id} id={id} label={`${name} (${quantity_unit})`} onChange={this.handleAccept}  /> */}
+           <Grid.Column verticalAlign='middle'>
                {name} ({quantity_unit})
            </Grid.Column>
-           <Grid.Column align='right' width={4}>      
+           <Grid.Column align='right'>      
                 <Form.Input
-                    // type='number'
+                    type='number'
                     id={id}
                     onChange={this.handleChange}
                     placeholder={quantity}
@@ -78,12 +81,13 @@ class PendingOrderItem extends React.Component {
                     min={0}
                     step={1}
                 />
-                
            </Grid.Column>
-                <Grid.Column width={4}>
-                    <Button id={id} key={id} onClick={this.handleAccept} position='right'>Accept</Button>
-                </Grid.Column>
-           
+            <Grid.Column align='right'>
+                <Button.Group>
+                <Button icon='thumbs up outline' onClick={this.handleAccept} />
+                <Button icon='thumbs down outline' onClick={this.handleReject} />
+                </Button.Group>
+            </Grid.Column>
            </Grid>
        </Segment>
         )

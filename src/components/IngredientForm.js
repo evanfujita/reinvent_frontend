@@ -55,6 +55,7 @@ class IngredientForm extends React.Component {
         .then(resp => resp.json())
         .then(ingredient => {
             this.props.updateIngredientQuantity(ingredient)
+            this.props.selectIngredient(ingredient)
             this.setState({
                 active: true
             })
@@ -75,6 +76,7 @@ class IngredientForm extends React.Component {
             <input 
                 width={4}
                 id={id}
+                min={0}
                 placeholder={quantity} 
                 onChange={this.handleChange}
                 onFocus={this.handleFocus}

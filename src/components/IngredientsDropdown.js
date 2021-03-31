@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { selectIngredient } from '../actions/selections'
 
@@ -8,6 +8,7 @@ class IngredientsDropdown extends React.Component {
     handleChange = event => {
         const ingredient = this.props.ingredients.find(ingredient => ingredient.id === parseInt(event.target.id))
         this.props.selectIngredient(ingredient)
+        
     }
 
     render(){
@@ -21,13 +22,16 @@ class IngredientsDropdown extends React.Component {
             }
         })
         return(
-            <Dropdown placeholder='ingredients' search selection options={ingredientsOptions} onChange={this.handleChange} />
+             <Dropdown fluid placeholder='ingredients'  selection search options={ingredientsOptions} onChange={this.handleChange} />
         )
     }
 }
 
 const mapStateToProps = state => {
-    return {ingredients: state.ingredients}
+    return {
+        ingredients: state.ingredients,
+        selectedIngredient: state.selections.ingredient
+    }
 }
 
 const mapDispatchToProps = {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { selectCategory } from '../actions/selections'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Segment } from 'semantic-ui-react'
 
 class CategoryMenuBar extends React.Component {
     handleClick = event => {
@@ -16,15 +16,12 @@ class CategoryMenuBar extends React.Component {
         })
 
         return(
+            <Segment basic inverse>
             <Menu tabular>
                 <Menu.Item name={'All'} id={0} active={categoryId === 0} onClick={this.handleClick} />
                 {displayCategories}
-                {/* <Menu.Menu position = 'right'>
-                    <Menu.Item>
-                        <Input icon='search' placeholder='Search' />
-                    </Menu.Item>
-                </Menu.Menu> */}
             </Menu>
+            </Segment>
         )
     }
 }

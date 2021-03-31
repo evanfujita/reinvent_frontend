@@ -89,11 +89,11 @@ class IngredientsContainer extends React.Component{
                     <Button toggle active={active} onClick={this.handleViewIngredients}>{this.state.view ? 'Hide' : 'Overview'}</Button>
                     <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
                     <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
-                    <IngredientsDropdown ingredients={ingredientsSelector} handleDropdownChange={this.handleDropdownChange} />
                     { toggleIngredientInformation }<br/>
                     { toggleViewAddIngredient }
                 </Grid.Column>
                 <Grid.Column align='middle'>
+                    <IngredientsDropdown ingredients={ingredientsSelector} handleDropdownChange={this.handleDropdownChange} />
                     { toggleViewIngredients }
                 </Grid.Column>
             </Grid.Row>

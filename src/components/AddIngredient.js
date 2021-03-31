@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addIngredient } from '../actions/ingredients'
-import { Dropdown, Form, Button } from 'semantic-ui-react'
+import { Dropdown, Form, Button, Segment } from 'semantic-ui-react'
 
 class AddIngredient extends React.Component {
     
@@ -73,7 +73,7 @@ class AddIngredient extends React.Component {
         })
 
         return(
-            <div align='left'>
+            <Segment basic inverse align='left'>
                 <label position='right'>Add Ingredient:</label>
                 <Form align='left'>
                     <label>Name</label>
@@ -124,7 +124,7 @@ class AddIngredient extends React.Component {
 
                     <Form.Field onClick={this.handleSubmit} control={Button}>Create Ingredient</Form.Field>
                 </Form>
-            </div>
+            </Segment>
         )
     }
 }

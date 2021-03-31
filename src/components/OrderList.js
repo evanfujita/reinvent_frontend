@@ -22,33 +22,16 @@ class OrderList extends React.Component {
         this.setState({
             vendorId: event.target.id
         })
-        // debugger
         
         this.props.selectVendor(vendor)
     }
 
     handleMeterChange = event => {
         const meter = parseInt(event.target.value)
+        this.setState({
+            orderAbovePar: meter
+        })
         this.props.parMeter(meter)
-    }
-
-    // handleChange = event => {
-    //     const id = parseInt(event.target.id)
-
-    //     if(event.target.checked){
-    //         this.setState({
-    //             ingredients: [...this.state.ingredients, id]
-    //         })
-    //     } else {
-    //         let newState = this.state.ingredients.filter(ingredient => ingredient !== id)
-    //         this.setState({
-    //             ingredients: newState
-    //         })
-    //     }
-    // }
-
-    addIngredient = () => {
-        // debugger
     }
 
     handleNote = event => {
@@ -56,6 +39,12 @@ class OrderList extends React.Component {
             notesForm: !this.state.notesForm
         })
     }
+
+    handleSubmitNote = () => {
+        this.setState({
+            notesForm: false
+        })
+    }    
 
     handleNoteChange = event => {
         this.setState({
@@ -91,7 +80,15 @@ class OrderList extends React.Component {
                     <Menu.Item key='All' name='All' id='all' active={vendorId === 'all'} onClick={this.handleClick} />
                             {vendors}
                     </Menu>
-                    <Form inverted>
+                    
+                </Grid.Column>
+                <Grid.Column width={8} align='left'>
+                    <List>
+                        {displayIngredients}
+                    </List>
+                </Grid.Column>
+                <Grid.Column width={4}>
+                <Form inverted>
                     <Form.Input
                         width='10'
                         label={`order above par: ${orderAbovePar}%`}
@@ -104,26 +101,19 @@ class OrderList extends React.Component {
                         value={orderAbovePar}
                     />
                     </Form>
-                </Grid.Column>
-                <Grid.Column width={6} align='left'>
-                    <List>
-                        {displayIngredients}
-                        { this.state.vendorId !== 'all' ? 
+                    { this.state.vendorId !== 'all' ? 
                         <>
                         <Button onClick={this.handleNote}>Add Note</Button>
-                        <Email vendor={vendorInfo} ingredients={vendorIngredients} vendorId={this.state.vendorId} notes={this.state.notes} />
+                        <Email vendor={vendorInfo} ingredients={vendorIngredients} vendorId={this.state.vendorId} notes={this.state.notes} handleSubmit={this.handleSubmitNote} />
                         </>
                         :
                         null
-                        }
-                    </List>
-                </Grid.Column>
-                <Grid.Column width={4}>
-                    {this.state.notesForm
-                     ?
-                    <NotesForm handleNoteChange={this.handleNoteChange} />
-                    :
-                    null}
+                    }
+                        {this.state.notesForm
+                         ?
+                        <NotesForm handleNoteChange={this.handleNoteChange} />
+                        :
+                        null}
                 </Grid.Column>
             </Grid>
         )

@@ -15,7 +15,8 @@ class Email extends React.Component {
 
     handleClick = () => {
       this.toggleVisibility()
-      
+      this.props.handleSubmit()
+
       const { first_name, restaurant_name } = this.props.user
       const { representative, email } = this.props.vendor
       const ingredients = this.props.ingredients.map(ingredient => 

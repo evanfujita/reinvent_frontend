@@ -92,7 +92,7 @@ class Login extends React.Component{
                     username: '',
                     password: ''
                 })
-                this.props.history.push('/dashboard')
+                this.props.history.push('/ingredients')
                 this.fetchIngredients()
                 this.fetchVendors()
                 this.fetchOrders()

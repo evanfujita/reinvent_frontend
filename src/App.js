@@ -6,7 +6,6 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import IngredientsContainer from './components/IngredientsContainer'
-import Dashboard from './components/Dashboard'
 import OrderList from './components/OrderList'
 import ProfileEdit from './components/ProfileEdit'
 import VendorsContainer from './components/VendorsContainer'
@@ -37,7 +36,7 @@ class App extends React.Component {
     .then(resp => resp.json())
     .then(user => {
       this.props.currentUser(user)
-      this.props.history.push('/dashboard')
+      this.props.history.push('/ingredients')
     })
     
     fetch('http://localhost:3000/ingredients')
@@ -83,7 +82,6 @@ class App extends React.Component {
           <Route path='/signup' component={Signup} />
           <Route path='/ingredients' component={IngredientsContainer} />
           <Route path='/updateProfile' component={ProfileEdit} />
-          <Route path='/dashboard' component={Dashboard} />
           <Route path='/orderList' component={OrderList} />
           <Route path='/vendors' component={VendorsContainer} />
           <Route path='/pendingOrder' component={PendingOrderContainer} />

@@ -13,12 +13,11 @@ class OrderListItem extends React.Component {
     }
 
     componentDidMount(){
-        
         this.setState({
             ...this.state,
             ingredient: this.props.ingredient,
             quantity: Math.ceil(this.props.ingredient.par - this.props.ingredient.quantity),
-            // orderAbovePar: this.props.orderAbovePar
+            orderAbovePar: this.props.orderAbovePar
         })
     }
 
@@ -30,13 +29,13 @@ class OrderListItem extends React.Component {
     }
 
     handleChange = event => {
-        this.props.addIngredient(this.state)
         this.props.itemsToOrder(this.state)
     }
 
     render(){
         const { name, quantity_unit } = this.state.ingredient
         const id = parseInt(this.state.ingredient.id)
+        const value = this.props.parMeter ? Math.ceil(this.state.quantity + (this.props.parMeter * this.state.quantity / 100)) : this.state.quantity
 
         return(
             <Segment>
@@ -46,21 +45,16 @@ class OrderListItem extends React.Component {
            </Grid.Column>
            <Grid.Column align='right' width={4}>
                <Form.Input 
-                    width={4}
-                    type='number'
                     id={id}
+                    type='number'
                     onChange={this.handleValueChange}
                     placeholder={this.state.quantity}
-                    value={this.state.quantity}
+                    value={value}
                     min={0}
                     step={1}
                />
-               {/* <label>{quantity_unit}</label> */}
                
            </Grid.Column>
-           {/* <Grid.Column align='right' verticalAlign='middle'>
-               {quantity_unit}
-           </Grid.Column> */}
            </Grid>
         </Segment>
         )

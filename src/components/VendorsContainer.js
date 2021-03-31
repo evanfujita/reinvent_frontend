@@ -58,8 +58,8 @@ class VendorsContainer extends React.Component {
                         <Button align='left' onClick={this.handleClick}>Add Vendor</Button><br/><br/>
                         { this.state.vendorId ? 
                         <>
-                        <Button basic color='yellow' fluid onClick={this.handleEdit}>Edit Vendor</Button><br/>
-                        <Button basic color='red' onClick={this.handleDelete}>Delete Vendor</Button>
+                        <Button onClick={this.handleEdit}>Edit Vendor</Button><br/><br/>
+                        <Button color='red' onClick={this.handleDelete}>Delete Vendor</Button>
                         </>
                         :
                         null

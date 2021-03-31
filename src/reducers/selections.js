@@ -20,7 +20,7 @@ function selections(state={}, action) {
             }
 
         case 'LOGOUT':
-            return null
+            return {}
 
         default:
             return state
