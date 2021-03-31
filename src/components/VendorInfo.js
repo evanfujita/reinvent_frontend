@@ -21,12 +21,8 @@ class VendorInfo extends React.Component {
                     <Segment> Representative: {representative}</Segment>
                     <Segment>Phone Number: {phone}</Segment>
                     <Segment>Email Address: {email}</Segment>
-                    <Segment>
-                        <Button.Group>
-                            <Button basic color='green' fluid onClick={this.handleClick}>Edit</Button>
-                            <Button fluid basic color='red' onClick={this.handleClick}>Delete</Button>
-                        </Button.Group>
-                    </Segment>
+                    <Segment><Button basic color='yellow' fluid onClick={this.handleClick}>Edit</Button></Segment>
+                    <Segment><Button fluid basic color='red' onClick={this.handleClick}>Delete</Button></Segment>    
                 </Segment.Group>
             </Segment>
         )
