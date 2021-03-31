@@ -1,14 +1,15 @@
 import React from 'react'
-import { Dropdown, Segment } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { selectIngredient } from '../actions/selections'
+import { withRouter } from 'react-router-dom'
 
 class IngredientsDropdown extends React.Component {
 
     handleChange = event => {
         const ingredient = this.props.ingredients.find(ingredient => ingredient.id === parseInt(event.target.id))
         this.props.selectIngredient(ingredient)
-        
+        this.props.history.push('/ingredients')
     }
 
     render(){
@@ -22,7 +23,7 @@ class IngredientsDropdown extends React.Component {
             }
         })
         return(
-             <Dropdown fluid placeholder='ingredients'  selection search options={ingredientsOptions} onChange={this.handleChange} />
+             <Dropdown id='ingredients' fluid placeholder='ingredients'  selection search options={ingredientsOptions} onChange={this.handleChange} />
         )
     }
 }
@@ -38,4 +39,4 @@ const mapDispatchToProps = {
     selectIngredient
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IngredientsDropdown)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(IngredientsDropdown))

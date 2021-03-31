@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom' 
 import { Menu, Label} from 'semantic-ui-react'
 import ProfileDropdown from './ProfileDropdown'
+import IngredientsDropdown from './IngredientsDropdown'
 
 class NavBar extends React.Component {
 
@@ -30,7 +31,6 @@ class NavBar extends React.Component {
                 Pending Orders
                 <Label floating circular color='yellow' >{this.props.pendingOrder.length}</Label>
             </Menu.Item>
-        
          : 
          null
 
@@ -52,6 +52,9 @@ class NavBar extends React.Component {
                         OrderList 
                         { label }
                         
+                    </Menu.Item>
+                    <Menu.Item name='ingredients' >
+                    <IngredientsDropdown handleClick={this.handleClick} />
                     </Menu.Item>
                         {pendingOrder}
                     <Menu.Menu position='right'>

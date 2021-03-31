@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Grid, Form, Checkbox } from 'semantic-ui-react'
+import { Segment, Grid, Form, Checkbox, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { itemsToOrder } from '../actions/pendingOrder'
 
@@ -30,18 +30,24 @@ class OrderListItem extends React.Component {
 
     handleChange = event => {
         this.props.itemsToOrder(this.state)
+        this.setState({
+            checked: true
+        })
     }
 
     render(){
         const { name, quantity_unit } = this.state.ingredient
         const id = parseInt(this.state.ingredient.id)
         const value = this.props.parMeter ? Math.ceil(this.state.quantity + (this.props.parMeter * this.state.quantity / 100)) : this.state.quantity
+        const icon = this.state.checked ? 'check' : 'plus'
 
         return(
             <Segment>
             <Grid columns={3}>
-           <Grid.Column width={6} verticalAlign='middle'>
-               <Form.Field control={Checkbox} key={id} id={id} label={`${name} (${quantity_unit})`} onChange={this.handleChange} value='true'/>
+           <Grid.Column width={8} verticalAlign='middle'>
+               <Button icon={icon} onClick={this.handleChange}></Button>
+               <label>{`${name} (${quantity_unit})`}</label>
+               {/* <Form.Field control={Checkbox} key={id} id={id} label={`${name} (${quantity_unit})`} onChange={this.handleChange} value='true'/> */}
            </Grid.Column>
            <Grid.Column align='right' width={4}>
                <Form.Input 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { loginSuccess } from '../actions/user'
-import { Form } from 'semantic-ui-react'
+import { Form, Segment } from 'semantic-ui-react'
 import { lowIngredient, renderIngredients } from '../actions/ingredients'
 import { renderVendors } from '../actions/vendors'
 import { renderOrders } from '../actions/orders'

@@ -54,11 +54,8 @@ class OrderList extends React.Component {
     
     render(){
         const vendorId = this.state.vendorId
-        const categorizedIngredients = this.props.lowIngredients.filter(ingredient => {
-            return (
-            vendorId === ingredient.vendor_id || vendorId === 'all' ? ingredient : null
-            )
-        })
+        const categorizedIngredients = this.props.lowIngredients.filter(ingredient => 
+            vendorId === ingredient.vendor_id || vendorId === 'all' ? ingredient : null)
         
         const vendors = this.props.vendors.map(vendor => (
             <Menu.Item key={vendor.id} name={vendor.name} id={vendor.id} active={parseInt(vendorId) === parseInt(vendor.id)} onClick={this.handleClick} />) )

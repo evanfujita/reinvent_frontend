@@ -93,8 +93,8 @@ class IngredientsContainer extends React.Component{
                     { toggleViewAddIngredient }
                 </Grid.Column>
                 <Grid.Column align='middle'>
-                    <IngredientsDropdown ingredients={ingredientsSelector} handleDropdownChange={this.handleDropdownChange} />
                     { toggleViewIngredients }
+                    {/* <IngredientsDropdown ingredients={ingredientsSelector} handleDropdownChange={this.handleDropdownChange} /> */}
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row stretched>
