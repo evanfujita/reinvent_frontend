@@ -11,3 +11,10 @@ export const addVendor = vendor => {
         vendor
     }
 }
+
+export const deleteVendor = id => {
+    return {
+        type: 'DELETE_VENDOR',
+        id
+    }
+}
