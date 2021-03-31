@@ -5,6 +5,12 @@ export const selectIngredient = ingredient => {
     }
 }
 
+export const deleteSelectedIngredient = () => {
+    return {
+        type: 'DELETE_INGREDIENT'
+    }
+}
+
 export const selectCategory = category => {
     return {
         type: 'SELECT_CATEGORY',

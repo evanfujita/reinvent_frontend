@@ -19,7 +19,6 @@ class IngredientsContainer extends React.Component{
             viewIngredients: false,
             viewAddIngredient: false,
             displayIngredientInfo: false, 
-            ingredientInfo: null,
             ingredientId: null
         }
     }
@@ -58,6 +57,7 @@ class IngredientsContainer extends React.Component{
             displayIngredientInfo: true,
             ingredientInfo: ingredient
         })
+        this.props.selectIngredient(ingredient)
     }
 
     render(){
@@ -71,14 +71,14 @@ class IngredientsContainer extends React.Component{
             this.props.ingredients
         )
 
-        const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /> </Segment>)
+        const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /></Segment>)
         const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
         
         //togglers
         const toggleForm = this.state.active ? <Form>{form}</Form> : <Form align='left'><Form.Field>{ingredientList}</Form.Field></Form>
         const toggleViewIngredients = this.state.view ? toggleForm : null
         const toggleViewAddIngredient = this.state.viewAddIngredient ? <AddIngredient /> : null
-        const toggleIngredientInformation = this.state.displayIngredientInfo ? <IngredientInfo key={this.state.ingredientInfo.id} ingredient={this.state.ingredientInfo} /> : null
+        const toggleIngredientInformation = this.props.selectedIngredient ? <Segment><IngredientInfo key={this.props.selectedIngredient.id} ingredient={this.props.selectedIngredient} /></Segment> : null
 
     return(
             
@@ -90,16 +90,16 @@ class IngredientsContainer extends React.Component{
                     <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
                     <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
                     <IngredientsDropdown ingredients={ingredientsSelector} handleDropdownChange={this.handleDropdownChange} />
+                    { toggleIngredientInformation }<br/>
+                    { toggleViewAddIngredient }
                 </Grid.Column>
                 <Grid.Column align='middle'>
                     { toggleViewIngredients }
                 </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
+            <Grid.Row stretched>
                 <Grid.Column width={8}>
-
-                    { toggleIngredientInformation }<br/>
-                    { toggleViewAddIngredient }
+                    
                 </Grid.Column>
             </Grid.Row>
             
@@ -113,6 +113,7 @@ const mapStateToProps = state => {
         ingredients: state.ingredients,
         category: state.selections.category,
         categories: state.categories,
+        selectedIngredient: state.selections.ingredient,
         ingredientQuantity: state.ingredientQuantity,
     }
 }

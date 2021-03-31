@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Form } from 'semantic-ui-react'
+import { updateIngredient } from '../actions/ingredients'
+import { selectIngredient } from '../actions/selections'
 
 class IngredientUpdateForm extends React.Component {
     
@@ -61,8 +63,9 @@ class IngredientUpdateForm extends React.Component {
         fetch(`http://localhost:3000/ingredients/${ingredient.id}`, reqObj)
         .then(resp => resp.json())
         .then(ingredient => {
-            debugger
+            
             this.props.updateIngredient(ingredient)
+            this.props.selectIngredient(ingredient)
         })  
         
     }
@@ -95,6 +98,10 @@ const mapStateToProps = state => {
     }
 }
 
+const mapDispatchToProps = {
+    updateIngredient,
+    selectIngredient
+}
 
 
-export default connect(mapStateToProps)(IngredientUpdateForm)
+export default connect(mapStateToProps, mapDispatchToProps)(IngredientUpdateForm)

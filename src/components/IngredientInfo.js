@@ -3,6 +3,7 @@ import { List, Button, Popup } from 'semantic-ui-react'
 import IngredientUpdateForm from './IngredientUpdateForm'
 import { connect } from 'react-redux'
 import { deleteIngredient } from '../actions/ingredients'
+import { deleteSelectedIngredient } from '../actions/selections'
 
 class IngredientInfo extends React.Component {
 
@@ -26,18 +27,18 @@ class IngredientInfo extends React.Component {
 
     handleConfirmDelete = () => {
         const id = this.props.selectedIngredient.id
-
         fetch(`http://localhost:3000/ingredients/${id}`, {method: 'DELETE'})
         .then(resp => resp.json())
         .then(data => {
             if(data.message){
+                this.props.deleteSelectedIngredient()
                 this.props.deleteIngredient(id)
             }
         })
     }
 
     render(){
-        const { name, quantity, quantity_unit, par } = this.props.ingredient
+        const { name, quantity, quantity_unit, par } = this.props.selectedIngredient
 
             const deleteIngredient = () => (
                 <>
@@ -66,9 +67,8 @@ class IngredientInfo extends React.Component {
             </List>
             
         return(
-            <div align='left'>
-                {name}<br/><br/>
-
+            <div>
+                <header>{name}</header><br/>
                 {deleteIngredient()}
                 <br/><br/>
                 {toggleEdit}
@@ -84,7 +84,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    deleteIngredient
+    deleteIngredient,
+    deleteSelectedIngredient
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientInfo)

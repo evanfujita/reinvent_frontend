@@ -4,21 +4,12 @@ import { selectIngredient } from '../actions/selections'
 
 class Ingredient extends React.Component {
 
-    state = {
-        ingredientInfo: null,
-        displayIngredientInfo: false
-    }
 
     handleIngredientClick = event => {
-        const id = parseInt(event.target.id)
-        const ingredient = this.props.ingredients.find(ingredient => ingredient.id === id)
-        // this.props.selectIngredient(ingredient)
-        
-        this.setState({
-            ingredientInfo: ingredient,
-            displayIngredientInfo: true
-        })
+        const id = parseInt(event.target.id)    
+        this.props.selectIngredient(this.props.ingredientInfo)
     }
+
     render(){
         const { id, name, quantity, quantity_unit } = this.props.ingredientInfo
         return(
