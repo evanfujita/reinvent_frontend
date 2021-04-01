@@ -57,8 +57,6 @@ class Email extends React.Component {
     render(){
       const { visible } = this.state
       const content = this.state.emailMessage ? `Success - Your Order Was Sent to ${this.props.vendor.name}!` : null
-      // const successMessage = this.state.visible
-      // ? <Transition visible={visible} animation='scale' duration={500}><Message size='mini' color='green'>{content}</Message></Transition> : null
 
         return(
             <>

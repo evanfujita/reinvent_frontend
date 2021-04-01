@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { createRef} from 'react'
 import { connect } from 'react-redux'
-import { List, Grid, Menu, Form, Button } from 'semantic-ui-react'
+import { List, Grid, Menu, Form, Button, Ref, Sticky } from 'semantic-ui-react'
 import NotesForm from './NotesForm'
 import Email from './Email'
 import OrderListItem from './OrderListItem'
@@ -8,6 +8,7 @@ import { parMeter } from '../actions/index'
 import { selectVendor } from '../actions/selections'
 
 class OrderList extends React.Component {
+    contextRef = createRef()
     
     state = {
         vendorId: 'all',
@@ -77,7 +78,6 @@ class OrderList extends React.Component {
                     <Menu.Item key='All' name='All' id='all' active={vendorId === 'all'} onClick={this.handleClick} />
                             {vendors}
                     </Menu>
-                    
                 </Grid.Column>
                 <Grid.Column width={8} align='left'>
                     <List>
@@ -96,7 +96,7 @@ class OrderList extends React.Component {
                         step={5}
                         type='range'
                         value={orderAbovePar}
-                    />
+                        />
                     </Form>
                     { this.state.vendorId !== 'all' ? 
                         <>
@@ -108,10 +108,11 @@ class OrderList extends React.Component {
                     }
                         {this.state.notesForm
                          ?
-                        <NotesForm handleNoteChange={this.handleNoteChange} />
-                        :
-                        null}
+                         <NotesForm handleNoteChange={this.handleNoteChange} />
+                         :
+                         null}
                 </Grid.Column>
+
             </Grid>
         )
     }

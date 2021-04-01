@@ -26,6 +26,7 @@ class PendingOrderItem extends React.Component {
     }
 
     handleAccept = event => {
+        this.props.handleAcceptOrder(this.state.ingredient.name)
         this.props.itemsToAccept(this.state)
         this.handleUpdateIngredient(this.state)
         this.props.removeLowIngredient(this.state.ingredient)
@@ -33,6 +34,7 @@ class PendingOrderItem extends React.Component {
 
     handleReject = () => {
         const { ingredient } = this.props.ingredient
+        this.props.handleRejectOrder(ingredient.name)
         this.props.acceptOrder(ingredient)
     }
 

@@ -72,7 +72,6 @@ class IngredientForm extends React.Component {
         <Segment>
         <Form.Field align='left'>
             <label>{active} {name} ({quantity_unit}) </label>
-            
             <input 
                 width={4}
                 id={id}

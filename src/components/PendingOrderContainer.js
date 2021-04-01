@@ -1,21 +1,42 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Menu, List, Grid, Button } from 'semantic-ui-react'
+import { Menu, List, Grid, Message, Transition } from 'semantic-ui-react'
 import PendingOrderItem from './PendingOrderItem'
 import { acceptOrder } from '../actions/pendingOrder'
 
 
 class PendingOrderContainer extends React.Component {
     state = {
-        vendorId: 'all'
+        vendorId: 'all',
+        emailMessage: false,
+        acceptVisible: false,
+        rejectVisible: false,
+        item: ''
     }
 
     handleClick = event => {
         const id = event.target.id
         this.setState({
             vendorId: id
-        })
+        })   
     }
+
+    handleAcceptOrder = item => {
+        this.setState({ 
+            acceptVisible: true,
+            item: item
+        })
+        setTimeout(() => {this.setState({acceptVisible: false})}, 2000) 
+    }
+
+    handleRejectOrder = item => {
+        this.setState({ 
+            rejectVisible: true,
+            item: item
+        })
+        setTimeout(() => {this.setState({rejectVisible: false})}, 2000) 
+    }
+
 
     handleChange = event => {
         const id = parseInt(event.target.id)
@@ -34,6 +55,8 @@ class PendingOrderContainer extends React.Component {
     
     
     render(){
+        
+        const { acceptVisible, rejectVisible } = this.state
         const vendorId = this.state.vendorId
         const categorizedIngredients = this.props.pendingOrder.filter(ingredient => (vendorId === ingredient.ingredient.vendor_id || vendorId === 'all' ? ingredient : null)        )
         
@@ -41,7 +64,14 @@ class PendingOrderContainer extends React.Component {
             <Menu.Item key={vendor.id} name={vendor.name} id={vendor.id} active={parseInt(vendorId) === vendor.id} onClick={this.handleClick} />
         )
 
-        const displayIngredients = categorizedIngredients.map(ingredient => <PendingOrderItem key={ingredient.ingredient.id} ingredient={ingredient} /> )
+        const displayIngredients = categorizedIngredients.map(ingredient => 
+            <PendingOrderItem 
+                key={ingredient.ingredient.id} 
+                ingredient={ingredient} 
+                handleAcceptOrder={this.handleAcceptOrder} 
+                handleRejectOrder={this.handleRejectOrder} 
+            /> 
+        )
         
         return(
             <Grid>
@@ -57,6 +87,10 @@ class PendingOrderContainer extends React.Component {
                     <List>
                         {displayIngredients}
                     </List>
+                </Grid.Column>
+                <Grid.Column width={4}>
+                    <Transition visible={acceptVisible} animation='scale' duration={500}><Message size='mini' color='green'>{this.state.item} Accepted</Message></Transition>  
+                    <Transition visible={rejectVisible} animation='scale' duration={500}><Message size='mini' color='red'>{this.state.item} Rejected</Message></Transition>  
                 </Grid.Column>
             </Grid>
         )

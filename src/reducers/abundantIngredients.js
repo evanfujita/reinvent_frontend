@@ -1,7 +1,7 @@
 const abundantIngredient = (state=[], action) => {
     switch(action.type){
         case 'ABUNDANT_INGREDIENT':
-            debugger
+            
             return [...state, action.ingredient]
 
         case 'UPDATE_INGREDIENT_QUANTITY':

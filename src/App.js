@@ -16,6 +16,8 @@ import { lowIngredient, renderIngredients } from './actions/ingredients'
 import { renderVendors } from './actions/vendors'
 import { renderOrders } from './actions/orders'
 import { abundantIngredient } from './actions/ingredients'
+import Carousel from './components/Carousel'
+
 
 class App extends React.Component {
   componentDidMount(){
@@ -85,6 +87,8 @@ class App extends React.Component {
           <Route path='/orderList' component={OrderList} />
           <Route path='/vendors' component={VendorsContainer} />
           <Route path='/pendingOrder' component={PendingOrderContainer} />
+          <Route exact path='/carousel' component={Carousel} />
+
         </Switch>
     </div>
   );

@@ -7,8 +7,6 @@ import AddIngredient from './AddIngredient'
 import Ingredient from './Ingredient'
 import IngredientInfo from './IngredientInfo'
 import CategoryMenuBar from './CategoryMenuBar'
-import IngredientsDropdown from './IngredientsDropdown'
-
 
 class IngredientsContainer extends React.Component{
     constructor(){
@@ -80,6 +78,8 @@ class IngredientsContainer extends React.Component{
         const toggleViewAddIngredient = this.state.viewAddIngredient ? <AddIngredient /> : null
         const toggleIngredientInformation = this.props.selectedIngredient ? <Segment><IngredientInfo key={this.props.selectedIngredient.id} ingredient={this.props.selectedIngredient} /></Segment> : null
 
+
+
     return(
             
         <Grid columns={2} >
@@ -94,7 +94,6 @@ class IngredientsContainer extends React.Component{
                 </Grid.Column>
                 <Grid.Column align='middle'>
                     { toggleViewIngredients }
-                    {/* <IngredientsDropdown ingredients={ingredientsSelector} handleDropdownChange={this.handleDropdownChange} /> */}
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row stretched>
