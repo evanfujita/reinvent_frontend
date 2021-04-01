@@ -83,7 +83,7 @@ class PendingOrderContainer extends React.Component {
                     </Menu>
 
                 </Grid.Column>
-                <Grid.Column width={8} align='left'>
+                <Grid.Column width={8} align='left' className='scrollable'>
                     <List>
                         {displayIngredients}
                     </List>

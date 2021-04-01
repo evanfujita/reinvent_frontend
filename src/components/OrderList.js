@@ -79,7 +79,7 @@ class OrderList extends React.Component {
                             {vendors}
                     </Menu>
                 </Grid.Column>
-                <Grid.Column width={8} align='left'>
+                <Grid.Column width={8} align='left' className='scrollable'>
                     <List>
                         {displayIngredients}
                     </List>

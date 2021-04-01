@@ -54,3 +54,9 @@
 .dropdown {
   padding-bottom: 1em;
 }
+
+.scrollable {
+  
+  height: 800px; /* or any value */
+  overflow-y: auto;
+}

@@ -60,7 +60,7 @@ class Email extends React.Component {
 
         return(
             <>
-              <Button onClick={this.handleClick}>Email</Button>
+              { this.props.itemsToOrder.length > 0 ? <Button onClick={this.handleClick}>Send Order</Button> : null }
               {/* {successMessage} */}
               <Transition visible={visible} animation='scale' duration={500}><Message size='mini' color='green'>{content}</Message></Transition>
             </>
@@ -71,7 +71,8 @@ class Email extends React.Component {
 const mapStateToProps = state => {
     return {
         user: state.user,
-        selectedVendor: state.selections.vendor
+        selectedVendor: state.selections.vendor,
+        itemsToOrder: state.itemsToOrder
     }
 }
 

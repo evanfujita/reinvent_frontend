@@ -92,7 +92,7 @@ class IngredientsContainer extends React.Component{
                     { toggleIngredientInformation }<br/>
                     { toggleViewAddIngredient }
                 </Grid.Column>
-                <Grid.Column align='middle'>
+                <Grid.Column align='middle' className='scrollable'>
                     { toggleViewIngredients }
                 </Grid.Column>
             </Grid.Row>
