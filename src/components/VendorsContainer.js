@@ -48,7 +48,7 @@ class VendorsContainer extends React.Component {
                 <Grid.Row>
                 <Grid.Column width='4' align='left'>
 
-                <Menu inverted align='left' className='text' pointing secondary vertical>
+                <Menu align='left' className='text' pointing secondary vertical>
                 {displayVendors}
                 </Menu>
                         <Button align='left' onClick={this.handleClick}>Add Vendor</Button><br/><br/>

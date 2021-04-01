@@ -85,8 +85,8 @@ class PendingOrderItem extends React.Component {
            </Grid.Column>
             <Grid.Column align='right'>
                 <Button.Group>
-                <Button icon='thumbs up outline' onClick={this.handleAccept} />
-                <Button icon='thumbs down outline' onClick={this.handleReject} />
+                <Button icon='thumbs up outline' color='green' onClick={this.handleAccept} />
+                <Button icon='thumbs down outline' color='red' onClick={this.handleReject} />
                 </Button.Group>
             </Grid.Column>
            </Grid>

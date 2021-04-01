@@ -40,6 +40,7 @@ class OrderListItem extends React.Component {
         const id = parseInt(this.state.ingredient.id)
         const value = this.props.parMeter ? Math.ceil(this.state.quantity + (this.props.parMeter * this.state.quantity / 100)) : this.state.quantity
         const icon = this.state.checked ? 'check' : 'plus'
+        const color = this.state.checked ? 'green' : null
 
         return(
             <Segment>
@@ -59,7 +60,7 @@ class OrderListItem extends React.Component {
                />
            </Grid.Column>
            <Grid.Column align='right'>
-            <Button icon={icon} onClick={this.handleChange}></Button>
+            <Button icon={icon} color={color} onClick={this.handleChange}></Button>
            </Grid.Column>
            </Grid>
         </Segment>

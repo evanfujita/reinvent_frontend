@@ -37,7 +37,7 @@ class Email extends React.Component {
       const templateID = 'template_emjv768'
       const userID = 'user_2aDBcZXjpPvZLRGDXPzBX'
       
-      // emailjs.send(serviceID, templateID, templateParams, userID)
+      emailjs.send(serviceID, templateID, templateParams, userID)
       
 
       this.setState({

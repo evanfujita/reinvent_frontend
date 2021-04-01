@@ -7,6 +7,7 @@ import { renderVendors } from '../actions/vendors'
 import { renderOrders } from '../actions/orders'
 import { abundantIngredient } from '../actions/ingredients' 
 
+
 class Login extends React.Component{
     state = {
         username: '',
@@ -105,10 +106,8 @@ class Login extends React.Component{
     render(){
         return(
 
-        <div className='form'>
-            <h3>Login</h3>
+            <Form align='middle' onSubmit={this.handleSubmit} >
             { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null }
-            <Form onSubmit={this.handleSubmit} >
                     <Form.Input
                         fluid
                         onChange={this.handleChange}
@@ -117,9 +116,8 @@ class Login extends React.Component{
                         placeholder='username'/>
                     <Form.Input className='field' onChange={this.handleChange} type='password' name='password' value={this.state.password} placeholder='password'/>
                     <input className='ui submit button' type='submit' name='username' value='Login'/>
-                
             </Form>
-        </div>
+
         )}   
     }
 

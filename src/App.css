@@ -17,7 +17,7 @@
 }
 
 .App-header {
-  background-color:rgb(53, 59, 70);
+  /* background-color:rgb(53, 59, 70); */
   min-height: 6vh;
   padding-bottom: 1em;
   color: white;  
@@ -41,9 +41,9 @@
   display: block !important;
 }
 
-.text {
+/* .text {
   color: #b0b0b0;
-}
+} */
 
 .form {
   width: 20em;
@@ -58,4 +58,36 @@
 .scrollable {
   height: 800px;
   overflow-y: auto;
+}
+
+.App {
+  /* The image used */
+  background-image: url('./spices.jpeg');
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+label, .ui-grid {
+  color: black !important; 
+}
+
+.ui.vertical.text.menu:first-child, .ui.menu, .ui.tabular.menu {
+  color: black !important; 
+  background: rgba(0,0,0,.05) !important;
+}
+
+
+.ui.secondary.inverted.menu .link.item, .ui.secondary.inverted.menu a.item {
+  color: black !important;
+}
+
+.ui.segment {
+  background: rgba(0,0,0,.05) !important;
+  color: black !important;
 }

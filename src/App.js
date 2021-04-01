@@ -75,6 +75,7 @@ class App extends React.Component {
   render(){
   return (
     <div className="App">
+      <img src='./ingredients-photo.jpeg' id='bg' alt='' />
       <header className="App-header">
           <NavBar />
       </header>

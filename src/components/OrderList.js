@@ -71,17 +71,16 @@ class OrderList extends React.Component {
         )
 
         const renderButtons = this.state.vendorId !== 'all' ? 
-        <>
-        <Button onClick={this.handleNote}>Add Note</Button>
-        <Email vendor={vendorInfo} ingredients={vendorIngredients} vendorId={this.state.vendorId} notes={this.state.notes} handleSubmit={this.handleSubmitNote} />
-        </>
-        :
-        null
+            <>
+            <Button onClick={this.handleNote}>Add Note</Button>
+            <Email vendor={vendorInfo} ingredients={vendorIngredients} vendorId={this.state.vendorId} notes={this.state.notes} handleSubmit={this.handleSubmitNote} />
+            </>
+            :
+            null
 
         const renderNotesForm = this.state.notesForm ? <NotesForm handleNoteChange={this.handleNoteChange} /> : null
-    
             
-            return(
+        return(
             <Grid>
                 <Grid.Column width='4' align='left'>
                     <Menu inverted align='left' className='text' pointing secondary vertical>
@@ -112,7 +111,6 @@ class OrderList extends React.Component {
                     {renderButtons}
                     {renderNotesForm}
                 </Grid.Column>
-
             </Grid>
         )
     }

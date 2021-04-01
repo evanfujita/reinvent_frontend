@@ -1,4 +1,6 @@
 import React from 'react'
+import { Dropdown, Button, Form } from 'semantic-ui-react'
+
 
 class LoginForm extends React.Component {
 
@@ -9,25 +11,41 @@ class LoginForm extends React.Component {
 
     render(){
 
-    const options = [
-    { key: 1, text: `${this.state.username}`, value: 1 },
-    { key: 2, text: `${this.state.password}`, value: 2 },
-    ]
 
     return(
-        <div className='ui floating labled icon dropdown'>
-            <span className='text'>Login</span>
-            <div className='menu'>
-                <div className='header'>
-                    Username
-                </div>
-                <div className='ui left icon input'>
-                    <input type='text' name='username' placeholder='username' />
-                </div>
-            </div>
-        </div>
+        <Dropdown text='Login' verticalAlign='middle' closeOnBlur>
+        <Dropdown.Menu>
+            <Form>
+                <Dropdown.Item>
+                    <Form.Input 
+                        fluid
+                        onChange={this.handleChange}
+                        type='text' 
+                        name='username'
+                        value='username'
+                        placeholder='username'/>
+                </Dropdown.Item>
+
+            <Dropdown.Item>
+            <Form.Input className='field' onChange={this.handleChange} type='password' name='password' value={this.state.password} placeholder='password'/>
+            </Dropdown.Item>
+            
+            <Dropdown.Item>
+            <input className='ui submit button' type='submit' name='username' value='Login'/>
+            </Dropdown.Item>
+            </Form>
+        </Dropdown.Menu>
+        </Dropdown>
     )
 }
 }
 
 export default LoginForm
+
+{/* <Form align='middle' onSubmit={this.handleSubmit} > */}
+// { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null }
+        
+  
+        
+        
+    

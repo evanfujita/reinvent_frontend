@@ -16,12 +16,10 @@ class CategoryMenuBar extends React.Component {
         })
 
         return(
-            <Segment basic inverse>
             <Menu tabular>
                 <Menu.Item name={'All'} id={0} active={categoryId === 0} onClick={this.handleClick} />
                 {displayCategories}
-            </Menu>
-            </Segment>
+            </Menu>   
         )
     }
 }
