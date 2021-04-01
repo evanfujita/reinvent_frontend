@@ -5,7 +5,6 @@ const abundantIngredient = (state=[], action) => {
             return [...state, action.ingredient]
 
         case 'UPDATE_INGREDIENT_QUANTITY':
-            debugger
             let newState = state
             if(action.ingredient.quantity > (action.ingredient.par * 4)){
                 newState = [

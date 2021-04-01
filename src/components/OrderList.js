@@ -69,6 +69,17 @@ class OrderList extends React.Component {
         const displayIngredients = categorizedIngredients.map(ingredient => 
             <OrderListItem key={ingredient.id} ingredient={ingredient} addIngredient={this.addIngredient} />
         )
+
+        const renderButtons = this.state.vendorId !== 'all' ? 
+        <>
+        <Button onClick={this.handleNote}>Add Note</Button>
+        <Email vendor={vendorInfo} ingredients={vendorIngredients} vendorId={this.state.vendorId} notes={this.state.notes} handleSubmit={this.handleSubmitNote} />
+        </>
+        :
+        null
+
+        const renderNotesForm = this.state.notesForm ? <NotesForm handleNoteChange={this.handleNoteChange} /> : null
+    
             
             return(
             <Grid>
@@ -98,19 +109,8 @@ class OrderList extends React.Component {
                         value={orderAbovePar}
                         />
                     </Form>
-                    { this.state.vendorId !== 'all' ? 
-                        <>
-                        <Button onClick={this.handleNote}>Add Note</Button>
-                        <Email vendor={vendorInfo} ingredients={vendorIngredients} vendorId={this.state.vendorId} notes={this.state.notes} handleSubmit={this.handleSubmitNote} />
-                        </>
-                        :
-                        null
-                    }
-                        {this.state.notesForm
-                         ?
-                         <NotesForm handleNoteChange={this.handleNoteChange} />
-                         :
-                         null}
+                    {renderButtons}
+                    {renderNotesForm}
                 </Grid.Column>
 
             </Grid>

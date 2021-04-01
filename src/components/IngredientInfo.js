@@ -67,7 +67,7 @@ class IngredientInfo extends React.Component {
             
         return(
             <div>
-                <header>{name}</header><br/>
+                <h2>{name}</h2><br/>
                 {deleteIngredient()}
                 <br/><br/>
                 {toggleEdit}
