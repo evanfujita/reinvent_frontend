@@ -12,12 +12,11 @@ class IngredientInfo extends React.Component {
         confirmDelete: false
     }
     
-    handleEdit = event => {
+    handleEdit = () => {
         this.setState({
             edit: !this.state.edit
         })
     }
-
 
     handleDelete = () => {
         this.setState({

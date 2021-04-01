@@ -58,7 +58,6 @@ class PendingOrderItem extends React.Component {
             this.props.updateIngredient(ingredient)
             this.props.acceptOrder(ingredient)  
         })
-
     }
 
     render(){

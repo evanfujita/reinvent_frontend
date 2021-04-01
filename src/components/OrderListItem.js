@@ -45,9 +45,7 @@ class OrderListItem extends React.Component {
             <Segment>
             <Grid columns={3}>
            <Grid.Column verticalAlign='middle'>
-              
                <label>{`${name} (${quantity_unit})`}</label>
-               {/* <Form.Field control={Checkbox} key={id} id={id} label={`${name} (${quantity_unit})`} onChange={this.handleChange} value='true'/> */}
            </Grid.Column>
            <Grid.Column align='right'>
                <Form.Input 
@@ -59,7 +57,6 @@ class OrderListItem extends React.Component {
                     min={0}
                     step={1}
                />
-               
            </Grid.Column>
            <Grid.Column align='right'>
             <Button icon={icon} onClick={this.handleChange}></Button>

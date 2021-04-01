@@ -53,10 +53,10 @@ class NavBar extends React.Component {
                         { label }
                         
                     </Menu.Item>
+                        {pendingOrder}
                     <Menu.Item name='ingredients' >
                     <IngredientsDropdown handleClick={this.handleClick} />
                     </Menu.Item>
-                        {pendingOrder}
                     <Menu.Menu position='right'>
                         <Menu.Item>
                             <ProfileDropdown />
