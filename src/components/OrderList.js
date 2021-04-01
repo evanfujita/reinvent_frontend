@@ -1,4 +1,4 @@
-import React, { createRef} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { List, Grid, Menu, Form, Button, Segment } from 'semantic-ui-react'
 import NotesForm from './NotesForm'
@@ -8,7 +8,6 @@ import { parMeter } from '../actions/index'
 import { selectVendor } from '../actions/selections'
 
 class OrderList extends React.Component {
-    contextRef = createRef()
     
     state = {
         vendorId: 'all',

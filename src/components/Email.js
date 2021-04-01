@@ -46,7 +46,7 @@ class Email extends React.Component {
       setTimeout(() => {this.setState({visible: false})}, 2000) 
       
       this.props.pendingOrder(this.props.ingredients) 
-      this.props.ingredients.map(ingredient => {
+      this.props.ingredients.forEach(ingredient => {
         this.props.deleteItem(ingredient.ingredient)
       })
     }

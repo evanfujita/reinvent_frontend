@@ -4,8 +4,7 @@ import { selectIngredient } from '../actions/selections'
 
 class Ingredient extends React.Component {
 
-    handleIngredientClick = event => {
-        const id = parseInt(event.target.id)    
+    handleIngredientClick = () => {
         this.props.selectIngredient(this.props.ingredientInfo)
     }
 

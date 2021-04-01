@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown, Button, Form } from 'semantic-ui-react'
+import { Dropdown, Form } from 'semantic-ui-react'
 
 
 class LoginForm extends React.Component {
@@ -41,11 +41,3 @@ class LoginForm extends React.Component {
 }
 
 export default LoginForm
-
-{/* <Form align='middle' onSubmit={this.handleSubmit} > */}
-// { this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null }
-        
-  
-        
-        
-    

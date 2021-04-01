@@ -2,10 +2,9 @@ import React from 'react'
 import { logout } from '../actions/user'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom' 
-import { Menu, Label, Dropdown } from 'semantic-ui-react'
+import { Menu, Label } from 'semantic-ui-react'
 import ProfileDropdown from './ProfileDropdown'
 import IngredientsDropdown from './IngredientsDropdown'
-import LoginForm from './LoginForm'
 
 class NavBar extends React.Component {
 
@@ -36,8 +35,7 @@ class NavBar extends React.Component {
          null
 
         return(
-            // <div>
-                <Menu pointing>
+                <Menu>
                 
                 { !this.props.user ? 
                 <>
@@ -67,7 +65,7 @@ class NavBar extends React.Component {
                 </>
                 }
                 </Menu>
-            // </div>
+            
     )}
 }
 

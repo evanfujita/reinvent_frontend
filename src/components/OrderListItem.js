@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Grid, Form, Checkbox, Button } from 'semantic-ui-react'
+import { Segment, Grid, Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { itemsToOrder } from '../actions/pendingOrder'
 

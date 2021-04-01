@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import VendorInfo from './VendorInfo'
-import { Grid, Button, Segment, Menu } from 'semantic-ui-react'
+import { Grid, Button, Menu } from 'semantic-ui-react'
 import AddVendorForm from './AddVendorForm'
 import { deleteVendor } from '../actions/vendors'
 
@@ -19,9 +19,9 @@ class VendorsContainer extends React.Component {
     }   
 
     handleVendorClick = event => {
-        const vendorId = parseInt(event.target.id)
+        const updatedVendorId = parseInt(event.target.id)
         this.setState({
-            vendorId: vendorId
+            vendorId: updatedVendorId
         })
     }
 

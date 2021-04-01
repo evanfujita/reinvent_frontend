@@ -76,7 +76,7 @@ class PendingOrderContainer extends React.Component {
         return(
             <Grid>
                 <Grid.Column width={4} align='left'>
-                    <Menu inverted align='left' className='text' pointing secondary vertical>
+                    <Menu align='left' className='text' pointing secondary vertical>
                         By Vendor:
                     <Menu.Item key='All' name='All' id='all' active={vendorId === 'all'} onClick={this.handleClick} />
                         {vendorsMenu}
