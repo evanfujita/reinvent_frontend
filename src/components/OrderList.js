@@ -1,6 +1,6 @@
 import React, { createRef} from 'react'
 import { connect } from 'react-redux'
-import { List, Grid, Menu, Form, Button, Ref, Sticky } from 'semantic-ui-react'
+import { List, Grid, Menu, Form, Button, Segment } from 'semantic-ui-react'
 import NotesForm from './NotesForm'
 import Email from './Email'
 import OrderListItem from './OrderListItem'
@@ -72,7 +72,7 @@ class OrderList extends React.Component {
 
         const renderButtons = this.state.vendorId !== 'all' ? 
             <>
-            <Button onClick={this.handleNote}>Add Note</Button>
+            <Button onClick={this.handleNote}>Add Note</Button><br/><br/>
             <Email vendor={vendorInfo} ingredients={vendorIngredients} vendorId={this.state.vendorId} notes={this.state.notes} handleSubmit={this.handleSubmitNote} />
             </>
             :
@@ -83,7 +83,7 @@ class OrderList extends React.Component {
         return(
             <Grid>
                 <Grid.Column width='4' align='left'>
-                    <Menu inverted align='left' className='text' pointing secondary vertical>
+                    <Menu align='left' className='text' pointing secondary vertical>
                         By Vendor:
                     <Menu.Item key='All' name='All' id='all' active={vendorId === 'all'} onClick={this.handleClick} />
                             {vendors}
@@ -96,8 +96,9 @@ class OrderList extends React.Component {
                 </Grid.Column>
                 <Grid.Column width={4}>
                 <Form inverted>
+                    <Segment>
                     <Form.Input
-                        width='10'
+                        width='16'
                         label={`order above par: ${orderAbovePar}%`}
                         min={0}
                         max={300}
@@ -107,9 +108,11 @@ class OrderList extends React.Component {
                         type='range'
                         value={orderAbovePar}
                         />
-                    </Form>
+                    
                     {renderButtons}
                     {renderNotesForm}
+                    </Segment>
+                    </Form>
                 </Grid.Column>
             </Grid>
         )

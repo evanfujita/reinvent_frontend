@@ -14,8 +14,8 @@ class Profile extends React.Component {
         const { first_name, last_name, username, restaurant_name } = this.props.user
         const name = `${first_name} ${last_name}`
         return(
-            <Dropdown>
-                <Dropdown.Menu text='Profile'>
+            <Dropdown icon='user' verticalAlign='middle'>
+                <Dropdown.Menu>
                     <Dropdown.Item text={name}/>
                     <Dropdown.Item text={username} />
                     <Dropdown.Item text={restaurant_name} />
