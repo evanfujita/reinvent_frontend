@@ -20,14 +20,22 @@ class AddIngredient extends React.Component {
         })
     }
 
-    handleDropdownChange = event => {
+    handleCategoryDropdownChange = event => {
         const id = event.target.id
         this.setState({
             category_id: id
         })
     }
 
+    handleVendorDropdownChange = event => {
+        const id = event.target.id
+        this.setState({
+            vendor_id: id
+        })
+    }
+
     handleSubmit = () => {
+        
         const reqObj = {
             method: 'POST',
             headers: {
@@ -110,7 +118,7 @@ class AddIngredient extends React.Component {
                         fluid
                         selection
                         options={categoriesOptions}
-                        onChange={this.handleDropdownChange}
+                        onChange={this.handleCategoryDropdownChange}
                     /><br/>
                     <label>Vendor</label>
                     <Dropdown 
@@ -118,7 +126,7 @@ class AddIngredient extends React.Component {
                         fluid
                         selection
                         options={vendorsOptions}
-                        onChange={this.handleDropdownChange}
+                        onChange={this.handleVendorDropdownChange}
                     />
                     <br/>
 

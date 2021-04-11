@@ -4,7 +4,7 @@ const Home = () => {
 
     return(
         <div>
-            Lazy Inventory
+            Easy Inventory
         </div>
     )
 }
