@@ -78,8 +78,6 @@ class IngredientsContainer extends React.Component{
         const toggleViewAddIngredient = this.state.viewAddIngredient ? <AddIngredient /> : null
         const toggleIngredientInformation = this.props.selectedIngredient ? <Segment><IngredientInfo key={this.props.selectedIngredient.id} ingredient={this.props.selectedIngredient} /></Segment> : null
 
-
-
     return(
             
         <Grid columns={2} >
