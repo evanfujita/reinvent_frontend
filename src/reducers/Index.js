@@ -11,7 +11,7 @@ import pendingOrderReducer from './pendingOrder'
 import parMeterReducer from './parMeter'
 import itemsToOrderReducer from './itemsToOrder'
 import itemsToAcceptReducer from './itemsToAccept'
-import abundantIngredientReducer from './abundantIngredients'
+
 
 
 export default combineReducers({
@@ -26,7 +26,6 @@ export default combineReducers({
   pendingOrder: pendingOrderReducer,
   parMeter: parMeterReducer,
   itemsToOrder: itemsToOrderReducer,
-  itemsToAccept: itemsToAcceptReducer,
-  abundantIngredients: abundantIngredientReducer
+  itemsToAccept: itemsToAcceptReducer
 })
 

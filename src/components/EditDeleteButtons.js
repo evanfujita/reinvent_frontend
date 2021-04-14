@@ -13,7 +13,6 @@ class EditDeleteButtons extends React.Component {
         })
     }
 
-
     handleDelete = () => {
         this.setState({
             confirmDelete: !this.state.confirmDelete
@@ -23,13 +22,13 @@ class EditDeleteButtons extends React.Component {
     handleConfirmDelete = () => {
         const id = this.props.selectedIngredient.id
 
-        // fetch(`http://localhost:3000/ingredients/${id}`, {method: 'DELETE'})
-        // .then(resp => resp.json())
-        // .then(data => {
-        //     if(data.message){
-        //         this.props.deleteIngredient(id)
-        //     }
-        // })
+        fetch(`http://localhost:3000/ingredients/${id}`, {method: 'DELETE'})
+        .then(resp => resp.json())
+        .then(data => {
+            if(data.message){
+                this.props.deleteIngredient(id)
+            }
+        })
     }
 
     render(){
