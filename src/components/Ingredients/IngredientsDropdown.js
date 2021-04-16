@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dropdown } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { selectIngredient } from '../actions/selections'
+import { selectIngredient } from '../../actions/selections'
 import { withRouter } from 'react-router-dom'
 
 class IngredientsDropdown extends React.Component {

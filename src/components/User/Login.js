@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { loginSuccess } from '../actions/user'
+import { loginSuccess } from '../../actions/user'
 import { Form } from 'semantic-ui-react'
-import { lowIngredient, renderIngredients } from '../actions/ingredients'
-import { renderVendors } from '../actions/vendors'
-import { renderOrders } from '../actions/orders'
-import { abundantIngredient } from '../actions/ingredients' 
+import { lowIngredient, renderIngredients } from '../../actions/ingredients'
+import { renderVendors } from '../../actions/vendors'
+import { renderOrders } from '../../actions/orders'
+import { abundantIngredient } from '../../actions/ingredients' 
 
 
 class Login extends React.Component{

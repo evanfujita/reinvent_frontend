@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectCategory } from '../actions/selections'
+import { selectCategory } from '../../actions/selections'
 import { Dropdown, Grid} from 'semantic-ui-react'
 
 class Categories extends React.Component{

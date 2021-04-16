@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { updateUser } from '../actions/user'
-import { logout } from '../actions/user'
+import { updateUser } from '../../actions/user'
+import { logout } from '../../actions/user'
 
 class ProfileEdit extends React.Component {
     

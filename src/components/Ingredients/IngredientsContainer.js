@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Form, Button, Grid, Segment } from 'semantic-ui-react'
-import { selectCategory, selectIngredient } from '../actions/selections'
+import { selectCategory, selectIngredient } from '../../actions/selections'
 import IngredientForm from './IngredientForm'
 import AddIngredient from './AddIngredient'
 import Ingredient from './Ingredient'
 import IngredientInfo from './IngredientInfo'
-import CategoryMenuBar from './CategoryMenuBar'
+import CategoryMenuBar from '../Categories/CategoryMenuBar'
 
 class IngredientsContainer extends React.Component{
     constructor(){

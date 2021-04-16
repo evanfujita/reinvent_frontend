@@ -2,8 +2,8 @@ import React from 'react'
 import { List, Button, Popup } from 'semantic-ui-react'
 import IngredientUpdateForm from './IngredientUpdateForm'
 import { connect } from 'react-redux'
-import { deleteIngredient } from '../actions/ingredients'
-import { deleteSelectedIngredient } from '../actions/selections'
+import { deleteIngredient } from '../../actions/ingredients'
+import { deleteSelectedIngredient } from '../../actions/selections'
 
 class IngredientInfo extends React.Component {
 

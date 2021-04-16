@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { addVendor } from '../actions/vendors'
+import { addVendor } from '../../actions/vendors'
 
 class AddVendorForm extends React.Component {
     

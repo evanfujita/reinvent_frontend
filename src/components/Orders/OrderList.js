@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { List, Grid, Menu, Form, Button, Segment } from 'semantic-ui-react'
-import NotesForm from './NotesForm'
-import Email from './Email'
+import NotesForm from '../NotesForm'
+import Email from '../FuncitonalComponents/Email'
 import OrderListItem from './OrderListItem'
-import { parMeter } from '../actions/index'
-import { selectVendor } from '../actions/selections'
+import { parMeter } from '../../actions/index'
+import { selectVendor } from '../../actions/selections'
 
 class OrderList extends React.Component {
     

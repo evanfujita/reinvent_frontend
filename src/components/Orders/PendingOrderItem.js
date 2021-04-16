@@ -1,8 +1,8 @@
 import React from 'react'
 import { Segment, Grid, Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { itemsToAccept, itemsToDeny, acceptOrder } from '../actions/pendingOrder'
-import { updateIngredient, removeLowIngredient } from '../actions/ingredients'
+import { itemsToAccept, itemsToDeny, acceptOrder } from '../../actions/pendingOrder'
+import { updateIngredient, removeLowIngredient } from '../../actions/ingredients'
 
 class PendingOrderItem extends React.Component {
 

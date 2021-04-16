@@ -1,10 +1,10 @@
 import React from 'react'
-import { logout } from '../actions/user'
+import { logout } from '../../actions/user'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom' 
 import { Menu, Label } from 'semantic-ui-react'
-import ProfileDropdown from './ProfileDropdown'
-import IngredientsDropdown from './IngredientsDropdown'
+import ProfileDropdown from '../User/ProfileDropdown'
+import IngredientsDropdown from '../Ingredients/IngredientsDropdown'
 
 class NavBar extends React.Component {
 

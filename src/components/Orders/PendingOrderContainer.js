@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Menu, List, Grid, Message, Transition } from 'semantic-ui-react'
 import PendingOrderItem from './PendingOrderItem'
-import { acceptOrder } from '../actions/pendingOrder'
+import { acceptOrder } from '../../actions/pendingOrder'
 
 
 class PendingOrderContainer extends React.Component {

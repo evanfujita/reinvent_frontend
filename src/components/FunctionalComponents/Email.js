@@ -2,7 +2,7 @@ import React from 'react'
 import emailjs from 'emailjs-com'
 import { connect } from 'react-redux'
 import { Button, Message, Transition } from 'semantic-ui-react'
-import { deleteItem, pendingOrder } from '../actions/pendingOrder'
+import { deleteItem, pendingOrder } from '../../actions/pendingOrder'
 
 
 class Email extends React.Component {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addIngredient } from '../actions/ingredients'
+import { addIngredient } from '../../actions/ingredients'
 import { Dropdown, Form, Button, Segment } from 'semantic-ui-react'
 
 class AddIngredient extends React.Component {

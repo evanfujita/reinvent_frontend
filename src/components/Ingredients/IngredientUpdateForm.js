@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Form } from 'semantic-ui-react'
-import { updateIngredient } from '../actions/ingredients'
-import { selectIngredient } from '../actions/selections'
+import { updateIngredient } from '../../actions/ingredients'
+import { selectIngredient } from '../../actions/selections'
 
 class IngredientUpdateForm extends React.Component {
     

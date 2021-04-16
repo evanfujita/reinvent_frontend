@@ -1,7 +1,7 @@
 import React from 'react'
 import { Segment, Grid, Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { itemsToOrder } from '../actions/pendingOrder'
+import { itemsToOrder } from '../../actions/pendingOrder'
 
 class OrderListItem extends React.Component {
 
