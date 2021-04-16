@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { List, Grid, Menu, Form, Button, Segment } from 'semantic-ui-react'
-import NotesForm from '../NotesForm'
+import NotesForm from '../Forms/NotesForm'
 import Email from '../FunctionalComponents/Email'
 import OrderListItem from './OrderListItem'
 import { parMeter } from '../../actions/index'
