@@ -42,14 +42,12 @@ class IngredientUpdateForm extends React.Component {
         }
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = () => {
         let ingredient = this.props.ingredient
         for (const property in this.state){
             if(this.state[property] !== ''){
                 ingredient[property] = this.state[property]
-            }
-                // ingredient[property] = ingredient[property]
-            
+            }            
         }
         
         const reqObj = {
