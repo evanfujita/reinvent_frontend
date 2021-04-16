@@ -82,11 +82,6 @@ label {
   background: rgba(0,0,0,.05) !important;
 }
 
-
-/* .ui.secondary.inverted.menu .link.item, .ui.secondary.inverted.menu a.item {
-  color: black !important;
-} */
-
 .ui.segment {
   background: rgba(0,0,0,.05) !important;
   color: black !important;
