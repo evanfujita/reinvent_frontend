@@ -3,13 +3,11 @@ import { connect } from 'react-redux'
 import { selectCategory } from '../../actions/selections'
 import { Dropdown, Grid} from 'semantic-ui-react'
 
-class Categories extends React.Component{
-    constructor(){
-        super()
-        this.state = {
-            categoryId: 0,
-            categories: ''
-        }
+class Categories extends React.Component{    
+
+    state = {
+        categoryId: 0,
+        categories: ''
     }
 
     handleChange = (event) => {
@@ -20,7 +18,6 @@ class Categories extends React.Component{
         })
         const category = this.props.categories.find(category => category.id === id)
         this.props.selectCategory(category)
-
     }
 
     handleIngredientsChange = event => {

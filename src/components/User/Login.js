@@ -6,6 +6,7 @@ import { lowIngredient, renderIngredients } from '../../actions/ingredients'
 import { renderVendors } from '../../actions/vendors'
 import { renderOrders } from '../../actions/orders'
 import { abundantIngredient } from '../../actions/ingredients' 
+import { fetchVendors } from '../../helpers/fetch'
 
 
 class Login extends React.Component{
@@ -36,13 +37,13 @@ class Login extends React.Component{
         })
     }
 
-    fetchVendors = () => {
-        fetch('http://localhost:3000/vendors')
-        .then(resp => resp.json())
-        .then(vendors => {
-          this.props.renderVendors(vendors)
-        })
-    }
+    // fetchVendors = () => {
+    //     fetch('http://localhost:3000/vendors')
+    //     .then(resp => resp.json())
+    //     .then(vendors => {
+    //       this.props.renderVendors(vendors)
+    //     })
+    // }
 
     fetchOrders = () => {
         fetch('http://localhost:3000/orders')
@@ -76,7 +77,7 @@ class Login extends React.Component{
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(value)
-        }
+    }
 
         fetch('http://localhost:3000/auth', reqObj)
         .then(resp => resp.json())
@@ -95,13 +96,12 @@ class Login extends React.Component{
                 })
                 this.props.history.push('/ingredients')
                 this.fetchIngredients()
-                this.fetchVendors()
+                // this.fetchVendors()
+                fetchVendors()
                 this.fetchOrders()
             }
         })
     }
-
-
 
     render(){
         return(
