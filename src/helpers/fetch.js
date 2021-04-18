@@ -43,6 +43,22 @@ export const fetchIngredients = (renderIngredients, lowIngredient) => {
     })
 }
 
+export const addFetch = (resource, reqObj, dispatch) => {
+    fetch(`http://localhost:3000/${resource}`, reqObj)
+    .then(resp => resp.json())
+    .then(data => {
+        dispatch(data)
+    })
+}
+
+export const patchFetch = (resource, id, reqObj, dispatch) => {
+    fetch(`http://localhost:3000/${resource}/${id}`, reqObj)
+    .then(resp => resp.json())
+    .then(data => {
+        dispatch(data)
+    })
+}
+
 export const deleteFetch = (resource, id) => {
     fetch(`http://localhost3000/${resource}/${id}`, {method: 'DELETE'})
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Form, Icon, Segment } from 'semantic-ui-react'
 import { updateIngredient, updateIngredientQuantity } from '../../actions/ingredients'
 import { selectIngredient } from '../../actions/selections'
+import { handleReqObj, patchFetch } from '../../helpers/fetch'
 
 class IngredientForm extends React.Component {
    
@@ -19,7 +20,10 @@ class IngredientForm extends React.Component {
 
     handleBlur = event => {
         if(event.target.value !== ''){
-            this.handleFetch(event)
+            const id = parseInt(event.target.id)
+            const reqObj = handleReqObj('PATCH', {quantity: this.state.quantity})
+            patchFetch('ingredients', id, reqObj, this.props.updateIngredientQuantity)
+            this.resetForm(event)
         }
     }
 
@@ -37,28 +41,6 @@ class IngredientForm extends React.Component {
     handleChange = event => {
         this.setState({
             quantity: event.target.value
-        })
-    }
-
-    handleFetch = event => {
-        const id = parseInt(event.target.id)
-
-        const reqObj = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({quantity: this.state.quantity})
-        }
-        fetch(`http://localhost:3000/ingredients/${id}`, reqObj)
-        .then(resp => resp.json())
-        .then(ingredient => {
-            this.props.updateIngredientQuantity(ingredient)
-            this.props.selectIngredient(ingredient)
-            this.setState({
-                active: true
-            })
-            this.resetForm(event)
         })
     }
 

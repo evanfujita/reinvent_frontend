@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addIngredient } from '../../actions/ingredients'
 import { Dropdown, Form, Button, Segment } from 'semantic-ui-react'
-import { handleReqObj } from '../../helpers/fetch'
+import { handleReqObj, addFetch } from '../../helpers/fetch'
 
 class AddIngredient extends React.Component {
     
@@ -36,30 +36,15 @@ class AddIngredient extends React.Component {
     }
 
     handleSubmit = () => {
-        
-        // const reqObj = {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(this.state)
-        // }
-
         const reqObj = handleReqObj('POST', this.state)
-        debugger
+        addFetch('ingredients', reqObj, this.props.addIngredient)
+        
         this.setState({
             name: '',
             quantity: '',
             quantity_unit: '',
             par: '',
             category_id: ''
-        })
-
-        fetch('http://localhost:3000/ingredients', reqObj)
-        .then(resp => resp.json())
-        .then(ingredient => {
-            debugger
-            this.props.addIngredient(ingredient)
         })
     }
     
