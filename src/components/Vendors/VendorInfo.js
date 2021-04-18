@@ -1,13 +1,9 @@
 import React from 'react'
 import { Segment } from 'semantic-ui-react'
 
-class VendorInfo extends React.Component {
-    
+const VendorInfo = props => {
+    const { name, representative, phone, email } = this.props.vendor
 
-    
-    render(){
-
-        const { name, representative, phone, email } = this.props.vendor
         return(
             <Segment>
                 
@@ -23,8 +19,5 @@ class VendorInfo extends React.Component {
             </Segment>
         )
     }
-}
-
-
 
 export default VendorInfo
