@@ -42,7 +42,6 @@ class ProfileEdit extends React.Component {
     }
 
     updateFetch = (updatedUser, id) => {
-
         const reqObj = handleReqObj('PATCH', updatedUser)
         patchFetch('users', id, reqObj, null)
     }

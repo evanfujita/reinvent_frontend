@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { loginSuccess } from '../../actions/user'
 import { Form } from 'semantic-ui-react'
+import { handleReqObj, addFetch } from '../../helpers/fetch'
 
 class Signup extends React.Component{
 
@@ -40,20 +41,8 @@ class Signup extends React.Component{
     }
 
     createUser = value => {
-        const reqObj = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({user: value})
-        }
-
-        fetch('http://localhost:3000/users', reqObj)
-        .then(resp => resp.json())
-        .then(user => {
-            this.props.loginSuccess(user)
-            this.props.history.push('/stations')
-        })
+        const reqObj = handleReqObj('POST', {user: value})
+        addFetch('users', reqObj, loginSuccess)
     }
 
 render(){

@@ -9,7 +9,6 @@ class Profile extends React.Component {
         this.props.history.push('/updateProfile')
     }
 
-
     render(){
         const { first_name, last_name, username, restaurant_name } = this.props.user
         const name = `${first_name} ${last_name}`

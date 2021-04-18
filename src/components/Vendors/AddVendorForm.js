@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { addVendor } from '../../actions/vendors'
+import { handleReqObj, addFetch } from '../../helpers/fetch'
 
 class AddVendorForm extends React.Component {
     
@@ -20,20 +21,8 @@ class AddVendorForm extends React.Component {
 
     handleClick = () => {
         const newVendor = this.state
-
-        const reqObj = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newVendor)
-        }
-
-        fetch('http://localhost:3000/vendors', reqObj)
-        .then(resp => resp.json())
-        .then(vendor => {
-            this.props.addVendor(vendor)
-        })
+        const reqObj = handleReqObj('POST', newVendor)
+        addFetch('vendors', reqObj, this.props.addVendor)
     }
     
     render(){
