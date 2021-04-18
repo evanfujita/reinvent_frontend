@@ -2,11 +2,10 @@ import React from 'react'
 import { Segment } from 'semantic-ui-react'
 
 const VendorInfo = props => {
-    const { name, representative, phone, email } = this.props.vendor
+    const { name, representative, phone, email } = props.vendor
 
         return(
             <Segment>
-                
                 <Segment basic inverse>
                     {name}
                 </Segment>
