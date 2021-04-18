@@ -6,7 +6,7 @@ import { lowIngredient, renderIngredients } from '../../actions/ingredients'
 import { renderVendors } from '../../actions/vendors'
 import { renderOrders } from '../../actions/orders'
 import { abundantIngredient } from '../../actions/ingredients' 
-import { fetchVendors, fetchIngredients } from '../../helpers/fetch'
+import { fetchVendors, fetchIngredients, handleReqObj } from '../../helpers/fetch'
 
 
 class Login extends React.Component{
@@ -34,13 +34,8 @@ class Login extends React.Component{
     }
 
     handleLogin = value => {
-        const reqObj = { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(value)
-    }
+
+        const reqObj = handleReqObj('POST', value)
 
         fetch('http://localhost:3000/auth', reqObj)
         .then(resp => resp.json())

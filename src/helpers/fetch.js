@@ -1,4 +1,12 @@
-
+export const handleReqObj = (method, object) => {
+    return { 
+        method: method, 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(object)
+    }
+}
 
 export const fetchVendors = (renderVendors) => {
     fetch('http://localhost:3000/vendors')
