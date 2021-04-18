@@ -18,7 +18,6 @@ class IngredientForm extends React.Component {
     }
 
     handleBlur = event => {
-        
         if(event.target.value !== ''){
             this.handleFetch(event)
         }
@@ -63,7 +62,6 @@ class IngredientForm extends React.Component {
         })
     }
 
-    
     render(){
         const { name, id, quantity, quantity_unit } = this.props.ingredient
         const active = this.state.active ? <Icon name='check circle outline' color='green'/> : null

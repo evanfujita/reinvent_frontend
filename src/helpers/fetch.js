@@ -8,6 +8,14 @@ export const handleReqObj = (method, object) => {
     }
 }
 
+export const fetchUser = (currentUser, reqObj) => {
+    fetch('http://localhost:3000/current_user', reqObj)
+    .then(resp => resp.json())
+    .then(user => {
+      currentUser(user)
+})
+}
+
 export const fetchVendors = (renderVendors) => {
     fetch('http://localhost:3000/vendors')
     .then(resp => resp.json())
@@ -33,4 +41,8 @@ export const fetchIngredients = (renderIngredients, lowIngredient) => {
             }
         )
     })
+}
+
+export const deleteFetch = (resource, id) => {
+    fetch(`http://localhost3000/${resource}/${id}`, {method: 'DELETE'})
 }

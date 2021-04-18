@@ -15,13 +15,13 @@ import { currentUser } from './actions/index'
 import { lowIngredient, renderIngredients } from './actions/ingredients'
 import { renderVendors } from './actions/vendors'
 import { renderOrders } from './actions/orders'
-import { abundantIngredient } from './actions/ingredients'
+import { fetchIngredients, fetchUser, fetchVendors } from './helpers/fetch'
 
 class App extends React.Component {
   componentDidMount(){
     const token = localStorage.getItem('token')
     
-    if(!localStorage.getItem('token')){
+    if(!token){
       this.props.history.push('/home')
     } else {
     
@@ -32,42 +32,10 @@ class App extends React.Component {
       }
     }
 
-    fetch('http://localhost:3000/current_user', reqObj)
-    .then(resp => resp.json())
-    .then(user => {
-      this.props.currentUser(user)
-      this.props.history.push('/ingredients')
-    })
-    
-    fetch('http://localhost:3000/ingredients')
-    .then(resp => resp.json())
-    .then(ingredients => {
-      const sortedIngredients = ingredients.sort(function(a,b){
-        if(a.name < b.name) {return -1}
-        if(a.name > b.name) {return 1}
-        return 0
-    })
-        this.props.renderIngredients(sortedIngredients)
-        sortedIngredients.forEach(ingredient => {
-          if(ingredient.quantity < ingredient.par) {
-            this.props.lowIngredient(ingredient)
-          } else if (ingredient.quantity > (ingredient.par * 4)){
-            this.props.abundantIngredient(ingredient)
-          }
-        })  
-      })
-
-    fetch('http://localhost:3000/vendors')
-    .then(resp => resp.json())
-    .then(vendors => {
-      this.props.renderVendors(vendors)
-    })
-
-    fetch('http://localhost:3000/orders')
-    .then(resp => resp.json())
-    .then(orders => {
-      this.props.renderOrders(orders)
-    })
+    fetchUser(this.props.currentUser, reqObj)
+    fetchIngredients(this.props.renderIngredients, this.props.lowIngredient)
+    fetchVendors(this.props.renderVendors)
+    this.props.history.push('/ingredients')
 }}
 
   render(){
@@ -98,7 +66,6 @@ const mapDispatchToProps = {
   lowIngredient,
   renderVendors,
   renderOrders,
-  abundantIngredient
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(App));
