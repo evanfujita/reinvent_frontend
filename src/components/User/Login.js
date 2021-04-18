@@ -6,7 +6,7 @@ import { lowIngredient, renderIngredients } from '../../actions/ingredients'
 import { renderVendors } from '../../actions/vendors'
 import { renderOrders } from '../../actions/orders'
 import { abundantIngredient } from '../../actions/ingredients' 
-import { fetchVendors } from '../../helpers/fetch'
+import { fetchVendors, fetchIngredients } from '../../helpers/fetch'
 
 
 class Login extends React.Component{
@@ -14,43 +14,6 @@ class Login extends React.Component{
         username: '',
         password: '',
         error: ''
-    }
-
-    fetchIngredients = () => {
-        fetch('http://localhost:3000/ingredients')
-        .then(resp => resp.json())
-        .then(ingredients => {
-            const sortedIngredients = ingredients.sort(function(a,b){
-                if(a.name < b.name) {return -1}
-                if(a.name > b.name) {return 1}
-                return 0
-            })
-            this.props.renderIngredients(sortedIngredients)
-            sortedIngredients.forEach(ingredient => {
-                if(ingredient.quantity < ingredient.par){
-                    this.props.lowIngredient(ingredient)
-                } else if (ingredient.quantity > (ingredient.par * 2)){
-                        this.props.abundantIngredient(ingredient)
-                    }
-                }
-            )
-        })
-    }
-
-    // fetchVendors = () => {
-    //     fetch('http://localhost:3000/vendors')
-    //     .then(resp => resp.json())
-    //     .then(vendors => {
-    //       this.props.renderVendors(vendors)
-    //     })
-    // }
-
-    fetchOrders = () => {
-        fetch('http://localhost:3000/orders')
-        .then(resp => resp.json())
-        .then(orders => {
-          this.props.renderOrders(orders)
-        })
     }
 
     handleChange = event => {
@@ -95,10 +58,8 @@ class Login extends React.Component{
                     password: ''
                 })
                 this.props.history.push('/ingredients')
-                this.fetchIngredients()
-                // this.fetchVendors()
-                fetchVendors()
-                this.fetchOrders()
+                fetchIngredients(this.props.renderIngredients, this.props.lowIngredient)
+                fetchVendors(this.props.renderVendors)
             }
         })
     }
