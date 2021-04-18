@@ -3,6 +3,7 @@ import { Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { updateUser } from '../../actions/user'
 import { logout } from '../../actions/user'
+import { handleReqObj, patchFetch } from '../../helpers/fetch'
 
 class ProfileEdit extends React.Component {
     
@@ -41,20 +42,9 @@ class ProfileEdit extends React.Component {
     }
 
     updateFetch = (updatedUser, id) => {
-        
-        const reqObj = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedUser)
-        }
 
-        fetch(`http://localhost:3000/users/${id}`, reqObj)
-        .then(resp => resp.json())
-        .then(user => {
-            
-        })
+        const reqObj = handleReqObj('PATCH', updatedUser)
+        patchFetch('users', id, reqObj, null)
     }
 
     handleDelete = () => {

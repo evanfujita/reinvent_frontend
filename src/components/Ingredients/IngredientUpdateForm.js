@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Button, Form } from 'semantic-ui-react'
 import { updateIngredient } from '../../actions/ingredients'
 import { selectIngredient } from '../../actions/selections'
+import { handleReqObj, patchFetch } from '../../helpers/fetch'
 
 class IngredientUpdateForm extends React.Component {
     
@@ -50,22 +51,8 @@ class IngredientUpdateForm extends React.Component {
             }            
         }
         
-        const reqObj = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(ingredient)
-        }
-        
-        fetch(`http://localhost:3000/ingredients/${ingredient.id}`, reqObj)
-        .then(resp => resp.json())
-        .then(ingredient => {
-            
-            this.props.updateIngredient(ingredient)
-            this.props.selectIngredient(ingredient)
-        })  
-        
+        const reqObj = handleReqObj('PATCH', ingredient)
+        patchFetch('ingredients', ingredient.id, reqObj, this.props.updateIngredient)        
     }
         
     render(){

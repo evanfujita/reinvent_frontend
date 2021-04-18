@@ -55,9 +55,27 @@ export const patchFetch = (resource, id, reqObj, dispatch) => {
     fetch(`http://localhost:3000/${resource}/${id}`, reqObj)
     .then(resp => resp.json())
     .then(data => {
-        dispatch(data)
+        if(dispatch){dispatch(data)}
     })
 }
+
+// export const loginAuth = (reqObj, loginSuccess, renderVendors, renderIngredients, lowIngredient, history) => {
+//     fetch('http://localhost:3000/auth', reqObj)
+//         .then(resp => resp.json())
+//         .then(user => {
+//             if (user.error) {
+//                 this.setState({
+//                     error: user.error
+//                 })
+//             } else {
+//                 loginSuccess(user.user)
+//                 localStorage.setItem('token', user.token)
+//                 history.push('/ingredients')
+//                 fetchIngredients(renderIngredients, lowIngredient)
+//                 fetchVendors(renderVendors)
+//             }
+//         })
+// }
 
 export const deleteFetch = (resource, id) => {
     fetch(`http://localhost3000/${resource}/${id}`, {method: 'DELETE'})
