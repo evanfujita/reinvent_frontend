@@ -27,7 +27,6 @@ class Categories extends React.Component{
     }
 
     render(){
-
        const categoryOptions = this.props.categories.map(category => {
             return {key: category.id, id: category.id, text: category.name, value: category.id}
         })
@@ -51,7 +50,6 @@ class Categories extends React.Component{
     }
 }
 
-
 const mapStateToProps = state => {
     return {
         categories: state.categories
@@ -61,7 +59,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     selectCategory
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories)
 

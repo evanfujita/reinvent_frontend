@@ -76,7 +76,3 @@ export const patchFetch = (resource, id, reqObj, dispatch) => {
 //             }
 //         })
 // }
-
-export const deleteFetch = (resource, id) => {
-    fetch(`http://localhost3000/${resource}/${id}`, {method: 'DELETE'})
-}

@@ -14,10 +14,11 @@ class IngredientsContainer extends React.Component{
         this.state = {
             ingredients: '',
             active: false,
-            viewIngredients: false,
+            viewIngredients: true,
             viewAddIngredient: false,
             displayIngredientInfo: false, 
-            ingredientId: null
+            ingredientId: null,
+            view: true
         }
     }
    
@@ -36,12 +37,6 @@ class IngredientsContainer extends React.Component{
     handleAddIngredient = () => {
         this.setState({
             viewAddIngredient: !this.state.viewAddIngredient
-        })
-    }
-
-    handleViewIngredients = () => {
-        this.setState({
-            view: !this.state.view
         })
     }
 
@@ -74,7 +69,6 @@ class IngredientsContainer extends React.Component{
         
         //togglers
         const toggleForm = this.state.active ? <Form>{form}</Form> : <Form align='left'><Form.Field>{ingredientList}</Form.Field></Form>
-        const toggleViewIngredients = this.state.view ? toggleForm : null
         const toggleViewAddIngredient = this.state.viewAddIngredient ? <AddIngredient /> : null
         const toggleIngredientInformation = this.props.selectedIngredient ? <Segment><IngredientInfo key={this.props.selectedIngredient.id} ingredient={this.props.selectedIngredient} /></Segment> : null
 
@@ -84,14 +78,13 @@ class IngredientsContainer extends React.Component{
             <Grid.Row>
                 <Grid.Column width={8} align='middle'>
                     <CategoryMenuBar />
-                    <Button toggle active={active} onClick={this.handleViewIngredients}>{this.state.view ? 'Hide' : 'Overview'}</Button>
                     <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
                     <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
                     { toggleIngredientInformation }<br/>
                     { toggleViewAddIngredient }
                 </Grid.Column>
                 <Grid.Column align='middle' className='scrollable'>
-                    { toggleViewIngredients }
+                    { toggleForm }
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row stretched>
