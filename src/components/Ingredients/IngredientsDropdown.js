@@ -7,9 +7,10 @@ import { withRouter } from 'react-router-dom'
 class IngredientsDropdown extends React.Component {
 
     handleChange = event => {
-        const ingredient = this.props.ingredients.find(ingredient => ingredient.id === parseInt(event.target.id))
-        this.props.selectIngredient(ingredient)
-        this.props.history.push('/ingredients')
+        const { ingredients, selectIngredient, history } = this.props
+        const ingredient = ingredients.find(ingredient => ingredient.id === parseInt(event.target.id))
+        selectIngredient(ingredient)
+        history.push('/ingredients')
     }
 
     render(){
@@ -23,7 +24,7 @@ class IngredientsDropdown extends React.Component {
             }
         })
         return(
-             <Dropdown id='ingredients' fluid placeholder='ingredients'  selection search options={ingredientsOptions} onChange={this.handleChange} />
+             <Dropdown fluid selection search  id='ingredients' placeholder='ingredients' options={ingredientsOptions} onChange={this.handleChange} />
         )
     }
 }
