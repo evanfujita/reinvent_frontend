@@ -59,20 +59,20 @@ export const patchFetch = (resource, id, reqObj, dispatch) => {
     })
 }
 
-// export const loginAuth = (reqObj, loginSuccess, renderVendors, renderIngredients, lowIngredient, history) => {
-//     fetch('http://localhost:3000/auth', reqObj)
-//         .then(resp => resp.json())
-//         .then(user => {
-//             if (user.error) {
-//                 this.setState({
-//                     error: user.error
-//                 })
-//             } else {
-//                 loginSuccess(user.user)
-//                 localStorage.setItem('token', user.token)
-//                 history.push('/ingredients')
-//                 fetchIngredients(renderIngredients, lowIngredient)
-//                 fetchVendors(renderVendors)
-//             }
-//         })
-// }
+export const loginAuth = (reqObj, props) => {
+    fetch('http://localhost:3000/auth', reqObj)
+        .then(resp => resp.json())
+        .then(user => {
+            if (user.error) {
+                // this.setState({
+                //     error: user.error
+                // })
+            } else {
+                props.loginSuccess(user.user)
+                props.history.push('/ingredients')
+                fetchIngredients(props.renderIngredients, props.lowIngredient)
+                fetchVendors(props.renderVendors)
+                localStorage.setItem('token', user.token)
+            }
+        })
+}
