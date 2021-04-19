@@ -27,7 +27,7 @@ class IngredientsContainer extends React.Component{
             viewAddIngredient: !this.state.viewAddIngredient
         })
     }
-    
+
     render(){
         const { active, viewAddIngredient } = this.state
         const { selectedIngredient, category, ingredients } = this.props
@@ -69,9 +69,7 @@ const mapStateToProps = state => {
     return {
         ingredients: state.ingredients,
         category: state.selections.category,
-        categories: state.categories,
-        selectedIngredient: state.selections.ingredient,
-        ingredientQuantity: state.ingredientQuantity,
+        selectedIngredient: state.selections.ingredient
     }
 }
 
