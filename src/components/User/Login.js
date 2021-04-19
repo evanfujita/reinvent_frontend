@@ -9,6 +9,10 @@ import FormTemplate from '../Forms/FormTemplate'
 
 class Login extends React.Component{
 
+    state = {
+        error: ''
+    }
+
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
@@ -18,12 +22,13 @@ class Login extends React.Component{
     handleSubmit = (state) => {
         const reqObj = handleReqObj('POST', state)
         loginAuth(reqObj, this.props)
+        //need to handle errors
     }
 
     render(){
-        const fields = ['username', 'password']
+        const fields = {'username': 'asdf', 'password': 'asdf'}
         return(
-            <FormTemplate fields={fields} handleSubmit={this.handleSubmit} />
+            <FormTemplate fields={fields} handleSubmit={this.handleSubmit} error={this.state.error} />
         )}   
     }
 

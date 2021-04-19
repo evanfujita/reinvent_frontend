@@ -2,17 +2,23 @@ import React from 'react'
 import { Form } from 'semantic-ui-react'
 
 class FormTemplate extends React.Component{
-    state = {
-        error: ''
+    
+    constructor(props){
+        super(props)
+        this.state = {
+            error: ''
+        }
     }
 
     componentDidMount(){
-        this.props.fields.forEach(field => {
+        for(const field in this.props.fields) {
+            debugger
             this.setState({
                 ...this.state,
-                [field]: ''
+                [field]: this.props.fields[field]
+                
             })
-        })
+        }
     }
 
     handleChange = event => {
@@ -28,7 +34,7 @@ class FormTemplate extends React.Component{
     }
 
     render(){
-        const fields = this.props.fields.map(field => {
+        const fields = Object.keys(this.props.fields).map(field => {
             return <Form.Input name={field} placeholder={field} onChange={this.handleChange} value={this.state.field} />
         })
         return(
