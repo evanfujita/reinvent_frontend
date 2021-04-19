@@ -31,18 +31,6 @@ class IngredientUpdateForm extends React.Component {
     }
     }
 
-    blurValidation = event => {
-        const id = this.props.ingredient.id
-        if(id !== this.state.id){
-            this.setState({
-                id: id,
-                name: '',
-                par: '',
-                quantity_unit: ''
-            })
-        }
-    }
-
     handleSubmit = () => {
         let ingredient = this.props.ingredient
         for (const property in this.state){
@@ -61,7 +49,7 @@ class IngredientUpdateForm extends React.Component {
             <Form>
                 <Form.Field>
                     <label>Name</label>
-                    <input name='name' onBlur={this.blurValidation} onChange={this.handleChange} placeholder={name} value={this.state.name} />
+                    <input name='name' onChange={this.handleChange} placeholder={name} value={this.state.name} />
                 </Form.Field>
                 <Form.Field>
                     <label>Unit of Measurement</label>

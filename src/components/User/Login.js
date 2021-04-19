@@ -23,6 +23,7 @@ class Login extends React.Component{
         const reqObj = handleReqObj('POST', state)
         loginAuth(reqObj, this.props)
         //need to handle errors
+        //consider setting in store?
     }
 
     render(){
@@ -31,7 +32,6 @@ class Login extends React.Component{
             <FormTemplate fields={fields} handleSubmit={this.handleSubmit} error={this.state.error} />
         )}   
     }
-
 
 const mapDispatchToProps = {
     loginSuccess,

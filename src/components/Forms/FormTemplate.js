@@ -2,21 +2,16 @@ import React from 'react'
 import { Form } from 'semantic-ui-react'
 
 class FormTemplate extends React.Component{
-    
-    constructor(props){
-        super(props)
-        this.state = {
-            error: ''
-        }
+
+    state = {
+        error: ''
     }
 
     componentDidMount(){
         for(const field in this.props.fields) {
-            debugger
             this.setState({
                 ...this.state,
                 [field]: this.props.fields[field]
-                
             })
         }
     }
