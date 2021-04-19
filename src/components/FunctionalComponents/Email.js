@@ -12,11 +12,10 @@ class Email extends React.Component {
       visible: false
     }
 
-
     handleClick = () => {
       this.toggleVisibility()
       this.props.handleSubmit()
-
+      
       const { first_name, restaurant_name } = this.props.user
       const { representative, email } = this.props.vendor
       const ingredients = this.props.ingredients.map(ingredient => 
@@ -32,14 +31,12 @@ class Email extends React.Component {
         note: this.props.notes
       }
       
-
       const serviceID = 'service_cit3doz'
       const templateID = 'template_emjv768'
       const userID = 'user_2aDBcZXjpPvZLRGDXPzBX'
       
       emailjs.send(serviceID, templateID, templateParams, userID)
       
-
       this.setState({
         emailMessage: true
       })
@@ -53,15 +50,14 @@ class Email extends React.Component {
 
     toggleVisibility = () => this.setState((prevState) => ({ visible: !prevState.visible}))
     
-
     render(){
-      const { visible } = this.state
-      const content = this.state.emailMessage ? `Success - Your Order Was Sent to ${this.props.vendor.name}!` : null
+      const { visible, emailMessage } = this.state
+      const { vendor, itemsToOrder } = this.props
+      const content = emailMessage ? `Success - Your Order Was Sent to ${vendor.name}!` : null
 
         return(
             <>
-              { this.props.itemsToOrder.length > 0 ? <Button onClick={this.handleClick}>Send Order</Button> : null }
-              {/* {successMessage} */}
+              { itemsToOrder.length > 0 ? <Button onClick={this.handleClick}>Send Order</Button> : null }
               <Transition visible={visible} animation='scale' duration={500}><Message size='mini' color='green'>{content}</Message></Transition>
             </>
         )

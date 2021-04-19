@@ -7,7 +7,7 @@ class EditDeleteButtons extends React.Component {
         confirmDelete: false
     }
 
-    handleEdit = event => {
+    handleEdit = () => {
         this.setState({
             edit: !this.state.edit
         })
@@ -32,14 +32,8 @@ class EditDeleteButtons extends React.Component {
     }
 
     render(){
-
         const toggleConfirmDelete = this.state.confirmDelete ? <Button onClick={this.handleConfirmDelete}>Are you Sure?</Button> : null
-        const toggleEdit =    
-            this.state.edit
-            ?
-            <IngredientUpdateForm />
-            :
-            null
+        const toggleEdit = this.state.edit ? <IngredientUpdateForm /> : null
 
         return(
             <div>
