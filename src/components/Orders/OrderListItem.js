@@ -28,7 +28,7 @@ class OrderListItem extends React.Component {
         })
     }
 
-    handleChange = event => {
+    handleChange = () => {
         this.props.itemsToOrder(this.state)
         this.setState({
             checked: true

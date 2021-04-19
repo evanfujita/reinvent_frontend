@@ -3,6 +3,7 @@ import { Segment, Grid, Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { itemsToAccept, itemsToDeny, acceptOrder } from '../../actions/pendingOrder'
 import { updateIngredient, removeLowIngredient } from '../../actions/ingredients'
+import { handleReqObj } from '../../helpers/fetch'
 
 class PendingOrderItem extends React.Component {
 
@@ -12,9 +13,10 @@ class PendingOrderItem extends React.Component {
     }
 
     componentDidMount(){
+        const { ingredient, quantity } = this.props.ingredient
         this.setState({
-            ingredient: this.props.ingredient.ingredient,
-            quantity: this.props.ingredient.quantity
+            ingredient: ingredient,
+            quantity: quantity
         })
     }
 
@@ -25,17 +27,19 @@ class PendingOrderItem extends React.Component {
         })
     }
 
-    handleAccept = event => {
-        this.props.handleAcceptOrder(this.state.ingredient.name)
-        this.props.itemsToAccept(this.state)
+    handleAccept = () => {
+        const { handleAcceptOrder, itemsToAccept, removeLowIngredient } = this.props
+        handleAcceptOrder(this.state.ingredient.name)
+        itemsToAccept(this.state)
         this.handleUpdateIngredient(this.state)
-        this.props.removeLowIngredient(this.state.ingredient)
+        removeLowIngredient(this.state.ingredient)
     }
 
     handleReject = () => {
         const { ingredient } = this.props.ingredient
-        this.props.handleRejectOrder(ingredient.name)
-        this.props.acceptOrder(ingredient)
+        const { handleRejectOrder, acceptOrder } = this.props
+        handleRejectOrder(ingredient.name)
+        acceptOrder(ingredient)
     }
 
     handleUpdateIngredient = ingredient => {
@@ -45,13 +49,7 @@ class PendingOrderItem extends React.Component {
             quantity: updatedQuantity
         }
         
-        const reqObj = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedIngredient)
-        }
+        const reqObj = handleReqObj('PATCH', updatedIngredient)
 
         fetch(`http://localhost:3000/ingredients/${id}`, reqObj)
         .then(resp => resp.json())

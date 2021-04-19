@@ -106,8 +106,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    acceptOrder,
-    
+    acceptOrder
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PendingOrderContainer)
