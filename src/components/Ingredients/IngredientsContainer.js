@@ -9,23 +9,12 @@ import IngredientInfo from './IngredientInfo'
 import CategoryMenuBar from '../Categories/CategoryMenuBar'
 
 class IngredientsContainer extends React.Component{
-    constructor(){
-        super()
-        this.state = {
-            ingredients: '',
-            active: false,
-            viewIngredients: true,
-            viewAddIngredient: false,
-            displayIngredientInfo: false, 
-            ingredientId: null,
-            view: true
-        }
-    }
-   
-    handleIngredientsChange = event => {
-        this.setState({
-            ingredients: event.target.innerText
-        })
+    state = {
+        active: false,
+        viewIngredients: true,
+        viewAddIngredient: false,
+        displayIngredientInfo: false, 
+        ingredientId: null,
     }
 
     handleToggle = () => {
@@ -42,7 +31,6 @@ class IngredientsContainer extends React.Component{
 
     handleDropdownChange = event => {
         const id = parseInt(event.target.id)
-        
         const ingredient = this.props.ingredients.find(ingredient => {
             return ingredient.id === id
         })
@@ -75,24 +63,16 @@ class IngredientsContainer extends React.Component{
     return(
             
         <Grid columns={2} >
-            <Grid.Row>
-                <Grid.Column width={8} align='middle'>
-                    <CategoryMenuBar />
-                    <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
-                    <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
-                    { toggleIngredientInformation }<br/>
-                    { toggleViewAddIngredient }
-                </Grid.Column>
-                <Grid.Column align='middle' className='scrollable'>
-                    { toggleForm }
-                </Grid.Column>
-            </Grid.Row>
-            <Grid.Row stretched>
-                <Grid.Column width={8}>
-                    
-                </Grid.Column>
-            </Grid.Row>
-            
+            <Grid.Column width={8} align='middle'>
+                <CategoryMenuBar />
+                <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
+                <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
+                { toggleIngredientInformation }<br/>
+                { toggleViewAddIngredient }
+            </Grid.Column>
+            <Grid.Column align='middle' className='scrollable'>
+                { toggleForm }
+            </Grid.Column>
         </Grid>
         )
     }
