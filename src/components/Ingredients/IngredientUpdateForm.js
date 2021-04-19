@@ -28,7 +28,7 @@ class IngredientUpdateForm extends React.Component {
         this.setState({
             [name]: value
         })
-    }
+        }
     }
 
     handleSubmit = () => {
