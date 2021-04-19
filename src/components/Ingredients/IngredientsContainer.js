@@ -11,7 +11,6 @@ import CategoryMenuBar from '../Categories/CategoryMenuBar'
 class IngredientsContainer extends React.Component{
     state = {
         active: false,
-        viewIngredients: true,
         viewAddIngredient: false,
         displayIngredientInfo: false, 
         ingredientId: null,
@@ -42,23 +41,23 @@ class IngredientsContainer extends React.Component{
     }
 
     render(){
-        const active = this.state.active
-        
+        const { active, viewAddIngredient } = this.state
+        const { selectedIngredient, category, ingredients } = this.props
         const ingredientsSelector = (
-            this.props.category !== 0
+            category !== 0
             ? 
-            this.props.ingredients.filter(ingredient => parseInt(ingredient.category_id) === this.props.category)
+            ingredients.filter(ingredient => parseInt(ingredient.category_id) === category)
             :
-            this.props.ingredients
+            ingredients
         )
 
         const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /></Segment>)
         const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
         
         //togglers
-        const toggleForm = this.state.active ? <Form>{form}</Form> : <Form align='left'><Form.Field>{ingredientList}</Form.Field></Form>
-        const toggleViewAddIngredient = this.state.viewAddIngredient ? <AddIngredient /> : null
-        const toggleIngredientInformation = this.props.selectedIngredient ? <Segment><IngredientInfo key={this.props.selectedIngredient.id} ingredient={this.props.selectedIngredient} /></Segment> : null
+        const toggleForm = active ? <Form>{form}</Form> : <Form align='left'><Form.Field>{ingredientList}</Form.Field></Form>
+        const toggleViewAddIngredient = viewAddIngredient ? <AddIngredient /> : null
+        const toggleIngredientInformation = selectedIngredient ? <Segment><IngredientInfo key={selectedIngredient.id} ingredient={selectedIngredient} /></Segment> : null
 
     return(
             
