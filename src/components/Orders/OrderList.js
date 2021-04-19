@@ -22,7 +22,6 @@ class OrderList extends React.Component {
         this.setState({
             vendorId: event.target.id
         })
-        
         this.props.selectVendor(vendor)
     }
 
@@ -53,31 +52,27 @@ class OrderList extends React.Component {
     }
     
     render(){
-        const vendorId = this.state.vendorId
-        const categorizedIngredients = this.props.lowIngredients.filter(ingredient => 
-            vendorId === ingredient.vendor_id || vendorId === 'all' ? ingredient : null)
+        const { orderAbovePar, vendorId, notes, notesForm } = this.state
+        const { lowIngredients, vendors, itemsToOrder } = this.props
+        const vendorInfo = vendors.find(vendor => parseInt(vendorId) === vendor.id)
         
-        const vendors = this.props.vendors.map(vendor => (
+        const categorizedIngredients = lowIngredients.filter(ingredient => vendorId === ingredient.vendor_id || vendorId === 'all' ? ingredient : null)
+        const renderNotesForm = notesForm ? <NotesForm handleNoteChange={this.handleNoteChange} /> : null
+        
+        const vendorsMenu = vendors.map(vendor => (
             <Menu.Item key={vendor.id} name={vendor.name} id={vendor.id} active={parseInt(vendorId) === parseInt(vendor.id)} onClick={this.handleClick} />) )
             
-        const vendorInfo = this.props.vendors.find(vendor => parseInt(vendorId) === vendor.id)
-
-        const vendorIngredients = this.props.itemsToOrder.filter(ingredient => ingredient.ingredient.vendor_id === vendorId)
-
-        const { orderAbovePar } = this.state
+        const vendorIngredients = itemsToOrder.filter(ingredient => ingredient.ingredient.vendor_id === vendorId)
         const displayIngredients = categorizedIngredients.map(ingredient => 
             <OrderListItem key={ingredient.id} ingredient={ingredient} addIngredient={this.addIngredient} />
         )
-
-        const renderButtons = this.state.vendorId !== 'all' ? 
+        const renderButtons = vendorId !== 'all' ? 
             <>
             <Button onClick={this.handleNote}>Add Note</Button><br/><br/>
-            <Email vendor={vendorInfo} ingredients={vendorIngredients} vendorId={this.state.vendorId} notes={this.state.notes} handleSubmit={this.handleSubmitNote} />
+            <Email vendor={vendorInfo} ingredients={vendorIngredients} vendorId={vendorId} notes={notes} handleSubmit={this.handleSubmitNote} />
             </>
             :
             null
-
-        const renderNotesForm = this.state.notesForm ? <NotesForm handleNoteChange={this.handleNoteChange} /> : null
             
         return(
             <Grid>
@@ -85,7 +80,7 @@ class OrderList extends React.Component {
                     <Menu align='left' className='text' pointing secondary vertical>
                         By Vendor:
                     <Menu.Item key='All' name='All' id='all' active={vendorId === 'all'} onClick={this.handleClick} />
-                            {vendors}
+                            {vendorsMenu}
                     </Menu>
                 </Grid.Column>
                 <Grid.Column width={8} align='left' className='scrollable'>
@@ -97,7 +92,6 @@ class OrderList extends React.Component {
                 <Form inverted>
                     <Segment>
                     <Form.Input
-                        width='16'
                         label={`order above par: ${orderAbovePar}%`}
                         min={0}
                         max={300}
@@ -122,7 +116,6 @@ const mapStateToProps = state => {
     return {
         ingredients: state.ingredients,
         lowIngredients: state.lowIngredients,
-        categories: state.categories,
         vendors: state.vendors,
         orders: state.orders,
         itemsToOrder: state.itemsToOrder

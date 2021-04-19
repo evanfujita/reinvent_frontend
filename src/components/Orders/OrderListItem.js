@@ -36,11 +36,13 @@ class OrderListItem extends React.Component {
     }
 
     render(){
-        const { name, quantity_unit } = this.state.ingredient
-        const id = parseInt(this.state.ingredient.id)
-        const value = this.props.parMeter ? Math.ceil(this.state.quantity + (this.props.parMeter * this.state.quantity / 100)) : this.state.quantity
-        const icon = this.state.checked ? 'check' : 'plus'
-        const color = this.state.checked ? 'green' : null
+        const { quantity, checked, ingredient } = this.state
+        const { name, quantity_unit } = ingredient
+        const { parMeter } = this.props
+        const id = parseInt(ingredient.id)
+        const value = parMeter ? Math.ceil(this.state.quantity + (parMeter * quantity / 100)) : quantity
+        const icon = checked ? 'check' : 'plus'
+        const color = checked ? 'green' : null
 
         return(
             <Segment>
@@ -53,7 +55,7 @@ class OrderListItem extends React.Component {
                     id={id}
                     type='number'
                     onChange={this.handleValueChange}
-                    placeholder={this.state.quantity}
+                    placeholder={quantity}
                     value={value}
                     min={0}
                     step={1}
