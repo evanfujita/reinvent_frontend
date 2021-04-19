@@ -29,7 +29,6 @@ class IngredientForm extends React.Component {
 
     handleFocus = event => {
         const id = parseInt(event.target.id)
-        
         const selectedIngredient = this.props.ingredients.find(ingredient => ingredient.id === id)
         this.props.selectIngredient(selectedIngredient)
         this.setState({

@@ -19,9 +19,10 @@ class NavBar extends React.Component {
     }
 
     render(){
-        const page = this.props.history.location.pathname
-        const label = this.props.lowIngredients.length > 0 ? <Label floating circular color='red' >{this.props.lowIngredients.length}</Label> : null
-        const pendingOrder = this.props.pendingOrder
+        const { history, lowIngredients, pendingOrder } = this.props
+        const page = history.location.pathname
+        const label = lowIngredients.length === 0 ? null : <Label floating circular color='red' >{lowIngredients.length}</Label>
+        const pendingOrders = pendingOrder
             ? 
             <Menu.Item 
             name='pendingOrder' 
@@ -29,14 +30,13 @@ class NavBar extends React.Component {
             active={page === '/pendingOrder'} 
             id='pendingOrder'>
                 Pending Orders
-                <Label floating circular color='yellow' >{this.props.pendingOrder.length}</Label>
+                <Label floating circular color='yellow'>{pendingOrder.length}</Label>
             </Menu.Item>
          : 
          null
 
         return(
                 <Menu>
-                
                 { !this.props.user ? 
                 <>
                     <Menu.Item name='login' onClick={this.handleClick}  active={page === '/login'} id='login' />
@@ -51,7 +51,7 @@ class NavBar extends React.Component {
                         { label }
                         
                     </Menu.Item>
-                        {pendingOrder}
+                        {pendingOrders}
                     <Menu.Item name='ingredients' >
                     <IngredientsDropdown handleClick={this.handleClick} />
                     </Menu.Item>

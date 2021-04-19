@@ -5,7 +5,8 @@ import { selectIngredient } from '../../actions/selections'
 class Ingredient extends React.Component {
 
     handleIngredientClick = () => {
-        this.props.selectIngredient(this.props.ingredientInfo)
+        const { selectIngredient, ingredientInfo } = this.props
+        selectIngredient(ingredientInfo)
     }
 
     render(){
