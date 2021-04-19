@@ -27,19 +27,7 @@ class IngredientsContainer extends React.Component{
             viewAddIngredient: !this.state.viewAddIngredient
         })
     }
-
-    handleDropdownChange = event => {
-        const id = parseInt(event.target.id)
-        const ingredient = this.props.ingredients.find(ingredient => {
-            return ingredient.id === id
-        })
-        this.setState({
-            displayIngredientInfo: true,
-            ingredientInfo: ingredient
-        })
-        this.props.selectIngredient(ingredient)
-    }
-
+    
     render(){
         const { active, viewAddIngredient } = this.state
         const { selectedIngredient, category, ingredients } = this.props
