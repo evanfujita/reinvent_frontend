@@ -31,14 +31,7 @@ class IngredientsContainer extends React.Component{
     render(){
         const { active, viewAddIngredient } = this.state
         const { selectedIngredient, category, ingredients } = this.props
-        const ingredientsSelector = (
-            category !== 0
-            ? 
-            ingredients.filter(ingredient => parseInt(ingredient.category_id) === category)
-            :
-            ingredients
-        )
-
+        const ingredientsSelector = category !== 0 ? ingredients.filter(ingredient => parseInt(ingredient.category_id) === category) : ingredients
         const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /></Segment>)
         const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
         

@@ -69,7 +69,6 @@ class IngredientForm extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        ingredientQuantity: state.ingredientQuantity,
         ingredients: state.ingredients,
         selectedIngredient: state.selections.ingredient,
         category: state.selections.ingredient
