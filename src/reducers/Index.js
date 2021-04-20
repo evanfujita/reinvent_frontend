@@ -11,6 +11,7 @@ import pendingOrderReducer from './pendingOrder'
 import parMeterReducer from './parMeter'
 import itemsToOrderReducer from './itemsToOrder'
 import itemsToAcceptReducer from './itemsToAccept'
+import updatedInventoryReducer from './updatedInventory'
 
 
 
@@ -26,6 +27,7 @@ export default combineReducers({
   pendingOrder: pendingOrderReducer,
   parMeter: parMeterReducer,
   itemsToOrder: itemsToOrderReducer,
-  itemsToAccept: itemsToAcceptReducer
+  itemsToAccept: itemsToAcceptReducer,
+  updatedInventory: updatedInventoryReducer
 })
 

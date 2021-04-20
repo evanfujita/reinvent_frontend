@@ -36,7 +36,7 @@ class IngredientsContainer extends React.Component{
         const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
         
         //togglers
-        const toggleForm = active ? <Form>{form}</Form> : <Form align='left'><Form.Field>{ingredientList}</Form.Field></Form>
+        const toggleForm = active ? <Form>{form}<input type='submit' name='submit'></input></Form> : <Form align='left'><Form.Field>{ingredientList}</Form.Field></Form>
         const toggleViewAddIngredient = viewAddIngredient ? <AddIngredient /> : null
         const toggleIngredientInformation = selectedIngredient ? <Segment><IngredientInfo key={selectedIngredient.id} ingredient={selectedIngredient} /></Segment> : null
 

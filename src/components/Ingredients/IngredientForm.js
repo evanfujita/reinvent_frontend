@@ -4,6 +4,7 @@ import { Form, Icon, Segment } from 'semantic-ui-react'
 import { updateIngredient, updateIngredientQuantity } from '../../actions/ingredients'
 import { selectIngredient } from '../../actions/selections'
 import { handleReqObj, patchFetch } from '../../helpers/fetch'
+import { updatedInventory } from '../../actions/updatedInventory'
 
 class IngredientForm extends React.Component {
    
@@ -19,12 +20,16 @@ class IngredientForm extends React.Component {
     }
 
     handleBlur = event => {
-        if(event.target.value !== ''){
-            const id = parseInt(event.target.id)
-            const reqObj = handleReqObj('PATCH', {quantity: this.state.quantity})
-            patchFetch('ingredients', id, reqObj, this.props.updateIngredientQuantity)
-            this.resetForm(event)
-        }
+        const updatedIngredient = {[this.props.selectedIngredient.id]: event.target.value}
+        this.props.updatedInventory(updatedIngredient)
+        // debugger
+     
+        // if(event.target.value !== ''){
+        //     const id = parseInt(event.target.id)
+        //     const reqObj = handleReqObj('PATCH', {quantity: this.state.quantity})
+        //     patchFetch('ingredients', id, reqObj, this.props.updateIngredientQuantity)
+        //     this.resetForm(event)
+        // }
     }
 
     handleFocus = event => {
@@ -70,14 +75,16 @@ const mapStateToProps = state => {
     return {
         ingredients: state.ingredients,
         selectedIngredient: state.selections.ingredient,
-        category: state.selections.ingredient
+        category: state.selections.ingredient,
+        updatedInventory: state.updatedInventory
     }
 }
 
 const mapDispatchToProps = {
     updateIngredientQuantity,
     updateIngredient,
-    selectIngredient
+    selectIngredient,
+    updatedInventory
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientForm)
