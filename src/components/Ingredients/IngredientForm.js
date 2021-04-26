@@ -21,15 +21,9 @@ class IngredientForm extends React.Component {
 
     handleBlur = event => {
         const updatedIngredient = {[this.props.selectedIngredient.id]: event.target.value}
-        this.props.updatedInventory(updatedIngredient)
-        // debugger
-     
-        // if(event.target.value !== ''){
-        //     const id = parseInt(event.target.id)
-        //     const reqObj = handleReqObj('PATCH', {quantity: this.state.quantity})
-        //     patchFetch('ingredients', id, reqObj, this.props.updateIngredientQuantity)
-        //     this.resetForm(event)
-        // }
+        if(event.target.value !== ''){
+            this.props.updatedInventory(updatedIngredient)
+        }
     }
 
     handleFocus = event => {
