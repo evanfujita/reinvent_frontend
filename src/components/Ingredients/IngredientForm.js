@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Form, Icon, Segment } from 'semantic-ui-react'
 import { updateIngredient, updateIngredientQuantity } from '../../actions/ingredients'
 import { selectIngredient } from '../../actions/selections'
-import { handleReqObj, patchFetch } from '../../helpers/fetch'
 import { updatedInventory } from '../../actions/updatedInventory'
 
 class IngredientForm extends React.Component {
@@ -20,7 +19,7 @@ class IngredientForm extends React.Component {
     }
 
     handleBlur = event => {
-        const updatedIngredient = {[this.props.selectedIngredient.id]: event.target.value}
+        const updatedIngredient = {id: this.props.selectedIngredient.id, quantity: parseInt(event.target.value)}
         if(event.target.value !== ''){
             this.props.updatedInventory(updatedIngredient)
             this.setState({

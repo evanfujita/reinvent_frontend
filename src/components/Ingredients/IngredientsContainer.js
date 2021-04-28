@@ -30,7 +30,6 @@ class IngredientsContainer extends React.Component{
     }
 
     handleSubmit = () => {
-        // debugger
         const reqObj = handleReqObj('PATCH', {ingredients: this.props.updatedInventory})
         updateInventoryFetch(reqObj)
     }
