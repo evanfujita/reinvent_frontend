@@ -23,6 +23,9 @@ class IngredientForm extends React.Component {
         const updatedIngredient = {[this.props.selectedIngredient.id]: event.target.value}
         if(event.target.value !== ''){
             this.props.updatedInventory(updatedIngredient)
+            this.setState({
+                active: true
+            })
         }
     }
 
