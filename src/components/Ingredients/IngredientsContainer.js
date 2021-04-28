@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Form, Button, Grid, Segment } from 'semantic-ui-react'
 import { selectCategory, selectIngredient } from '../../actions/selections'
+import { updatedInventory, undoUpdatedInventory } from '../../actions/updatedInventory'
 import IngredientForm from './IngredientForm'
 import AddIngredient from './AddIngredient'
 import Ingredient from './Ingredient'
@@ -34,6 +35,10 @@ class IngredientsContainer extends React.Component{
         updateInventoryFetch(reqObj)
     }
 
+    handleUndo = () => {
+        this.props.undoUpdatedInventory()
+    }
+
     render(){
         const { active, viewAddIngredient } = this.state
         const { selectedIngredient, category, ingredients } = this.props
@@ -48,7 +53,7 @@ class IngredientsContainer extends React.Component{
 
     return(
             
-        <Grid columns={2} >
+        <Grid columns={3} >
             <Grid.Column width={8} align='middle'>
                 <CategoryMenuBar />
                 <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
@@ -56,8 +61,11 @@ class IngredientsContainer extends React.Component{
                 { toggleIngredientInformation }<br/>
                 { toggleViewAddIngredient }
             </Grid.Column>
-            <Grid.Column align='middle' className='scrollable'>
+            <Grid.Column width={6} align='middle' className='scrollable'>
                 { toggleForm }
+            </Grid.Column>
+            <Grid.Column align='middle' width={2}> 
+                {this.props.updatedInventory.length > 0 ? <Button onClick={this.handleUndo}>undo</Button> : null}
             </Grid.Column>
         </Grid>
         )
@@ -75,7 +83,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     selectCategory,
-    selectIngredient   
+    selectIngredient,
+    undoUpdatedInventory   
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientsContainer)

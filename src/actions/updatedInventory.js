@@ -4,3 +4,9 @@ export const updatedInventory = ingredient => {
         ingredient
     }
 }
+
+export const undoUpdatedInventory = () => {
+    return {
+        type: 'UNDO_UPDATED_INGREDIENT_INVENTORY'
+    }
+}
