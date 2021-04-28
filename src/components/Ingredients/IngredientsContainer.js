@@ -7,7 +7,7 @@ import AddIngredient from './AddIngredient'
 import Ingredient from './Ingredient'
 import IngredientInfo from './IngredientInfo'
 import CategoryMenuBar from '../Categories/CategoryMenuBar'
-import { handleReqObj } from '../../helpers/fetch'
+import { handleReqObj, updateInventoryFetch } from '../../helpers/fetch'
 
 class IngredientsContainer extends React.Component{
     state = {
@@ -30,13 +30,9 @@ class IngredientsContainer extends React.Component{
     }
 
     handleSubmit = () => {
-        console.log(this.props.updatedInventory)
+        // debugger
         const reqObj = handleReqObj('PATCH', {ingredients: this.props.updatedInventory})
-        fetch('http://localhost:3000/updateInventory', reqObj)
-        .then(resp => resp.json())
-        .then(data => {
-            debugger
-        })
+        updateInventoryFetch(reqObj)
     }
 
     render(){

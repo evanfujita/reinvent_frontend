@@ -59,6 +59,10 @@ export const patchFetch = (resource, id, reqObj, dispatch) => {
     })
 }
 
+export const updateInventoryFetch = (reqObj) => {
+    fetch(`http://localhost:3000/updateInventory`, reqObj)
+}
+
 export const loginAuth = (reqObj, props) => {
     fetch('http://localhost:3000/auth', reqObj)
         .then(resp => resp.json())
