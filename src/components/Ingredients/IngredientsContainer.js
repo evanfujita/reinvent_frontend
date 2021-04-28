@@ -45,9 +45,10 @@ class IngredientsContainer extends React.Component{
         const ingredientsSelector = category !== 0 ? ingredients.filter(ingredient => parseInt(ingredient.category_id) === category) : ingredients
         const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /></Segment>)
         const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
-        
+        const { updatedInventory } = this.props
+
         //togglers
-        const toggleForm = active ? <Form onSubmit={this.handleSubmit}>{form}<input type='submit' name='submit'></input></Form> : <Form align='left'><Form.Field>{ingredientList}</Form.Field></Form>
+        const toggleForm = active ? <Form onSubmit={this.handleSubmit}>{form}</Form> : <Form align='left'><Form.Field>{ingredientList}</Form.Field></Form>
         const toggleViewAddIngredient = viewAddIngredient ? <AddIngredient /> : null
         const toggleIngredientInformation = selectedIngredient ? <Segment><IngredientInfo key={selectedIngredient.id} ingredient={selectedIngredient} /></Segment> : null
 
@@ -66,7 +67,7 @@ class IngredientsContainer extends React.Component{
             <Grid.Column align='middle' width={2}> 
                 <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
                 <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
-                {this.props.updatedInventory.length > 0 ? <Button onClick={this.handleUndo}>undo</Button> : null}
+                {updatedInventory.length > 0 ? <><Button onClick={this.handleUndo}>Undo</Button> <Button onClick={this.handleSubmit}>Update Inventory</Button> </>: null}
             </Grid.Column>
         </Grid>
         )
