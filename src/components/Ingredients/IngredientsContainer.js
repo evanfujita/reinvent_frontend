@@ -55,19 +55,18 @@ class IngredientsContainer extends React.Component{
     return(
             
         <Grid columns={3} >
-            <Grid.Column width={8} align='middle'>
+            <Grid.Column width={4} align='left'>
                 <CategoryMenuBar />
-
-                { toggleIngredientInformation }<br/>
-                { toggleViewAddIngredient }
-            </Grid.Column>
-            <Grid.Column width={6} align='middle' className='scrollable'>
-                { toggleForm }
-            </Grid.Column>
-            <Grid.Column align='middle' width={2}> 
-                <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
+                <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button><br/>
                 <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
                 {updatedInventory.length > 0 ? <><Button onClick={this.handleUndo}>Undo</Button> <Button onClick={this.handleSubmit}>Update Inventory</Button> </>: null}
+            </Grid.Column>
+            <Grid.Column width={6} align='left' className='scrollable'>
+                { toggleForm }
+            </Grid.Column>
+            <Grid.Column align='middle' width={6}> 
+                { toggleIngredientInformation }<br/>
+                { toggleViewAddIngredient }
             </Grid.Column>
         </Grid>
         )

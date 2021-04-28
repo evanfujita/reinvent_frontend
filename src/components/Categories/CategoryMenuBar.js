@@ -16,7 +16,7 @@ class CategoryMenuBar extends React.Component {
         })
 
         return(
-            <Menu tabular>
+            <Menu pointing secondary vertical>
                 <Menu.Item name={'All'} id={0} active={categoryId === 0} onClick={this.handleClick} />
                 {displayCategories}
             </Menu>   
