@@ -56,8 +56,7 @@ class IngredientsContainer extends React.Component{
         <Grid columns={3} >
             <Grid.Column width={8} align='middle'>
                 <CategoryMenuBar />
-                <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
-                <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
+
                 { toggleIngredientInformation }<br/>
                 { toggleViewAddIngredient }
             </Grid.Column>
@@ -65,6 +64,8 @@ class IngredientsContainer extends React.Component{
                 { toggleForm }
             </Grid.Column>
             <Grid.Column align='middle' width={2}> 
+                <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button>
+                <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
                 {this.props.updatedInventory.length > 0 ? <Button onClick={this.handleUndo}>undo</Button> : null}
             </Grid.Column>
         </Grid>
