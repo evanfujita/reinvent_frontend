@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { Icon, Button, Form } from 'semantic-ui-react'
 import { updateIngredient, updateIngredientQuantity } from '../../actions/ingredients'
 import { selectIngredient } from '../../actions/selections'
-import { updatedInventory } from '../../actions/updatedInventory'
-import IngredientInventoryForm from '../Forms/IngredientInventoryForm'
+import { updatedInventory, undoUpdatedInventory } from '../../actions/updatedInventory'
+
+// import IngredientInventoryForm from '../Forms/IngredientInventoryForm'
 
 class IngredientForm extends React.Component {
    
@@ -48,23 +49,23 @@ class IngredientForm extends React.Component {
         })
     }
 
+    handleUndo = () => {
+        this.setState({
+            active: false,
+            quantity: this.props.ingredient.quantity
+        })
+        this.props.undoUpdatedInventory()
+    }
+
     render(){
         
-        const active = this.state.active ? <><Icon name='check circle outline' color='green'/><Icon name='undo' color='red' /></> : null
+        const active = this.state.active ? <><Icon name='check circle outline' color='green'/><Icon onClick={this.handleUndo} name='undo' color='yellow' /></> : null
         const { name, id, quantity_unit } = this.props.ingredient
     
     return(         
         <>
-            {active}
-            {/* <IngredientInventoryForm
-                ingredient={this.props.ingredient}
-                active={this.state.active}
-                onChange={this.handleChange}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur} 
-            /> */}
-                    <Form.Field align='left'>
-            <label>{name} ({quantity_unit}) </label>
+            <Form.Field align='left'>
+            <label>{name} ({quantity_unit}) {active}</label>
             <input 
                 width={4}
                 id={id}
@@ -93,7 +94,8 @@ const mapDispatchToProps = {
     updateIngredientQuantity,
     updateIngredient,
     selectIngredient,
-    updatedInventory
+    updatedInventory,
+    undoUpdatedInventory
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientForm)

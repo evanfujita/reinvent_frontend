@@ -35,10 +35,6 @@ class IngredientsContainer extends React.Component{
         updateInventoryFetch(reqObj)
     }
 
-    // handleUndo = () => {
-    //     this.props.undoUpdatedInventory()
-    // }
-
     render(){
         const { active, viewAddIngredient } = this.state
         const { selectedIngredient, category, ingredients } = this.props
@@ -59,9 +55,7 @@ class IngredientsContainer extends React.Component{
                 <CategoryMenuBar />
                 <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button><br/>
                 <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
-                {updatedInventory.length > 0 ? <><Button 
-                    // onClick={this.handleUndo}
-                    >Undo</Button> <Button onClick={this.handleSubmit}>Update Inventory</Button> </>: null}
+                {updatedInventory.length > 0 ? <Button onClick={this.handleSubmit}>Update Inventory</Button> : null}
             </Grid.Column>
             <Grid.Column width={6} align='left' className='scrollable'>
                 { toggleForm }
