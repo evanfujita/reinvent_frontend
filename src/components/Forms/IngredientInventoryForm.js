@@ -1,6 +1,15 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
 
+
+
+// 
+// 
+//
+//  not using this component
+//
+//
+
 const IngredientInventoryForm = props => {
     const { name, id, quantity, quantity_unit } = props.ingredient
     const { handleChange, handleFocus, handleBlur } = props

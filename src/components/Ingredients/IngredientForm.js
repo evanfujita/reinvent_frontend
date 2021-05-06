@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Icon, Button, Form } from 'semantic-ui-react'
+import { Icon, Form } from 'semantic-ui-react'
 import { updateIngredient, updateIngredientQuantity } from '../../actions/ingredients'
 import { selectIngredient } from '../../actions/selections'
 import { updatedInventory, undoUpdatedInventory } from '../../actions/updatedInventory'
-
-// import IngredientInventoryForm from '../Forms/IngredientInventoryForm'
 
 class IngredientForm extends React.Component {
    
@@ -59,7 +57,7 @@ class IngredientForm extends React.Component {
 
     render(){
         
-        const active = this.state.active ? <><Icon name='check circle outline' color='green'/><Icon onClick={this.handleUndo} name='undo' color='yellow' /></> : null
+        const active = this.state.active ? <Icon onClick={this.handleUndo} id='undo-icon' name='undo' color='yellow' /> : null
         const { name, id, quantity_unit } = this.props.ingredient
     
     return(         

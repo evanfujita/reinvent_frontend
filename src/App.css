@@ -82,3 +82,7 @@ label {
   background: rgba(0,0,0,.05) !important;
   color: black !important;
 }
+
+#undo-icon:hover {
+  cursor: pointer;
+}
