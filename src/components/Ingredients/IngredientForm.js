@@ -1,17 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Icon, Segment } from 'semantic-ui-react'
+import { Icon, Button, Form } from 'semantic-ui-react'
 import { updateIngredient, updateIngredientQuantity } from '../../actions/ingredients'
 import { selectIngredient } from '../../actions/selections'
 import { updatedInventory } from '../../actions/updatedInventory'
+import IngredientInventoryForm from '../Forms/IngredientInventoryForm'
 
 class IngredientForm extends React.Component {
    
-    state = {
-        id: null,
-        quantity: null,
-        updated: [],
-        active: false
+    constructor(props){
+        super(props)
+        this.state = {
+            id: null,
+            quantity: props.ingredient.quantity,
+            active: false
+        }
     }
 
     resetForm = event => {
@@ -26,6 +29,7 @@ class IngredientForm extends React.Component {
                 active: true
             })
         }
+        event.target.value = ''
     }
 
     handleFocus = event => {
@@ -45,25 +49,34 @@ class IngredientForm extends React.Component {
     }
 
     render(){
-        const { name, id, quantity, quantity_unit } = this.props.ingredient
-        const active = this.state.active ? <Icon name='check circle outline' color='green'/> : null
+        
+        const active = this.state.active ? <><Icon name='check circle outline' color='green'/><Icon name='undo' color='red' /></> : null
+        const { name, id, quantity_unit } = this.props.ingredient
     
     return(         
-        <Segment>
-        <Form.Field align='left'>
-            <label>{active} {name} ({quantity_unit}) </label>
+        <>
+            {active}
+            {/* <IngredientInventoryForm
+                ingredient={this.props.ingredient}
+                active={this.state.active}
+                onChange={this.handleChange}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur} 
+            /> */}
+                    <Form.Field align='left'>
+            <label>{name} ({quantity_unit}) </label>
             <input 
                 width={4}
                 id={id}
                 min={0}
-                placeholder={quantity} 
+                placeholder={this.state.quantity} 
                 onChange={this.handleChange}
                 onFocus={this.handleFocus}
-                onBlur={this.handleBlur} 
+                onBlur={this.handleBlur}
                 type='number' 
             />
         </Form.Field> 
-        </Segment>
+        </>
     )}
 }
 
