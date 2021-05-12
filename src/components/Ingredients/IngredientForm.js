@@ -10,7 +10,7 @@ class IngredientForm extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            id: null,
+            id: props.ingredient.id,
             quantity: props.ingredient.quantity,
             active: false
         }
