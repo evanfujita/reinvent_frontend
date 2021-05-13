@@ -16,7 +16,6 @@ const Email = props => {
     const [visible, setVisible] = useState(false)
     const dispatch = useDispatch()
     
-    
     const handleClick = () => {
       toggleVisibility()
       props.handleSubmit()
