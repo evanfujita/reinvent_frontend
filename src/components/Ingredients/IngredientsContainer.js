@@ -1,8 +1,6 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Form, Button, Grid, Segment } from 'semantic-ui-react'
-import { selectCategory, selectIngredient } from '../../actions/selections'
-import { updatedInventory, undoUpdatedInventory } from '../../actions/updatedInventory'
 import IngredientForm from './IngredientForm'
 import AddIngredient from './AddIngredient'
 import Ingredient from './Ingredient'
@@ -10,41 +8,38 @@ import IngredientInfo from './IngredientInfo'
 import CategoryMenuBar from '../Categories/CategoryMenuBar'
 import { handleReqObj, updateInventoryFetch } from '../../helpers/fetch'
 
-class IngredientsContainer extends React.Component{
-    state = {
-        active: false,
-        viewAddIngredient: false,
-        displayIngredientInfo: false, 
-        ingredientId: null,
+const IngredientsContainer = props => {
+    //state
+    const [active, setActive] = useState(false)
+    const [viewAddIngredient, setViewAddIngredient] = useState(false)
+
+    //store
+    const ingredients = useSelector(state => state.ingredients)
+    const category = useSelector(state => state.selections.category)
+    const selectedIngredient = useSelector (state => state.selections.ingredient)
+    const updatedInventory = useSelector(state => state.updatedInventory)
+
+    const dispatch = useDispatch()
+
+    const handleToggle = () => {
+        setActive(!active)
     }
 
-    handleToggle = () => {
-        this.setState({
-            active: !this.state.active
-        })
+    const handleAddIngredient = () => {
+        setViewAddIngredient(!viewAddIngredient)
     }
 
-    handleAddIngredient = () => {
-        this.setState({
-            viewAddIngredient: !this.state.viewAddIngredient
-        })
+    const handleSubmit = () => {
+        const reqObj = handleReqObj('PATCH', {ingredients: props.updatedInventory})
+        dispatch(updateInventoryFetch(reqObj))
     }
 
-    handleSubmit = () => {
-        const reqObj = handleReqObj('PATCH', {ingredients: this.props.updatedInventory})
-        updateInventoryFetch(reqObj)
-    }
-
-    render(){
-        const { active, viewAddIngredient } = this.state
-        const { selectedIngredient, category, ingredients } = this.props
         const ingredientsSelector = category !== 0 ? ingredients.filter(ingredient => parseInt(ingredient.category_id) === category) : ingredients
         const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /></Segment>)
         const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
-        const { updatedInventory } = this.props
 
         //togglers
-        const toggleForm = active ? <Form onSubmit={this.handleSubmit}>{form}</Form> : <Form><Form.Field>{ingredientList}</Form.Field></Form>
+        const toggleForm = active ? <Form onSubmit={handleSubmit}>{form}</Form> : <Form><Form.Field>{ingredientList}</Form.Field></Form>
         const toggleViewAddIngredient = viewAddIngredient ? <AddIngredient /> : null
         const toggleIngredientInformation = selectedIngredient ? <Segment><IngredientInfo key={selectedIngredient.id} ingredient={selectedIngredient} /></Segment> : null
 
@@ -53,9 +48,9 @@ class IngredientsContainer extends React.Component{
         <Grid columns={3} >
             <Grid.Column width={4} align='left'>
                 <CategoryMenuBar />
-                <Button toggle active={active} onClick={this.handleToggle}>Edit Inventory</Button><br/>
-                <Button onClick={this.handleAddIngredient}>Add Ingredient</Button><br/><br/>
-                {updatedInventory.length > 0 ? <Button onClick={this.handleSubmit}>Update Inventory</Button> : null}
+                <Button toggle active={active} onClick={handleToggle}>Edit Inventory</Button><br/>
+                <Button onClick={handleAddIngredient}>Add Ingredient</Button><br/><br/>
+                {updatedInventory.length > 0 ? <Button onClick={handleSubmit}>Update Inventory</Button> : null}
             </Grid.Column>
             <Grid.Column width={6} align='left' className='scrollable'>
                 { toggleForm }
@@ -67,21 +62,5 @@ class IngredientsContainer extends React.Component{
         </Grid>
         )
     }
-}
 
-const mapStateToProps = state => {
-    return {
-        ingredients: state.ingredients,
-        category: state.selections.category,
-        selectedIngredient: state.selections.ingredient,
-        updatedInventory: state.updatedInventory
-    }
-}
-
-const mapDispatchToProps = {
-    selectCategory,
-    selectIngredient,
-    undoUpdatedInventory   
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(IngredientsContainer)
+export default IngredientsContainer

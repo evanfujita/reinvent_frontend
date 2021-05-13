@@ -34,8 +34,7 @@ const EditDeleteButtons = props => {
                 <br/><br/>
                 {toggleEdit}
             </div>
-        )
-    
+        )   
 }
 
 export default EditDeleteButtons
