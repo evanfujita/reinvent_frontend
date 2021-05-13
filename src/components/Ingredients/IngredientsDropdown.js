@@ -16,19 +16,28 @@ const IngredientsDropdown = props => {
         history.push('/ingredients')
     }
 
-        const ingredientsOptions = ingredients.map(ingredient => {
-            let name = `${ingredient.name}: ${ingredient.quantity} ${ingredient.quantity_unit}`
-            return {
-                key: ingredient.id,
-                text: name,
-                id: ingredient.id,
-                value: ingredient.id            
-            }
-        })
-        return(
-                <Dropdown fluid selection search  id='ingredients' placeholder='ingredients' options={ingredientsOptions} onChange={handleChange} />
-        )
+    const ingredientsOptions = ingredients.map(ingredient => {
+        const { name, quantity, quantity_unit, id} = ingredient
+        let text = `${name}: ${quantity} ${quantity_unit}`
+        return {
+            key: id,
+            text: text,
+            id: id,
+            value: id            
+        }
+    })
 
+    return(
+            <Dropdown 
+                fluid 
+                selection 
+                search  
+                id='ingredients' 
+                placeholder='ingredients' 
+                options={ingredientsOptions} 
+                onChange={handleChange} 
+            />
+    )
 }
 
 export default withRouter(IngredientsDropdown)
