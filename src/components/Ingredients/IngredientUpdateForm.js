@@ -1,80 +1,44 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button, Form } from 'semantic-ui-react'
 import { updateIngredient } from '../../actions/ingredients'
-import { selectIngredient } from '../../actions/selections'
 import { handleReqObj, patchFetch } from '../../helpers/fetch'
 
-class IngredientUpdateForm extends React.Component {
+const IngredientUpdateForm = props => {
     
-    state = {
-        id: this.props.ingredient.id,
-        name: '',
-        par: '',
-        quantity_unit: ''
-    }
+    const selectedIngredient = useSelector(state => state.selections.ingredient)
+    const [name, setName] = useState(null)
+    const [par, setPar] = useState(null)
+    const [quantity_unit, setQuantityUnit] = useState(null)
+    const [id] = useState(selectedIngredient.id)
+    const dispatch = useDispatch()
 
-    handleChange = event => {
-        const { name, value } = event.target
-        const id = this.props.ingredient.id
-        if(id !== this.state.id){
-            this.setState({
-                id: id,
-                name: '',
-                par: '',
-                quantity_unit: ''
-            })
-        } else {
-        this.setState({
-            [name]: value
-        })
-        }
-    }
-
-    handleSubmit = () => {
-        let ingredient = this.props.ingredient
-        for (const property in this.state){
-            if(this.state[property] !== ''){
-                ingredient[property] = this.state[property]
-            }            
-        }
+    const handleSubmit = () => {
+        let body = {}
+        if(name){body['name'] = name}
+        if(par){body['par'] = par}
+        if(quantity_unit){body['quantity_unit'] = quantity_unit}
         
-        const reqObj = handleReqObj('PATCH', ingredient)
-        patchFetch('ingredients', ingredient.id, reqObj, this.props.updateIngredient)        
+        const reqObj = handleReqObj('PATCH', body)
+        patchFetch('ingredients', id, reqObj, updateIngredient)        
     }
-        
-    render(){
-        const { name, quantity_unit, par } = this.props.ingredient
         return(
             <Form>
                 <Form.Field>
                     <label>Name</label>
-                    <input name='name' onChange={this.handleChange} placeholder={name} value={this.state.name} />
+                    <input name='name' onChange={(event)=> setName(event.target.value)} placeholder={selectedIngredient.name} value={name} />
                 </Form.Field>
                 <Form.Field>
                     <label>Unit of Measurement</label>
-                    <input name='quantity_unit' onChange={this.handleChange} placeholder={quantity_unit} value={this.state.quantity_unit} />
+                    <input name='quantity_unit' onChange={(event)=>setQuantityUnit(event.target.value)} placeholder={selectedIngredient.quantity_unit} value={quantity_unit} />
                 </Form.Field>
                 <Form.Field>
                     <label>Par</label>
-                    <input name='par' onChange={this.handleChange} placeholder={par} value={this.state.par} />
+                    <input name='par' onChange={(event)=> setPar(event.target.value)} placeholder={selectedIngredient.par} value={par} />
                 </Form.Field>
-                <Button type='submit' onClick={this.handleSubmit}>Update Ingredient</Button>
+                <Button type='submit' onClick={handleSubmit}>Update Ingredient</Button>
             </Form>
         )
-    }
 }
 
-const mapStateToProps = state => {
-    return {
-        ingredient: state.selections.ingredient
-    }
-}
-
-const mapDispatchToProps = {
-    updateIngredient,
-    selectIngredient
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(IngredientUpdateForm)
+export default (IngredientUpdateForm)
