@@ -1,50 +1,41 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-class EditDeleteButtons extends React.Component {
+const EditDeleteButtons = props => {
 
-    state = {
-        edit: false,
-        confirmDelete: false
+    const [edit, setEdit] = useState(false)
+    const [confirmDelete, setConfirmDelete] = useState(false)
+
+    const handleEdit = () => {
+        setEdit(!edit)
     }
 
-    handleEdit = () => {
-        this.setState({
-            edit: !this.state.edit
-        })
+    const handleDelete = () => {
+        setConfirmDelete(!confirmDelete)
     }
 
-    handleDelete = () => {
-        this.setState({
-            confirmDelete: !this.state.confirmDelete
-        })
-    }
-
-    handleConfirmDelete = () => {
+    const handleConfirmDelete = () => {
         const id = this.props.selectedIngredient.id
 
         fetch(`http://localhost:3000/ingredients/${id}`, {method: 'DELETE'})
         .then(resp => resp.json())
         .then(data => {
-            if(data.message){
-                this.props.deleteIngredient(id)
-            }
+            data.message ? props.deleteIngredient(id) : null
         })
     }
 
-    render(){
-        const toggleConfirmDelete = this.state.confirmDelete ? <Button onClick={this.handleConfirmDelete}>Are you Sure?</Button> : null
-        const toggleEdit = this.state.edit ? <IngredientUpdateForm /> : null
+        const toggleConfirmDelete = confirmDelete ? <Button onClick={handleConfirmDelete}>Are you Sure?</Button> : null
+        const toggleEdit = edit ? <IngredientUpdateForm /> : null
 
         return(
             <div>
-                <Button onClick={this.handleEdit}>Edit</Button>
-                <Button onClick={this.handleDelete}>Delete</Button>
+                <Button onClick={handleEdit}>Edit</Button>
+                <Button onClick={handleDelete}>Delete</Button>
                 {toggleConfirmDelete}
                 <br/><br/>
                 {toggleEdit}
             </div>
         )
-    }
+    
 }
 
 export default EditDeleteButtons
