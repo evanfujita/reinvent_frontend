@@ -1,24 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import emailjs from 'emailjs-com'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button, Message, Transition } from 'semantic-ui-react'
 import { deleteItem, pendingOrder } from '../../actions/pendingOrder'
 
 
-class Email extends React.Component {
+const Email = props => {
 
-    state = {
-      emailMessage: false,
-      visible: false
-    }
+    const { ingredients } = props
 
-    handleClick = () => {
-      this.toggleVisibility()
-      this.props.handleSubmit()
-      
-      const { first_name, restaurant_name } = this.props.user
-      const { representative, email } = this.props.vendor
-      const ingredients = this.props.ingredients.map(ingredient => 
+    const user = useSelector(state => state.user)
+    const { first_name, restaurant_name } = user
+    const selectedVendor = useSelector(state => state.selections.vendor)
+    const itemsToOrder = useSelector(state => state.itemsToOrder)
+    const [emailMessage, setEmailMessage] = useState(false)
+    const [visible, setVisible] = useState(false)
+    const dispatch = useDispatch()
+    
+    const handleClick = () => {
+      toggleVisibility()
+      props.handleSubmit()
+        
+      const { representative, email } = props.vendor
+      const allIngredients = ingredients.map(ingredient => 
           ` ${ingredient.ingredient.name}: ${ingredient.quantity} ${ingredient.ingredient.quantity_unit}`
       )
 
@@ -26,9 +31,9 @@ class Email extends React.Component {
         restaurant_name: restaurant_name,
         from_name: first_name,
         to_name: representative,
-        order: ingredients,
+        order: allIngredients,
         to_email: email,
-        note: this.props.notes
+        note: props.notes
       }
       
       const serviceID = 'service_cit3doz'
@@ -37,44 +42,26 @@ class Email extends React.Component {
       
       emailjs.send(serviceID, templateID, templateParams, userID)
       
-      this.setState({
-        emailMessage: true
-      })
-      setTimeout(() => {this.setState({visible: false})}, 2000) 
+      setEmailMessage(true)
+
+      setTimeout(() => {setVisible(false)}, 2000) 
       
-      this.props.pendingOrder(this.props.ingredients) 
-      this.props.ingredients.forEach(ingredient => {
-        this.props.deleteItem(ingredient.ingredient)
+      dispatch(pendingOrder(ingredients))
+      ingredients.forEach(ingredient => {
+        dispatch(deleteItem(ingredient.ingredient))
       })
     }
 
-    toggleVisibility = () => this.setState((prevState) => ({ visible: !prevState.visible}))
+    const toggleVisibility = () => setVisible(true)
+    const content = emailMessage ? `Success - Your Order Was Sent to ${selectedVendor.name}!` : null
+
+      return(
+          <>
+            { itemsToOrder.length > 0 ? <Button onClick={handleClick}>Send Order</Button> : null }
+            <Transition visible={visible} animation='scale' duration={500}><Message size='mini' color='green'>{content}</Message></Transition>
+          </>
+      )
     
-    render(){
-      const { visible, emailMessage } = this.state
-      const { vendor, itemsToOrder } = this.props
-      const content = emailMessage ? `Success - Your Order Was Sent to ${vendor.name}!` : null
-
-        return(
-            <>
-              { itemsToOrder.length > 0 ? <Button onClick={this.handleClick}>Send Order</Button> : null }
-              <Transition visible={visible} animation='scale' duration={500}><Message size='mini' color='green'>{content}</Message></Transition>
-            </>
-        )
-    }
 }
 
-const mapStateToProps = state => {
-    return {
-        user: state.user,
-        selectedVendor: state.selections.vendor,
-        itemsToOrder: state.itemsToOrder
-    }
-}
-
-const mapDispatchToProps = {
-    pendingOrder,
-    deleteItem
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Email)
+export default Email
