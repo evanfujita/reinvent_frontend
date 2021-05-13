@@ -1,19 +1,17 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
 
+const NotesForm = props => {
 
-class NotesForm extends React.Component {
+    return( 
+        <Form>
+            <Form.TextArea
+                onChange={props.handleNoteChange}
+                placeholder='note to vendor'
+            />
+        </Form>
+    )
 
-    render(){
-        return( 
-            <Form>
-                <Form.TextArea
-                    onChange={this.props.handleNoteChange}
-                    placeholder='note to vendor'
-                />
-            </Form>
-        )
-    }
 }
 
 export default NotesForm
