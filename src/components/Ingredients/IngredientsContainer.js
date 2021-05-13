@@ -34,14 +34,14 @@ const IngredientsContainer = props => {
         dispatch(updateInventoryFetch(reqObj))
     }
 
-        const ingredientsSelector = category !== 0 ? ingredients.filter(ingredient => parseInt(ingredient.category_id) === category) : ingredients
-        const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /></Segment>)
-        const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
+    const ingredientsSelector = category !== 0 ? ingredients.filter(ingredient => parseInt(ingredient.category_id) === category) : ingredients
+    const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /></Segment>)
+    const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
 
-        //togglers
-        const toggleForm = active ? <Form onSubmit={handleSubmit}>{form}</Form> : <Form><Form.Field>{ingredientList}</Form.Field></Form>
-        const toggleViewAddIngredient = viewAddIngredient ? <AddIngredient /> : null
-        const toggleIngredientInformation = selectedIngredient ? <Segment><IngredientInfo key={selectedIngredient.id} ingredient={selectedIngredient} /></Segment> : null
+    //togglers
+    const toggleForm = active ? <Form onSubmit={handleSubmit}>{form}</Form> : <Form><Form.Field>{ingredientList}</Form.Field></Form>
+    const toggleViewAddIngredient = viewAddIngredient ? <AddIngredient /> : null
+    const toggleIngredientInformation = selectedIngredient ? <Segment><IngredientInfo key={selectedIngredient.id} ingredient={selectedIngredient} /></Segment> : null
 
     return(
             

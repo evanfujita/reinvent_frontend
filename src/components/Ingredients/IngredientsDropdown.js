@@ -1,20 +1,22 @@
 import React from 'react'
 import { Dropdown } from 'semantic-ui-react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { selectIngredient } from '../../actions/selections'
 import { withRouter } from 'react-router-dom'
 
-class IngredientsDropdown extends React.Component {
+const IngredientsDropdown = props => {
 
-    handleChange = event => {
-        const { ingredients, selectIngredient, history } = this.props
+    const { history } = props
+    const ingredients = useSelector(state => state.ingredients)
+    const dispatch = useDispatch()
+
+    const handleChange = event => {
         const ingredient = ingredients.find(ingredient => ingredient.id === parseInt(event.target.id))
-        selectIngredient(ingredient)
+        dispatch(selectIngredient(ingredient))
         history.push('/ingredients')
     }
 
-    render(){
-        const ingredientsOptions = this.props.ingredients.map(ingredient => {
+        const ingredientsOptions = ingredients.map(ingredient => {
             let name = `${ingredient.name}: ${ingredient.quantity} ${ingredient.quantity_unit}`
             return {
                 key: ingredient.id,
@@ -24,20 +26,9 @@ class IngredientsDropdown extends React.Component {
             }
         })
         return(
-             <Dropdown fluid selection search  id='ingredients' placeholder='ingredients' options={ingredientsOptions} onChange={this.handleChange} />
+                <Dropdown fluid selection search  id='ingredients' placeholder='ingredients' options={ingredientsOptions} onChange={handleChange} />
         )
-    }
+
 }
 
-const mapStateToProps = state => {
-    return {
-        ingredients: state.ingredients,
-        selectedIngredient: state.selections.ingredient
-    }
-}
-
-const mapDispatchToProps = {
-    selectIngredient
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(IngredientsDropdown))
+export default withRouter(IngredientsDropdown)
