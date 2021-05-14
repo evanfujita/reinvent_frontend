@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Segment, Grid, Form, Button } from 'semantic-ui-react'
-import { connect } from 'react-redux'
 import { useSelector, useDispatch } from 'react-redux'
 import { itemsToOrder } from '../../actions/pendingOrder'
 
@@ -22,7 +21,7 @@ const OrderListItem = props => {
     }
 
     const handleChange = () => {
-        const order = {id: id, name: name, quantity: quantity}
+        const order = {ingredient: ingredient, quantity: quantity}
         dispatch(itemsToOrder(order))
         setChecked(!checked)
     }
@@ -54,7 +53,6 @@ const OrderListItem = props => {
            </Grid>
         </Segment>
         )
-    
 }
 
 export default OrderListItem

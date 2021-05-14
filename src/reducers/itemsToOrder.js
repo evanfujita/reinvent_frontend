@@ -1,7 +1,7 @@
 const itemsToOrder = (state=[], action) => {
     switch(action.type){
         case 'ITEM_TO_ORDER':
-            debugger
+            // debugger
             return [
                 ...state,
                 action.ingredient
