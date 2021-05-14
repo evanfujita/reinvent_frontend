@@ -15,9 +15,10 @@ const IngredientUpdateForm = props => {
 
     const handleSubmit = () => {
         let body = {}
-        if(name){body['name'] = name}
-        if(par){body['par'] = par}
-        if(quantity_unit){body['quantity_unit'] = quantity_unit}
+        body['name'] = name || selectedIngredient.name
+        body['par'] = par || selectedIngredient.par
+        body['quantity_unit'] = quantity_unit || selectedIngredient.quantity_unit
+        dispatch(updateIngredient(body))
         
         const reqObj = handleReqObj('PATCH', body)
         patchFetch('ingredients', id, reqObj, updateIngredient)        

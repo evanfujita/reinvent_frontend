@@ -6,7 +6,7 @@ const ingredients = (state = [], action) => {
             
         case 'UPDATE_INGREDIENT_QUANTITY':
         case 'UPDATE_INGREDIENT':
-            debugger
+            // debugger
             updatedIngredients = state.map(ingredient => {
                 if(ingredient.id === action.ingredient.id){
                     return action.ingredient

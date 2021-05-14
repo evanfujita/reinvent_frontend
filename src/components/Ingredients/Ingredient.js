@@ -1,30 +1,26 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { selectIngredient } from '../../actions/selections'
 
-class Ingredient extends React.Component {
-
-    handleIngredientClick = () => {
-        const { selectIngredient, ingredientInfo } = this.props
-        selectIngredient(ingredientInfo)
+const Ingredient = props => {
+    
+    const { ingredientInfo } = props
+    const { id, name, quantity, quantity_unit } = ingredientInfo
+    const dispatch = useDispatch()
+    const handleIngredientClick = () => {
+        dispatch(selectIngredient(ingredientInfo))
     }
 
-    render(){
-        const { id, name, quantity, quantity_unit } = this.props.ingredientInfo
-        return(
-            <label
-                key={id}
-                onClick={this.handleIngredientClick}
-                id={id}    
-            >
-                {name} - {quantity} {quantity_unit}
-            </label>   
-        )
-    }
+    return(
+        <label
+            key={id}
+            onClick={handleIngredientClick}
+            id={id}    
+        >
+            {name} - {quantity} {quantity_unit}
+        </label>   
+    )
+    
 }
 
-const mapDispatchToProps = {
-    selectIngredient   
-}
-
-export default connect(null, mapDispatchToProps)(Ingredient)
+export default Ingredient
