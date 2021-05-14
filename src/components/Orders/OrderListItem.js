@@ -22,7 +22,8 @@ const OrderListItem = props => {
     }
 
     const handleChange = () => {
-        dispatch(itemsToOrder(this.state))
+        const order = {id: id, name: name, quantity: quantity}
+        dispatch(itemsToOrder(order))
         setChecked(!checked)
     }
 
