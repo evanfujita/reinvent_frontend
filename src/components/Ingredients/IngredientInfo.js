@@ -1,62 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { List, Button, Popup } from 'semantic-ui-react'
 import IngredientUpdateForm from './IngredientUpdateForm'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { deleteIngredient } from '../../actions/ingredients'
 import { deleteSelectedIngredient } from '../../actions/selections'
 
-class IngredientInfo extends React.Component {
+const IngredientInfo = props => {
 
-    state = {
-        edit: false,
-        confirmDelete: false
-    }
+    const selectedIngredient = useSelector(state => state.selectedIngredient)
+    const { name, quantity, quantity_unit, par } = selectedIngredient
+
+    const [edit, setEdit] = useState(false)
+    const [confirmDelete, setConfirmDelete] = useState(false)
+
+    const dispatch = useDispatch()
     
-    handleEdit = () => {
-        this.setState({
-            edit: !this.state.edit
-        })
+    const handleEdit = () => {
+        setEdit(!edit)
     }
 
-    handleDelete = () => {
-        this.setState({
-            confirmDelete: !this.state.confirmDelete
-        })
+    const handleDelete = () => {
+        setConfirmDelete(!confirmDelete)
     }
 
-    handleConfirmDelete = () => {
-        const id = this.props.selectedIngredient.id
+    const handleConfirmDelete = () => {
+        const id = props.selectedIngredient.id
         fetch(`http://localhost:3000/ingredients/${id}`, {method: 'DELETE'})
         .then(resp => resp.json())
         .then(data => {
             if(data.message){
-                this.props.deleteSelectedIngredient()
-                this.props.deleteIngredient(id)
+                dispatch(deleteSelectedIngredient())
+                dispatch(deleteIngredient(id))
             }
         })
     }
 
-    render(){
-        const { name, quantity, quantity_unit, par } = this.props.selectedIngredient
-
-            const deleteIngredient = () => (
-                <>
-                <Button onClick={this.handleEdit}>Edit</Button>
-                <Popup
-                    content={
-                        <>
-                          <Button color='red' onClick={this.handleConfirmDelete}>Delete {name}?</Button> 
-                        </>
-                        }
-                        on='click'
-                        popper={{ id: 'popper-container', style: { zIndex : 2000 } }}
-                        trigger={<Button color='red'>Delete</Button>}
-                />
-                </>
-            )
+        const deleteIngredient = () => (
+            <>
+            <Button onClick={handleEdit}>Edit</Button>
+            <Popup
+                content={
+                    <>
+                        <Button color='red' onClick={handleConfirmDelete}>Delete {name}?</Button> 
+                    </>
+                    }
+                    on='click'
+                    popper={{ id: 'popper-container', style: { zIndex : 2000 } }}
+                    trigger={<Button color='red'>Delete</Button>}
+            />
+            </>
+        )
 
         const toggleEdit =  
-            this.state.edit
+            edit
             ?
             <IngredientUpdateForm />
             :
@@ -73,18 +69,7 @@ class IngredientInfo extends React.Component {
                 {toggleEdit}
             </div>
         )
-    }
+    
 }
 
-const mapStateToProps = state => {
-    return {
-        selectedIngredient: state.selections.ingredient
-    } 
-}
-
-const mapDispatchToProps = {
-    deleteIngredient,
-    deleteSelectedIngredient
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(IngredientInfo)
+export default IngredientInfo
