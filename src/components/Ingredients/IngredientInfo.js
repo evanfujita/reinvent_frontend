@@ -7,12 +7,10 @@ import { deleteSelectedIngredient } from '../../actions/selections'
 
 const IngredientInfo = props => {
 
-    const selectedIngredient = useSelector(state => state.selectedIngredient)
+    const selectedIngredient = useSelector(state => state.selections.ingredient)
     const { name, quantity, quantity_unit, par } = selectedIngredient
-
     const [edit, setEdit] = useState(false)
     const [confirmDelete, setConfirmDelete] = useState(false)
-
     const dispatch = useDispatch()
     
     const handleEdit = () => {

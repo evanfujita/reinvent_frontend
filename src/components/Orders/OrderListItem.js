@@ -1,46 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Segment, Grid, Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { itemsToOrder } from '../../actions/pendingOrder'
 
-class OrderListItem extends React.Component {
+const OrderListItem = props => {
 
-    state = {
-        ingredient: '',
-        quantity: 0,
-        orderAbovePar: this.props.parMeter,
-        checked: false
-    }
+    const [ingredient, setIngredient] = useState(props.ingredient)
+    const { name, quantity_unit } = ingredient
+    const id = parseInt(ingredient.id)
+    const [quantity, setQuantity] = useState(Math.ceil(props.ingredient.par - props.ingredient.quantity))
+    const [orderAbovePar, setPar] = useState(props.orderAbovePar)
+    const [checked, setChecked] = useState(false)
+    const dispatch = useDispatch()
+    
+    const parMeter = useSelector(state => state.parMeter)
 
-    componentDidMount(){
-        this.setState({
-            ...this.state,
-            ingredient: this.props.ingredient,
-            quantity: Math.ceil(this.props.ingredient.par - this.props.ingredient.quantity),
-            orderAbovePar: this.props.orderAbovePar
-        })
-    }
-
-    handleValueChange = event => {
+    const handleValueChange = event => {
         const value = parseInt(event.target.value)
-        this.setState({
-            quantity: value
-        })
+        setQuantity(value)
     }
 
-    handleChange = () => {
-        this.props.itemsToOrder(this.state)
-        this.setState({
-            checked: true
-        })
+    const handleChange = () => {
+        dispatch(itemsToOrder(this.state))
+        setChecked(!checked)
     }
 
-    render(){
-        const { quantity, checked, ingredient } = this.state
-        const { name, quantity_unit } = ingredient
-        const { parMeter } = this.props
-        const id = parseInt(ingredient.id)
-        const value = parMeter ? Math.ceil(this.state.quantity + (parMeter * quantity / 100)) : quantity
+        const value = parMeter ? Math.ceil(quantity + (parMeter * quantity / 100)) : quantity
         const icon = checked ? 'check' : 'plus'
         const color = checked ? 'green' : null
 
@@ -54,7 +40,7 @@ class OrderListItem extends React.Component {
                <Form.Input 
                     id={id}
                     type='number'
-                    onChange={this.handleValueChange}
+                    onChange={handleValueChange}
                     placeholder={quantity}
                     value={value}
                     min={0}
@@ -62,23 +48,12 @@ class OrderListItem extends React.Component {
                />
            </Grid.Column>
            <Grid.Column align='right'>
-            <Button icon={icon} color={color} onClick={this.handleChange}></Button>
+            <Button icon={icon} color={color} onClick={handleChange}></Button>
            </Grid.Column>
            </Grid>
         </Segment>
         )
-    }
+    
 }
 
-const mapStateToProps = state => {
-    return {
-        parMeter: state.parMeter,
-        ingredients: state.ingredients
-    }
-}
-
-const mapDispatchToProps = {
-    itemsToOrder
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderListItem)
+export default OrderListItem
