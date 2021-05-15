@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Menu, List, Grid, Message, Transition } from 'semantic-ui-react'
 import PendingOrderItem from './PendingOrderItem'
-// import { acceptOrder } from '../../actions/pendingOrder'
+import { acceptOrder } from '../../actions/pendingOrder'
 
 const PendingOrderContainer = props => {
     //store
@@ -27,6 +27,7 @@ const PendingOrderContainer = props => {
         setAcceptVisible(true)
         setItem(ingredient)
         setTimeout(() => {setAcceptVisible(false)}, 2000) 
+        dispatch(acceptOrder(ingredient))
     }
 
     const handleRejectOrder = ingredient => {

@@ -1,4 +1,4 @@
-function pendingOrder(state=null, action) {
+function pendingOrder(state=[], action) {
     let newState
     switch(action.type){
         case 'PENDING_ORDER':

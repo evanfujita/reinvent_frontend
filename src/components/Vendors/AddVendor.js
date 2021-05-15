@@ -1,30 +1,26 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useState } from 'react'
 import { Form } from 'semantic-ui-react'
 
-class AddVendor extends React.Component {
+const AddVendor = props => {
 
-    state ={
-        name: ''
+    const [name, setName] = useState('')
+
+    const handleChange = event => {
+
     }
-
-    render(){
+    
         return(
             <Form>
                 <Form.Input 
                     label='Name'
                     id='name'
                     placeholder='Name'
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     value={name}
                 />
             </Form>
         )
-    }
+    
 }
 
-const mapDispatchToProps = {
-
-}
-
-export default connect(null, mapDispatchToProps)(AddVendor)
+export default AddVendor

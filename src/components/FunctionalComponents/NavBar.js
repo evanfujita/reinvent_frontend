@@ -27,8 +27,10 @@ const NavBar = props => {
 
     const page = history.location.pathname
     const label = lowIngredients.length === 0 ? null : <Label floating circular color='red' >{lowIngredients.length}</Label>
-    const pendingOrders = pendingOrder
+    const pendingOrders = pendingOrder.length === 0
         ? 
+        null
+        :
         <Menu.Item 
         name='pendingOrder' 
         onClick={handleClick} 
@@ -37,8 +39,6 @@ const NavBar = props => {
             Pending Orders
             <Label floating circular color='yellow'>{pendingOrder.length}</Label>
         </Menu.Item>
-        : 
-        null
 
     return(
             <Menu>

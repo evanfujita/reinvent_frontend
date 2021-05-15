@@ -1,47 +1,42 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import VendorInfo from './VendorInfo'
 import { Grid, Button, Menu } from 'semantic-ui-react'
 import AddVendorForm from './AddVendorForm'
 import { deleteVendor } from '../../actions/vendors'
 
-class VendorsContainer extends React.Component {
+const VendorsContainer = props => {
 
-    state = {
-        viewForm: false,
-        vendorId: null
-    }
+    const vendors = useSelector(state => state.vendors)
+
+    const [viewForm, setViewForm] = useState(false)
+    const [vendorId, setVendorId] = useState(null)
+
+    const dispatch = useDispatch()
     
-    handleClick = () => {
-        this.setState({
-        viewForm: !this.state.viewForm
-        })
+    const handleClick = () => {
+        setViewForm(!viewForm)
     }   
 
-    handleVendorClick = event => {
+    const handleVendorClick = event => {
         const updatedVendorId = parseInt(event.target.id)
-        this.setState({
-            vendorId: updatedVendorId
-        })
+        setVendorId(updatedVendorId)
     }
 
-    handleDelete= () => {
-        const { vendorId } = this.state
+    const handleDelete = () => {
         fetch(`http://localhost:3000/vendors/${vendorId}`, {method: 'DELETE'})
         .then(resp => resp.json())
         .then(deletedVendor => {
-            this.setState({
-                vendorId: null
-            })
+            setVendorId(null)
             if(deletedVendor.message){
-                this.props.deleteVendor(vendorId)
+                dispatch(deleteVendor(vendorId))
             }
         })
     }
 
-    render(){
-        const displayVendors = this.props.vendors.map(vendor => <Menu.Item basic key={vendor.id} id={vendor.id} name={vendor.name} onClick={this.handleVendorClick} /> )
-        const vendorInfo = this.props.vendors.find(vendor => vendor.id === this.state.vendorId)
+    
+        const displayVendors = vendors.map(vendor => <Menu.Item basic key={vendor.id} id={vendor.id} name={vendor.name} onClick={handleVendorClick} /> )
+        const vendorInfo = vendors.find(vendor => vendor.id === vendorId)
 
         return(
             <Grid>
@@ -51,19 +46,19 @@ class VendorsContainer extends React.Component {
                 <Menu align='left' className='text' pointing secondary vertical>
                 {displayVendors}
                 </Menu>
-                        <Button align='left' onClick={this.handleClick}>Add Vendor</Button><br/><br/>
-                        { this.state.vendorId ? 
+                        <Button align='left' onClick={handleClick}>Add Vendor</Button><br/><br/>
+                        { vendorId ? 
                         <>
-                        <Button onClick={this.handleEdit}>Edit Vendor</Button><br/><br/>
-                        <Button color='red' onClick={this.handleDelete}>Delete Vendor</Button>
+                        {/* <Button onClick={props.handleEdit}>Edit Vendor</Button><br/><br/> */}
+                        <Button color='red' onClick={handleDelete}>Delete Vendor</Button>
                         </>
                         :
                         null
                         }
                 </Grid.Column>
                 <Grid.Column width='6'>
-                    {this.state.vendorId ? <VendorInfo vendor={vendorInfo} /> : null}
-                    {this.state.viewForm ? <AddVendorForm /> : null}
+                    {vendorId ? <VendorInfo vendor={vendorInfo} /> : null}
+                    {viewForm ? <AddVendorForm /> : null}
                 </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
@@ -74,17 +69,7 @@ class VendorsContainer extends React.Component {
                 </Grid.Row>
             </Grid>
         )
-    }
+    
 }
 
-const mapStateToProps = state => {
-    return {
-        vendors: state.vendors
-    }
-}
-
-const mapDispatchToProps = {
-    deleteVendor
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(VendorsContainer)
+export default VendorsContainer

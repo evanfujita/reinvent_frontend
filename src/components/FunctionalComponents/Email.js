@@ -30,7 +30,7 @@ const Email = props => {
       const templateID = 'template_emjv768'
       const userID = 'user_2aDBcZXjpPvZLRGDXPzBX'
       
-      emailjs.send(serviceID, templateID, templateParams, userID)
+      // emailjs.send(serviceID, templateID, templateParams, userID)
       setEmailMessage(true)
       setTimeout(() => {setVisible(false)}, 2000) 
       

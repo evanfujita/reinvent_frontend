@@ -7,6 +7,7 @@ import Ingredient from './Ingredient'
 import IngredientInfo from './IngredientInfo'
 import CategoryMenuBar from '../Categories/CategoryMenuBar'
 import { handleReqObj, updateInventoryFetch } from '../../helpers/fetch'
+import { updateIngredientQuantity } from '../../actions/ingredients'
 
 const IngredientsContainer = props => {
     //state
@@ -30,8 +31,9 @@ const IngredientsContainer = props => {
     }
 
     const handleSubmit = () => {
-        const reqObj = handleReqObj('PATCH', {ingredients: props.updatedInventory})
-        dispatch(updateInventoryFetch(reqObj))
+        const reqObj = handleReqObj('PATCH', {ingredients: updatedInventory})
+        updateInventoryFetch(reqObj, updateIngredientQuantity)
+            //sending action as argument but not getting dispatched
     }
 
     const ingredientsSelector = category !== 0 ? ingredients.filter(ingredient => parseInt(ingredient.category_id) === category) : ingredients
