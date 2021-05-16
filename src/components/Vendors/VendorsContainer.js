@@ -6,6 +6,7 @@ import AddVendorForm from './AddVendorForm'
 import { deleteVendor } from '../../actions/vendors'
 import { selectVendor } from '../../actions/selections'
 import DynamicMenu from '../DynamicMenu'
+import ItemInfo from '../ItemInfo'
 
 const VendorsContainer = props => {
 
@@ -31,6 +32,8 @@ const VendorsContainer = props => {
         }) 
     }
 
+    const attributes = {'Representative': 'representative', 'Phone': 'phone', 'Email': 'email'}
+
         const vendorInfo = vendors.find(vendor => {
             // debugger
             return (vendor.id === vendorId)})
@@ -52,7 +55,8 @@ const VendorsContainer = props => {
                     {/* can have EditDeleteButtons component here */}
                 </Grid.Column>
                 <Grid.Column width='6'>
-                    {vendorId ? <VendorInfo vendor={vendorInfo} /> : null}
+                    {/* {vendorId ? <VendorInfo vendor={vendorInfo} /> : null} */}
+                    {vendorId ? <ItemInfo item={vendorInfo} header={vendorInfo.name} attributes={attributes}/> : null}
                     {viewForm ? <AddVendorForm /> : null}
                 </Grid.Column>
                 </Grid.Row>

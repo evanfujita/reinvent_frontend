@@ -10,6 +10,7 @@ import DynamicMenu from '../DynamicMenu'
 import { handleReqObj, updateInventoryFetch } from '../../helpers/fetch'
 import { updateIngredientQuantity } from '../../actions/ingredients'
 import { selectCategory } from '../../actions/selections'
+import ItemInfo from '../ItemInfo'
 
 
 const IngredientsContainer = props => {
@@ -43,12 +44,11 @@ const IngredientsContainer = props => {
     const ingredientsSelector = category === 'all' ? ingredients : ingredients.filter(ingredient => parseInt(ingredient.category_id) == category.id)
     const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /></Segment>)
     const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
+    const attributes = {'Quantity': 'quantity', 'Par': 'par', 'Unit of Measurement': 'quantity_unit'}
 
     //togglers
     const toggleForm = active ? <Form onSubmit={handleSubmit}>{form}</Form> : <Form><Form.Field>{ingredientList}</Form.Field></Form>
     const toggleViewAddIngredient = viewAddIngredient ? <AddIngredient /> : null
-    const toggleIngredientInformation = selectedIngredient ? <Segment><IngredientInfo key={selectedIngredient.id} ingredient={selectedIngredient} /></Segment> : null
-
     return(
             
         <Grid columns={3} >
@@ -63,7 +63,7 @@ const IngredientsContainer = props => {
                 { toggleForm }
             </Grid.Column>
             <Grid.Column align='middle' width={6}> 
-                { toggleIngredientInformation }<br/>
+                {selectedIngredient ? <ItemInfo header={selectedIngredient.name} item={selectedIngredient} attributes={attributes} /> : null}
                 { toggleViewAddIngredient }
             </Grid.Column>
         </Grid>
