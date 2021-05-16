@@ -8,11 +8,13 @@ const DynamicMenu = props => {
     const dispatch = useDispatch()
     
     const handleClick = event => {
+        // debugger
         setId(event.target.id)
         if (actionItem){
-            const item = menuItems.find(i => 
-                i.id == event.target.id || event.target.id === 'all'
+            const item = event.target.id === 'all' ? 'all' : menuItems.find(i => 
+                i.id == event.target.id
             )
+            // debugger
             dispatch(actionItem(item))
         }
     }

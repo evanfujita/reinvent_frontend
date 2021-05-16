@@ -11,7 +11,6 @@ const NotesForm = props => {
             />
         </Form>
     )
-
 }
 
 export default NotesForm
