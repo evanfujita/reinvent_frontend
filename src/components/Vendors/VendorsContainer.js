@@ -4,13 +4,16 @@ import VendorInfo from './VendorInfo'
 import { Grid, Button, Menu } from 'semantic-ui-react'
 import AddVendorForm from './AddVendorForm'
 import { deleteVendor } from '../../actions/vendors'
+import { selectVendor } from '../../actions/selections'
+import DynamicMenu from '../DynamicMenu'
 
 const VendorsContainer = props => {
 
     const vendors = useSelector(state => state.vendors)
 
     const [viewForm, setViewForm] = useState(false)
-    const [vendorId, setVendorId] = useState(null)
+    // const [vendorId, setVendorId] = useState(null)
+    const vendorId = useSelector(state => state.selections.vendor.id)
 
     const dispatch = useDispatch()
     
@@ -20,32 +23,35 @@ const VendorsContainer = props => {
 
     const handleVendorClick = event => {
         const updatedVendorId = parseInt(event.target.id)
-        setVendorId(updatedVendorId)
+        // setVendorId(updatedVendorId)
     }
 
     const handleDelete = () => {
         fetch(`http://localhost:3000/vendors/${vendorId}`, {method: 'DELETE'})
         .then(resp => resp.json())
         .then(deletedVendor => {
-            setVendorId(null)
+            // setVendorId(null)
             if(deletedVendor.message){
                 dispatch(deleteVendor(vendorId))
             }
-        })
+        }) 
     }
 
     
-        const displayVendors = vendors.map(vendor => <Menu.Item basic key={vendor.id} id={vendor.id} name={vendor.name} onClick={handleVendorClick} /> )
-        const vendorInfo = vendors.find(vendor => vendor.id === vendorId)
+        // const displayVendors = vendors.map(vendor => <Menu.Item basic key={vendor.id} id={vendor.id} name={vendor.name} onClick={handleVendorClick} /> )
+        const vendorInfo = vendors.find(vendor => {
+            // debugger
+            return (vendor.id === vendorId)})
 
         return(
             <Grid>
                 <Grid.Row>
                 <Grid.Column width='4' align='left'>
+                <DynamicMenu menuItems={vendors} actionItem={selectVendor} />
 
-                <Menu align='left' className='text' pointing secondary vertical>
+                {/* <Menu align='left' className='text' pointing secondary vertical>
                 {displayVendors}
-                </Menu>
+                </Menu> */}
                         <Button align='left' onClick={handleClick}>Add Vendor</Button><br/><br/>
                         { vendorId ? 
                         <>

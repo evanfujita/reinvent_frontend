@@ -5,9 +5,12 @@ import IngredientForm from './IngredientForm'
 import AddIngredient from './AddIngredient'
 import Ingredient from './Ingredient'
 import IngredientInfo from './IngredientInfo'
-import CategoryMenuBar from '../Categories/CategoryMenuBar'
+// import CategoryMenuBar from '../Categories/CategoryMenuBar'
+import DynamicMenu from '../DynamicMenu'
 import { handleReqObj, updateInventoryFetch } from '../../helpers/fetch'
 import { updateIngredientQuantity } from '../../actions/ingredients'
+import { selectCategory } from '../../actions/selections'
+
 
 const IngredientsContainer = props => {
     //state
@@ -19,6 +22,7 @@ const IngredientsContainer = props => {
     const category = useSelector(state => state.selections.category)
     const selectedIngredient = useSelector (state => state.selections.ingredient)
     const updatedInventory = useSelector(state => state.updatedInventory)
+    const categories = useSelector(state => state.categories)
 
     const dispatch = useDispatch()
 
@@ -36,7 +40,7 @@ const IngredientsContainer = props => {
             //sending action as argument but not getting dispatched
     }
 
-    const ingredientsSelector = category !== 0 ? ingredients.filter(ingredient => parseInt(ingredient.category_id) === category) : ingredients
+    const ingredientsSelector = category === 'all' ? ingredients : ingredients.filter(ingredient => parseInt(ingredient.category_id) == category.id)
     const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /></Segment>)
     const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
 
@@ -49,7 +53,8 @@ const IngredientsContainer = props => {
             
         <Grid columns={3} >
             <Grid.Column width={4} align='left'>
-                <CategoryMenuBar />
+                <DynamicMenu menuItems={categories} actionItem={selectCategory} all={true} />
+                
                 <Button toggle active={active} onClick={handleToggle}>Edit Inventory</Button><br/>
                 <Button onClick={handleAddIngredient}>Add Ingredient</Button><br/><br/>
                 {updatedInventory.length > 0 ? <Button onClick={handleSubmit}>Update Inventory</Button> : null}

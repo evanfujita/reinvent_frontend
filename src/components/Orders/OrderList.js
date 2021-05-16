@@ -7,6 +7,7 @@ import OrderListItem from './OrderListItem'
 import { parMeter } from '../../actions/index'
 import { selectVendor } from '../../actions/selections'
 import DynamicMenu from '../DynamicMenu'
+import selections from '../../reducers/selections'
 
 const OrderList = props => {
     //local state
@@ -21,6 +22,7 @@ const OrderList = props => {
     const vendors = useSelector(state => state.vendors)
     const orders = useSelector(state => state.orders)
     const itemsToOrder = useSelector(state => state.itemsToOrder)
+    const vendor = useSelector(state => state.selections.vendor)
 
     const dispatch = useDispatch()
 
@@ -50,7 +52,7 @@ const OrderList = props => {
     
     const vendorInfo = vendors.find(vendor => parseInt(vendorId) === vendor.id)
     
-    const categorizedIngredients = lowIngredients.filter(ingredient => vendorId === ingredient.vendor_id || vendorId === 'all' ? ingredient : null)
+    const categorizedIngredients = lowIngredients.filter(ingredient => vendor.id === ingredient.vendor_id || vendor === 'all' ? ingredient : null)
     const renderNotesForm = notesForm ? <NotesForm handleNoteChange={handleNoteChange} /> : null
     
     // const vendorsMenu = vendors.map(vendor => (
@@ -76,7 +78,7 @@ const OrderList = props => {
                 <Menu.Item key='All' name='All' id='all' active={vendorId === 'all'} onClick={handleClick} />
                         {vendorsMenu}
                 </Menu> */}
-                <DynamicMenu menuItems={vendors} actionItem={selectVendor} />
+                <DynamicMenu menuItems={vendors} actionItem={selectVendor} all={true} />
             </Grid.Column>
             <Grid.Column width={8} align='left' className='scrollable'>
                 <List>
