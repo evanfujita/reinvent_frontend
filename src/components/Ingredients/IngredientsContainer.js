@@ -7,7 +7,7 @@ import Ingredient from './Ingredient'
 import DynamicMenu from '../DynamicMenu'
 import { handleReqObj, updateInventoryFetch } from '../../helpers/fetch'
 import { updateIngredientQuantity } from '../../actions/ingredients'
-import { selectCategory } from '../../actions/selections'
+import { selectCategory, selectIngredient } from '../../actions/selections'
 import ItemInfo from '../ItemInfo'
 
 const IngredientsContainer = props => {
@@ -39,7 +39,7 @@ const IngredientsContainer = props => {
     }
 
     const ingredientsSelector = category === 'all' ? ingredients : ingredients.filter(ingredient => parseInt(ingredient.category_id) == category.id)
-    const ingredientList = ingredientsSelector.map(ingredient => <Segment><Ingredient key={ingredient.id} ingredientInfo={ingredient} /></Segment>)
+    const ingredientList = ingredientsSelector.map(ingredient => <Segment onClick={()=> dispatch(selectIngredient(ingredient))}><Ingredient key={ingredient.id} ingredientInfo={ingredient}/></Segment>)
     const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
     const attributes = {'Quantity': 'quantity', 'Par': 'par', 'Unit of Measurement': 'quantity_unit'}
 
@@ -51,7 +51,6 @@ const IngredientsContainer = props => {
         <Grid columns={3} >
             <Grid.Column width={4} align='left'>
                 <DynamicMenu menuItems={categories} actionItem={selectCategory} all={true} />
-                
                 <Button toggle active={active} onClick={handleToggle}>Edit Inventory</Button><br/>
                 <Button onClick={handleAddIngredient}>Add Ingredient</Button><br/><br/>
                 {updatedInventory.length > 0 ? <Button onClick={handleSubmit}>Update Inventory</Button> : null}

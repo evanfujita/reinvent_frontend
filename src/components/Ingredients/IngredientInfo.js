@@ -5,6 +5,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { deleteIngredient } from '../../actions/ingredients'
 import { deleteSelectedIngredient } from '../../actions/selections'
 
+// 
+// 
+// 
+//  not using 
+// 
+// 
+// 
+
 const IngredientInfo = props => {
 
     const selectedIngredient = useSelector(state => state.selections.ingredient)
@@ -70,4 +78,4 @@ const IngredientInfo = props => {
     
 }
 
-export default IngredientInfo
+// export default IngredientInfo

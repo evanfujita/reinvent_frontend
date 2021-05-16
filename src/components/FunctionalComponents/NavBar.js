@@ -6,6 +6,7 @@ import { Menu, Label } from 'semantic-ui-react'
 import ProfileDropdown from '../User/ProfileDropdown'
 import IngredientsDropdown from '../Ingredients/IngredientsDropdown'
 
+
 const NavBar = props => {
 
     const dispatch = useDispatch()

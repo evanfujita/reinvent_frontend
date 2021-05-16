@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Segment, Grid, Form, Button } from 'semantic-ui-react'
 import { useDispatch } from 'react-redux'
-import { itemsToAccept, itemsToDeny, acceptOrder } from '../../actions/pendingOrder'
+import { itemsToAccept, acceptOrder } from '../../actions/pendingOrder'
 import { updateIngredient, removeLowIngredient } from '../../actions/ingredients'
 import { handleReqObj } from '../../helpers/fetch'
 
