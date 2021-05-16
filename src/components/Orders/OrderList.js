@@ -15,7 +15,6 @@ const OrderList = props => {
     const [notes, setNotes] = useState('')
 
     //redux
-    // const ingredients = useSelector(state => state.ingredients)
     const lowIngredients = useSelector(state => state.lowIngredients)
     const vendors = useSelector(state => state.vendors)
     const orders = useSelector(state => state.orders)
@@ -42,7 +41,7 @@ const OrderList = props => {
         setNotes(event.target.value)
     }
     
-    const vendorInfo = vendors.find(vendor => parseInt(vendor) === vendor.id)
+    // const vendorInfo = vendors.find(vendor => parseInt(vendor) === vendor.id)
     
     const categorizedIngredients = lowIngredients.filter(ingredient => vendor.id == ingredient.vendor_id || vendor === 'all' ? ingredient : null)
     const renderNotesForm = notesForm ? <NotesForm handleNoteChange={handleNoteChange} /> : null

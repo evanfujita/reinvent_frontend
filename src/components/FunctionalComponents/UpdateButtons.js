@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { Button } from 'semantic-ui-react'
 
-const EditDeleteButtons = props => {
+const UpdateButtons = props => {
 
     const [edit, setEdit] = useState(false)
     const [confirmDelete, setConfirmDelete] = useState(false)
@@ -14,27 +15,27 @@ const EditDeleteButtons = props => {
     }
 
     const handleConfirmDelete = () => {
-        const id = this.props.selectedIngredient.id
+        const id = props.selectedIngredient.id
 
         fetch(`http://localhost:3000/ingredients/${id}`, {method: 'DELETE'})
         .then(resp => resp.json())
         .then(data => {
-            data.message ? props.deleteIngredient(id) : null
+            // data.message ? props.deleteIngredient(id) : null
         })
     }
 
         const toggleConfirmDelete = confirmDelete ? <Button onClick={handleConfirmDelete}>Are you Sure?</Button> : null
-        const toggleEdit = edit ? <IngredientUpdateForm /> : null
+        // const toggleEdit = edit ? <IngredientUpdateForm /> : null
 
         return(
             <div>
                 <Button onClick={handleEdit}>Edit</Button>
-                <Button onClick={handleDelete}>Delete</Button>
+                <Button color='red' onClick={handleDelete}>Delete</Button>
                 {toggleConfirmDelete}
                 <br/><br/>
-                {toggleEdit}
+                {/* {toggleEdit} */}
             </div>
         )   
 }
 
-export default EditDeleteButtons
+export default UpdateButtons

@@ -6,11 +6,11 @@ import { deleteVendor } from '../../actions/vendors'
 import { selectVendor } from '../../actions/selections'
 import DynamicMenu from '../DynamicMenu'
 import ItemInfo from '../ItemInfo'
+import UpdateButtons from '../FunctionalComponents/UpdateButtons'
 
 const VendorsContainer = props => {
 
     const vendors = useSelector(state => state.vendors)
-
     const [viewForm, setViewForm] = useState(false)
     const vendorId = useSelector(state => state.selections.vendor.id)
 
@@ -33,9 +33,7 @@ const VendorsContainer = props => {
 
     const attributes = {'Representative': 'representative', 'Phone': 'phone', 'Email': 'email'}
 
-        const vendorInfo = vendors.find(vendor => {
-            // debugger
-            return (vendor.id === vendorId)})
+        const vendorInfo = vendors.find(vendor => (vendor.id === vendorId))
 
         return(
             <Grid>
@@ -45,8 +43,9 @@ const VendorsContainer = props => {
                     <Button align='left' onClick={handleClick}>Add Vendor</Button><br/><br/>
                     { vendorId ? 
                     <>
+                    <UpdateButtons />
                     {/* <Button onClick={props.handleEdit}>Edit Vendor</Button><br/><br/> */}
-                    <Button color='red' onClick={handleDelete}>Delete Vendor</Button>
+                    {/* <Button color='red' onClick={handleDelete}>Delete Vendor</Button> */}
                     </>
                     :
                     null

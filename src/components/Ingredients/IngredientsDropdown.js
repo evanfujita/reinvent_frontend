@@ -11,9 +11,9 @@ const IngredientsDropdown = props => {
     const dispatch = useDispatch()
 
     const handleChange = (event, data) => {
+        if(history !== '/ingredients'){history.push('/ingredients')}
         const ingredient = ingredients.find(ingredient => ingredient.id == data.value)
         dispatch(selectIngredient(ingredient))
-        if(history !== '/ingredients'){history.push('/ingredients')}
     }
 
     const ingredientsOptions = ingredients.map(ingredient => {
