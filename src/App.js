@@ -45,6 +45,7 @@ class App extends React.Component {
       <header className="App-header">
           <NavBar />
       </header>
+          
         <Switch>
           <Route exact path='/home' component={Home} />
           <Route path='/login' component={Login} />

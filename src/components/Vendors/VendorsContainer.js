@@ -55,6 +55,7 @@ const VendorsContainer = props => {
                         :
                         null
                         }
+                        {/* can have EditDeleteButtons component here */}
                 </Grid.Column>
                 <Grid.Column width='6'>
                     {vendorId ? <VendorInfo vendor={vendorInfo} /> : null}
@@ -69,7 +70,6 @@ const VendorsContainer = props => {
                 </Grid.Row>
             </Grid>
         )
-    
 }
 
 export default VendorsContainer
