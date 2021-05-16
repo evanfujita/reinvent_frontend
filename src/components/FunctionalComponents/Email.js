@@ -14,13 +14,14 @@ const Email = props => {
     const itemsToOrder = useSelector(state => state.itemsToOrder)
     const [emailMessage, setEmailMessage] = useState(false)
     const [visible, setVisible] = useState(false)
+    
     const dispatch = useDispatch()
     
     const handleClick = () => {
       toggleVisibility()
       props.handleSubmit()
       
-      const { representative, email } = props.vendor
+      const { representative, email } = selectedVendor
       const allIngredients = ingredients.map(ingredient => 
         ` ${ingredient.ingredient.name}: ${ingredient.quantity} ${ingredient.ingredient.quantity_unit}`
         )

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 
 const DynamicMenu = props => {
     const { menuItems, actionItem } = props
-    const [id, setId] = useState('All')
+    const [id, setId] = useState('all')
     const dispatch = useDispatch()
     
     const handleClick = event => {
