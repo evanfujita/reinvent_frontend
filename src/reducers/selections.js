@@ -1,8 +1,8 @@
-function selections(state={}, action) {
+function selections(state={category: 'all', vendor: 'all'}, action) {
     switch(action.type) {
         case 'LOGIN_SUCCESS':
         case 'CURRENT_USER':
-            return {category: 0}
+            return state
 
         case 'SELECT_INGREDIENT':
             return {...state, ingredient: action.ingredient}

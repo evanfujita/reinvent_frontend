@@ -6,6 +6,7 @@ import Email from '../FunctionalComponents/Email'
 import OrderListItem from './OrderListItem'
 import { parMeter } from '../../actions/index'
 import { selectVendor } from '../../actions/selections'
+import DynamicMenu from '../DynamicMenu'
 
 const OrderList = props => {
     //local state
@@ -23,11 +24,11 @@ const OrderList = props => {
 
     const dispatch = useDispatch()
 
-    const handleClick = event => {
-        const changeVendor = vendors.find(vendor => vendor.id === parseInt(event.target.id))
-        setVendorId(event.target.id)
-        dispatch(selectVendor(changeVendor))
-    }
+    // const handleClick = event => {
+    //     const changeVendor = vendors.find(vendor => vendor.id === parseInt(event.target.id))
+    //     setVendorId(event.target.id)
+    //     dispatch(selectVendor(changeVendor))
+    // }
 
     const handleMeterChange = event => {
         const meter = parseInt(event.target.value)
@@ -35,7 +36,7 @@ const OrderList = props => {
         dispatch(parMeter(meter))
     }
 
-    const handleNote = event => {
+    const handleNote = () => {
         setNotesForm(!notesForm)
     }
 
@@ -52,8 +53,8 @@ const OrderList = props => {
     const categorizedIngredients = lowIngredients.filter(ingredient => vendorId === ingredient.vendor_id || vendorId === 'all' ? ingredient : null)
     const renderNotesForm = notesForm ? <NotesForm handleNoteChange={handleNoteChange} /> : null
     
-    const vendorsMenu = vendors.map(vendor => (
-        <Menu.Item key={vendor.id} name={vendor.name} id={vendor.id} active={parseInt(vendorId) === parseInt(vendor.id)} onClick={handleClick} />) )
+    // const vendorsMenu = vendors.map(vendor => (
+    //     <Menu.Item key={vendor.id} name={vendor.name} id={vendor.id} active={parseInt(vendorId) === parseInt(vendor.id)} onClick={handleClick} />) )
         
     const vendorIngredients = itemsToOrder.filter(ingredient => ingredient.ingredient.vendor_id === vendorId)
     const displayIngredients = categorizedIngredients.map(ingredient => 
@@ -70,11 +71,12 @@ const OrderList = props => {
     return(
         <Grid>
             <Grid.Column width='4' align='left'>
-                <Menu align='left' className='text' pointing secondary vertical>
+                {/* <Menu align='left' className='text' pointing secondary vertical>
                     By Vendor:
                 <Menu.Item key='All' name='All' id='all' active={vendorId === 'all'} onClick={handleClick} />
                         {vendorsMenu}
-                </Menu>
+                </Menu> */}
+                <DynamicMenu menuItems={vendors} actionItem={selectVendor} />
             </Grid.Column>
             <Grid.Column width={8} align='left' className='scrollable'>
                 <List>
