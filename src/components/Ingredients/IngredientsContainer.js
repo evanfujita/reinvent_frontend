@@ -4,14 +4,11 @@ import { Form, Button, Grid, Segment } from 'semantic-ui-react'
 import IngredientForm from './IngredientForm'
 import AddIngredient from './AddIngredient'
 import Ingredient from './Ingredient'
-import IngredientInfo from './IngredientInfo'
-// import CategoryMenuBar from '../Categories/CategoryMenuBar'
 import DynamicMenu from '../DynamicMenu'
 import { handleReqObj, updateInventoryFetch } from '../../helpers/fetch'
 import { updateIngredientQuantity } from '../../actions/ingredients'
 import { selectCategory } from '../../actions/selections'
 import ItemInfo from '../ItemInfo'
-
 
 const IngredientsContainer = props => {
     //state

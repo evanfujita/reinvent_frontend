@@ -41,16 +41,6 @@ const VendorsContainer = props => {
                 <Grid.Column width='4' align='left'>
                 <DynamicMenu menuItems={vendors} actionItem={selectVendor} />
                     <Button align='left' onClick={handleClick}>Add Vendor</Button><br/><br/>
-                    { vendorId ? 
-                    <>
-                    <UpdateButtons />
-                    {/* <Button onClick={props.handleEdit}>Edit Vendor</Button><br/><br/> */}
-                    {/* <Button color='red' onClick={handleDelete}>Delete Vendor</Button> */}
-                    </>
-                    :
-                    null
-                    }
-                    {/* can have EditDeleteButtons component here */}
                 </Grid.Column>
                 <Grid.Column width='6'>
                     {/* {vendorId ? <VendorInfo vendor={vendorInfo} /> : null} */}

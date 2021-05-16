@@ -1,5 +1,6 @@
 import React from 'react'
 import { Segment } from 'semantic-ui-react'
+import UpdateButtons from './FunctionalComponents/UpdateButtons'
 
 const ItemInfo = props => {
     const { header, item, attributes } = props
@@ -14,7 +15,8 @@ const ItemInfo = props => {
         <Segment.Group inverted>
             { keys }
         </Segment.Group>
-    </Segment>
+            <UpdateButtons />
+        </Segment>
     )
 }
 
