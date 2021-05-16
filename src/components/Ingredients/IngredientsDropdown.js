@@ -10,10 +10,10 @@ const IngredientsDropdown = props => {
     const ingredients = useSelector(state => state.ingredients)
     const dispatch = useDispatch()
 
-    const handleChange = event => {
-        const ingredient = ingredients.find(ingredient => ingredient.id === parseInt(event.target.id))
+    const handleChange = (event, data) => {
+        const ingredient = ingredients.find(ingredient => ingredient.id == data.value)
         dispatch(selectIngredient(ingredient))
-        history.push('/ingredients')
+        if(history !== '/ingredients'){history.push('/ingredients')}
     }
 
     const ingredientsOptions = ingredients.map(ingredient => {
@@ -22,7 +22,6 @@ const IngredientsDropdown = props => {
         return {
             key: id,
             text: text,
-            id: id,
             value: id            
         }
     })

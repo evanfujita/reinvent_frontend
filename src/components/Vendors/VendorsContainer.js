@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import VendorInfo from './VendorInfo'
-import { Grid, Button, Menu } from 'semantic-ui-react'
+import { Grid, Button } from 'semantic-ui-react'
 import AddVendorForm from './AddVendorForm'
 import { deleteVendor } from '../../actions/vendors'
 import { selectVendor } from '../../actions/selections'

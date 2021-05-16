@@ -11,7 +11,6 @@ const ItemInfo = props => {
         <Segment basic inverse>
             { header }
         </Segment>
-
         <Segment.Group inverted>
             { keys }
         </Segment.Group>
