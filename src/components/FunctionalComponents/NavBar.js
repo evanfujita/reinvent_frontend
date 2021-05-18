@@ -9,8 +9,6 @@ const NavBar = props => {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
-    const lowIngredients = useSelector(state => state.lowIngredients)
-    const pendingOrder = useSelector(state => state.pendingOrder)
     const { history } = props
  
     const handleClick = (event) => {
@@ -24,7 +22,6 @@ const NavBar = props => {
     }
 
     const page = history.location.pathname
-    const label = lowIngredients.length === 0 ? null : <Label floating circular color='red' >{lowIngredients.length}</Label>
 
     return(
             <Menu>
@@ -39,8 +36,6 @@ const NavBar = props => {
                 handleClick={handleClick}
                 handleLogout={handleLogout}
                 page={page}
-                label={label}
-                // pendingOrders={pendingOrders}
                 />
             }
             </Menu>

@@ -5,20 +5,20 @@ import IngredientsDropdown from '../Ingredients/IngredientsDropdown'
 import ProfileDropdown from '../User/ProfileDropdown'
 
 const NavBarLoggedIn = props => {
-    const { handleClick, handleLogout, page, label } = props
+    const { handleClick, handleLogout, page } = props
     const pendingOrder = useSelector(state => state.pendingOrder)
-    const pendingOrders = pendingOrder.length === 0
-    ? 
-    null
-    :
-    <Menu.Item 
-    name='pendingOrder' 
-    onClick={handleClick} 
-    active={page === '/pendingOrder'} 
-    id='pendingOrder'>
-        Pending Orders
-        <Label floating circular color='yellow'>{pendingOrder.length}</Label>
-    </Menu.Item>
+    const lowIngredients = useSelector(state => state.lowIngredients)
+    const label = lowIngredients.length === 0 ? null : <Label floating circular color='red' >{lowIngredients.length}</Label>
+    
+    const pendingOrders = 
+        <Menu.Item 
+        name='pendingOrder' 
+        onClick={handleClick} 
+        active={page === '/pendingOrder'} 
+        id='pendingOrder'>
+            Pending Orders
+            <Label floating circular color='yellow'>{pendingOrder.length}</Label>
+        </Menu.Item>
 
     return(
         <>
@@ -28,7 +28,7 @@ const NavBarLoggedIn = props => {
             OrderList 
             { label }
         </Menu.Item>
-            {pendingOrders}
+            {pendingOrder.length === 0 ? null : pendingOrders}
         <Menu.Item name='ingredients' >
         <IngredientsDropdown handleClick={handleClick} />
         </Menu.Item>
