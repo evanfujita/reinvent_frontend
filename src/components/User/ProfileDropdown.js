@@ -1,34 +1,28 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
-class Profile extends React.Component {
+const Profile = props => {
 
-    handleClick = event => {
-        this.props.history.push('/updateProfile')
+    const handleClick = event => {
+        props.history.push('/updateProfile')
     }
 
-    render(){
-        const { first_name, last_name, username, restaurant_name } = this.props.user
-        const name = `${first_name} ${last_name}`
-        return(
-            <Dropdown icon='user'>
-                <Dropdown.Menu>
-                    <Dropdown.Item text={name}/>
-                    <Dropdown.Item text={username} />
-                    <Dropdown.Item text={restaurant_name} />
-                    <Dropdown.Item onClick={this.handleClick} text='Edit User' />
-                </Dropdown.Menu>
-            </Dropdown>   
-        )
-    }
+    const user = useSelector(state => state.user)
+    
+    const { first_name, last_name, username, restaurant_name } = user
+    const name = `${first_name} ${last_name}`
+    return(
+        <Dropdown icon='user'>
+            <Dropdown.Menu>
+                <Dropdown.Item text={name}/>
+                <Dropdown.Item text={username} />
+                <Dropdown.Item text={restaurant_name} />
+                <Dropdown.Item onClick={handleClick} text='Edit User' />
+            </Dropdown.Menu>
+        </Dropdown>   
+    )
 }
 
-const mapStateToProps = state => {
-    return {
-        user: state.user
-    }
-}
-
-export default withRouter(connect(mapStateToProps)(Profile))
+export default withRouter(Profile)
