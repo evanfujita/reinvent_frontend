@@ -7,7 +7,6 @@ import DynamicMenu from '../DynamicMenu'
 import { selectVendor } from '../../actions/selections'
 
 const PendingOrderContainer = props => {
-
     //store
     const vendor = useSelector(state => state.selections.vendor)
     const pendingOrder = useSelector(state => state.pendingOrder)
