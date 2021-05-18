@@ -6,11 +6,15 @@ import { Menu, Label } from 'semantic-ui-react'
 import NavBarLoggedIn from './NavBarLoggedIn'
 
 const NavBar = props => {
-
+    //redux
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
+    
+    //history
     const { history } = props
- 
+    const page = history.location.pathname
+    
+    //methods
     const handleClick = (event) => {
         history.push(`/${event.target.id}`)
     }
@@ -21,16 +25,17 @@ const NavBar = props => {
         localStorage.clear()
     }
 
-    const page = history.location.pathname
-
     return(
             <Menu>
 
             { !user ? 
-            <>
-                <Menu.Item name='login' onClick={handleClick}  active={page === '/login'} id='login' />
-                <Menu.Item name='signup' onClick={handleClick}  active={page === '/signup'} id='signup' />
-            </>
+            null
+            // <>
+            //     <Menu.Item name='login' onClick={handleClick}  active={page === '/login'} id='login' />
+            //     <Menu.Item name='signup' onClick={handleClick}  active={page === '/signup'} id='signup' />
+            // </>
+            
+            //  does it make sense to have login in navbar?
             :
                 <NavBarLoggedIn 
                 handleClick={handleClick}
@@ -39,7 +44,6 @@ const NavBar = props => {
                 />
             }
             </Menu>
-        
     )}
 
 export default withRouter(NavBar)

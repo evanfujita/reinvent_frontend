@@ -78,7 +78,7 @@ export const loginAuth = (reqObj, props) => {
                 // })
             } else {
                 props.loginSuccess(user.user)
-                props.history.push('/ingredients')
+                // props.history.push('/ingredients')
                 fetchIngredients(props.renderIngredients, props.lowIngredient)
                 fetchVendors(props.renderVendors)
                 localStorage.setItem('token', user.token)
