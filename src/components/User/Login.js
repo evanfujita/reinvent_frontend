@@ -5,7 +5,7 @@ import { lowIngredient, renderIngredients } from '../../actions/ingredients'
 import { renderVendors } from '../../actions/vendors'
 import { renderOrders } from '../../actions/orders'
 import { loginAuth, handleReqObj } from '../../helpers/fetch'
-import FormTemplate from '../Forms/FormTemplate'
+import AddForm from '../Forms/AddForm'
 
 class Login extends React.Component{
 
@@ -27,9 +27,9 @@ class Login extends React.Component{
     }
 
     render(){
-        const fields = {'username': 'asdf', 'password': 'asdf'}
+        const fields = [{label: 'username', name: 'username'}, {label: 'password', name: 'password'}]
         return(
-            <FormTemplate fields={fields} handleSubmit={this.handleSubmit} error={this.state.error} />
+            <AddForm fields={fields} submit='Login' handleSubmit={this.handleSubmit} error={this.state.error}/>
         )}   
     }
 

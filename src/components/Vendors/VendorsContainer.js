@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Grid, Button } from 'semantic-ui-react'
-import AddVendorForm from './AddVendorForm'
+import AddForm from '../Forms/AddForm'
 import { selectVendor } from '../../actions/selections'
 import DynamicMenu from '../DynamicMenu'
 import ItemInfo from '../ItemInfo'
@@ -12,9 +12,9 @@ const VendorsContainer = props => {
     const [viewForm, setViewForm] = useState(false)
     const vendorId = useSelector(state => state.selections.vendor.id)
     //attributes key is what is displayed, value is key for actual object
-    const attributes = {'Representative': 'representative', 'Phone': 'phone', 'Email': 'email'}
-
+    const attributes = [{label: 'Name', name: 'name'}, {label: 'Representative', name: 'representative'}, {label: 'Phone', name: 'phone_number'}, {label: 'Email', name: 'email'}]
     const vendorInfo = vendors.find(vendor => (vendor.id === vendorId))
+    const handleSubmit = event => {console.log('need to build out handleSubmit')}
 
         return(
             <Grid>
@@ -24,7 +24,7 @@ const VendorsContainer = props => {
                 </Grid.Column>
                 <Grid.Column width='6'>
                     {vendorId ? <ItemInfo item={vendorInfo} header={vendorInfo.name} attributes={attributes}/> : null}
-                    {viewForm ? <AddVendorForm /> : null}
+                    {viewForm ? <AddForm fields={attributes} submit='Add Vendor' handleSubmit={handleSubmit} /> : null}
                 </Grid.Column>
             </Grid>
         )

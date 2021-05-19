@@ -6,7 +6,7 @@ import { selectIngredient } from '../../actions/selections'
 import { updatedInventory, undoUpdatedInventory } from '../../actions/updatedInventory'
 
 class IngredientForm extends React.Component {
-   
+
     constructor(props){
         super(props)
         this.state = {

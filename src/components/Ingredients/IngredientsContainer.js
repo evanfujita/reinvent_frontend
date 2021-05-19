@@ -46,6 +46,7 @@ const IngredientsContainer = props => {
     //togglers
     const toggleForm = active ? <Form onSubmit={handleSubmit}>{form}</Form> : <Form><Form.Field>{ingredientList}</Form.Field></Form>
     const toggleViewAddIngredient = viewAddIngredient ? <AddIngredient /> : null
+
     return(
             
         <Grid columns={3} >
