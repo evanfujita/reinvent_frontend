@@ -13,7 +13,6 @@ const Ingredient = props => {
             {name} - {quantity} {quantity_unit}
         </label>   
     )
-    
 }
 
 export default Ingredient

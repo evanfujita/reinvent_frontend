@@ -16,7 +16,8 @@ function updatedInventory (state=[], action) {
         case 'UNDO_UPDATED_INGREDIENT_INVENTORY':
             newState = state.filter(i => i.id !== action.id)
             return newState
-
+        
+        case 'UPDATE_INGREDIENT_QUANTITY':
         case 'LOGOUT':
             return []
         

@@ -5,7 +5,7 @@ import IngredientForm from './IngredientForm'
 import AddIngredient from './AddIngredient'
 import Ingredient from './Ingredient'
 import DynamicMenu from '../DynamicMenu'
-import { handleReqObj, updateInventoryFetch } from '../../helpers/fetch'
+import { handleReqObj } from '../../helpers/fetch'
 import { updateIngredientQuantity } from '../../actions/ingredients'
 import { selectCategory, selectIngredient } from '../../actions/selections'
 import ItemInfo from '../ItemInfo'
@@ -34,7 +34,17 @@ const IngredientsContainer = props => {
 
     const handleSubmit = () => {
         const reqObj = handleReqObj('PATCH', {ingredients: updatedInventory})
-        updateInventoryFetch(reqObj, updateIngredientQuantity)
+        // updateInventoryFetch(reqObj, updateIngredientQuantity)
+        fetch(`http://localhost:3000/updateInventory`, reqObj)
+        .then(resp => resp.json())
+        .then(ingredients => {
+            let keys = Object.keys(ingredients)
+            keys.forEach(key => {
+                dispatch(updateIngredientQuantity(ingredients[key]))
+            })
+
+            
+        })
             //sending action as argument but not getting dispatched
     }
 
@@ -46,6 +56,8 @@ const IngredientsContainer = props => {
     //togglers
     const toggleForm = active ? <Form onSubmit={handleSubmit}>{form}</Form> : <Form><Form.Field>{ingredientList}</Form.Field></Form>
     const toggleViewAddIngredient = viewAddIngredient ? <AddIngredient /> : null
+
+
 
     return(
             

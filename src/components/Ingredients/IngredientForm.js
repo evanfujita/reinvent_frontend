@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Icon, Form } from 'semantic-ui-react'
-import { updateIngredient, updateIngredientQuantity } from '../../actions/ingredients'
+// import { updateIngredient, updateIngredientQuantity } from '../../actions/ingredients'
 import { selectIngredient } from '../../actions/selections'
 import { updatedInventory, undoUpdatedInventory } from '../../actions/updatedInventory'
 
