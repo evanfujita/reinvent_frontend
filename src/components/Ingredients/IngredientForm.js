@@ -1,64 +1,51 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Icon, Form } from 'semantic-ui-react'
 import { updateIngredient, updateIngredientQuantity } from '../../actions/ingredients'
 import { selectIngredient } from '../../actions/selections'
 import { updatedInventory, undoUpdatedInventory } from '../../actions/updatedInventory'
 
-class IngredientForm extends React.Component {
+const IngredientForm = props => {
+    const selectedIngredient = useSelector(state => state.selections.ingredient)
+    const ingredients = useSelector(state => state.ingredients)
+    const { id, quantity, name, quantity_unit } = props.ingredient
+    const [state, setState] = useState({id: id, quantity: quantity, active: false})
+    const dispatch = useDispatch()
 
-    constructor(props){
-        super(props)
-        this.state = {
-            id: props.ingredient.id,
-            quantity: props.ingredient.quantity,
-            active: false
-        }
-    }
-
-    resetForm = event => {
+    const resetForm = event => {
         event.target.value = ''
     }
 
-    handleBlur = event => {
-        const updatedIngredient = {id: this.props.selectedIngredient.id, quantity: parseInt(event.target.value)}
+    const handleBlur = event => {
+        const updatedIngredient = {id: selectedIngredient.id, quantity: parseInt(event.target.value)}
         if(event.target.value !== ''){
-            this.props.updatedInventory(updatedIngredient)
-            this.setState({
-                active: true
-            })
+            dispatch(updatedInventory(updatedIngredient))
+            setState({...state, active: !active})
         }
         event.target.value = ''
     }
 
-    handleFocus = event => {
+    const handleFocus = event => {
         const id = parseInt(event.target.id)
-        const selectedIngredient = this.props.ingredients.find(ingredient => ingredient.id === id)
-        this.props.selectIngredient(selectedIngredient)
-        this.setState({
-            ...this.state,
-            id: selectedIngredient.id
-        })
+        const selectedIngredient = ingredients.find(ingredient => ingredient.id === id)
+        dispatch(selectIngredient(selectedIngredient))
+        setState({...state, id: selectedIngredient.id})
     }
 
-    handleChange = event => {
-        this.setState({
-            quantity: event.target.value
-        })
+    const handleChange = event => {
+        setState({...state, quantity: event.target.value})
     }
 
-    handleUndo = () => {
-        this.setState({
+    const handleUndo = () => {
+        setState({
+            ...state,
             active: false,
-            quantity: this.props.ingredient.quantity
+            quantity: quantity
         })
-        this.props.undoUpdatedInventory()
-    }
-
-    render(){
+        dispatch(undoUpdatedInventory())
+    }    
         
-        const active = this.state.active ? <Icon onClick={this.handleUndo} id='undo-icon' name='undo' color='yellow' /> : null
-        const { name, id, quantity_unit } = this.props.ingredient
+    const active = state.active ? <Icon onClick={handleUndo} id='undo-icon' name='undo' color='yellow' /> : null
     
     return(         
         <>
@@ -68,32 +55,15 @@ class IngredientForm extends React.Component {
                 width={4}
                 id={id}
                 min={0}
-                placeholder={this.state.quantity} 
-                onChange={this.handleChange}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur}
+                placeholder={state.quantity} 
+                onChange={handleChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
                 type='number' 
             />
         </Form.Field> 
         </>
-    )}
+    )
 }
 
-const mapStateToProps = state => {
-    return {
-        ingredients: state.ingredients,
-        selectedIngredient: state.selections.ingredient,
-        category: state.selections.ingredient,
-        updatedInventory: state.updatedInventory
-    }
-}
-
-const mapDispatchToProps = {
-    updateIngredientQuantity,
-    updateIngredient,
-    selectIngredient,
-    updatedInventory,
-    undoUpdatedInventory
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(IngredientForm)
+export default IngredientForm

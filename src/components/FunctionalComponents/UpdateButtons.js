@@ -6,7 +6,7 @@ const UpdateButtons = props => {
 
     const [edit, setEdit] = useState(false)
     const [confirmDelete, setConfirmDelete] = useState(false)
-    const { handleSubmit } = props
+    const { handleSubmit, fields } = props
 
     const handleEdit = () => {
         setEdit(!edit)
@@ -20,8 +20,6 @@ const UpdateButtons = props => {
 
     }
 
-    const fields = [{label: 'Name', name: 'name'}, {label: 'Par', name: 'par'}, {label: 'Unit of Measuremnt', name: 'quantity_unit'}]
-    
     return(
         <div>
             <Button onClick={handleEdit}>Edit</Button>
