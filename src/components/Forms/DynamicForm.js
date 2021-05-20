@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 
-const AddForm = props => {
+const DynamicForm = props => {
     const [state, setState] = useState({})
     const handleChange = event => {
         setState({...state, [event.target.name]: event.target.value})
     }
     const { handleSubmit, submit } = props
-    const formFields = props.fields.map(field => {
+    
+    const formFields = props.fields ? props.fields.map(field => {
         const { label, name } = field
-        return (<Form.Input label={label} name={name} placeholder={label} onChange={handleChange} value={state.id} />)})
+        const placeholder = props.placeholder || label
+        return (<Form.Input label={label} name={name} placeholder={placeholder} onChange={handleChange} value={state.id} />)})
+        : null
     
     return(
         <Form>
@@ -19,4 +22,4 @@ const AddForm = props => {
     )
 }
 
-export default AddForm
+export default DynamicForm

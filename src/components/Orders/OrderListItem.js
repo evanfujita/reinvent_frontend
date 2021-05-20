@@ -9,7 +9,6 @@ const OrderListItem = props => {
     const { name, quantity_unit } = ingredient
     const id = parseInt(ingredient.id)
     const [quantity, setQuantity] = useState(Math.ceil(props.ingredient.par - props.ingredient.quantity))
-    const [orderAbovePar, setPar] = useState(props.orderAbovePar)
     const [checked, setChecked] = useState(false)
     const dispatch = useDispatch()
     
@@ -26,9 +25,9 @@ const OrderListItem = props => {
         setChecked(!checked)
     }
 
-        const value = parMeter ? Math.ceil(quantity + (parMeter * quantity / 100)) : quantity
-        const icon = checked ? 'check' : 'plus'
-        const color = checked ? 'green' : null
+    const value = parMeter ? Math.ceil(quantity + (parMeter * quantity / 100)) : quantity
+    const icon = checked ? 'check' : 'plus'
+    const color = checked ? 'green' : null
 
         return(
             <Segment>

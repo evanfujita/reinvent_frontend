@@ -5,7 +5,7 @@ import { lowIngredient, renderIngredients } from '../../actions/ingredients'
 import { renderVendors } from '../../actions/vendors'
 import { renderOrders } from '../../actions/orders'
 import { loginAuth, handleReqObj } from '../../helpers/fetch'
-import AddForm from '../Forms/AddForm'
+import DynamicForm from '../Forms/DynamicForm'
 
 class Login extends React.Component{
 
@@ -29,7 +29,7 @@ class Login extends React.Component{
     render(){
         const fields = [{label: 'username', name: 'username'}, {label: 'password', name: 'password'}]
         return(
-            <AddForm fields={fields} submit='Login' handleSubmit={this.handleSubmit} error={this.state.error}/>
+            <DynamicForm fields={fields} submit='Login' handleSubmit={this.handleSubmit} error={this.state.error}/>
         )}   
     }
 

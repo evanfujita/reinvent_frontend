@@ -4,7 +4,6 @@ import { Form } from 'semantic-ui-react'
 const OrderMeter = props => {
 
     const [orderAbovePar, setPar] = useState(0)
-
     const handleChange = event => {
         setPar(event.target.value)
     }
