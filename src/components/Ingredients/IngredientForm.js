@@ -6,21 +6,23 @@ import { selectIngredient } from '../../actions/selections'
 import { updatedInventory, undoUpdatedInventory } from '../../actions/updatedInventory'
 
 const IngredientForm = props => {
+    
+    const { id, quantity, name, quantity_unit } = props.ingredient
+    
+    //local state
+    const [state, setState] = useState({id: id, quantity: quantity, active: false})
+
+    //redux
     const selectedIngredient = useSelector(state => state.selections.ingredient)
     const ingredients = useSelector(state => state.ingredients)
-    const { id, quantity, name, quantity_unit } = props.ingredient
-    const [state, setState] = useState({id: id, quantity: quantity, active: false})
     const dispatch = useDispatch()
 
-    const resetForm = event => {
-        event.target.value = ''
-    }
-
+    //functions
     const handleBlur = event => {
         const updatedIngredient = {id: selectedIngredient.id, quantity: parseInt(event.target.value)}
         if(event.target.value !== ''){
             dispatch(updatedInventory(updatedIngredient))
-            setState({...state, active: !active})
+            setState({...state, active: true})
         }
         event.target.value = ''
     }
@@ -42,7 +44,7 @@ const IngredientForm = props => {
             active: false,
             quantity: quantity
         })
-        dispatch(undoUpdatedInventory())
+        dispatch(undoUpdatedInventory(id))
     }    
         
     const active = state.active ? <Icon onClick={handleUndo} id='undo-icon' name='undo' color='yellow' /> : null
