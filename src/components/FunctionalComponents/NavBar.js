@@ -2,7 +2,7 @@ import React from 'react'
 import { logout } from '../../actions/user'
 import { useSelector, useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom' 
-import { Menu } from 'semantic-ui-react'
+import { Menu, Label } from 'semantic-ui-react'
 import NavBarLoggedIn from './NavBarLoggedIn'
 
 const NavBar = props => {
@@ -34,8 +34,7 @@ const NavBar = props => {
             //     <Menu.Item name='login' onClick={handleClick}  active={page === '/login'} id='login' />
             //     <Menu.Item name='signup' onClick={handleClick}  active={page === '/signup'} id='signup' />
             // </>
-
-            //  does it make sense to have login in navbar?
+            //  does it make sense to have login in
             :
                 <NavBarLoggedIn 
                 handleClick={handleClick}

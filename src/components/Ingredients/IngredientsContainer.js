@@ -34,7 +34,6 @@ const IngredientsContainer = props => {
 
     const handleSubmit = () => {
         const reqObj = handleReqObj('PATCH', {ingredients: updatedInventory})
-        // updateInventoryFetch(reqObj, updateIngredientQuantity)
         fetch(`http://localhost:3000/updateInventory`, reqObj)
         .then(resp => resp.json())
         .then(ingredients => {
@@ -42,10 +41,8 @@ const IngredientsContainer = props => {
             keys.forEach(key => {
                 dispatch(updateIngredientQuantity(ingredients[key]))
             })
-
-            
         })
-            //sending action as argument but not getting dispatched
+        setActive(false)       
     }
 
     const ingredientsSelector = category === 'all' ? ingredients : ingredients.filter(ingredient => parseInt(ingredient.category_id) == category.id)
@@ -56,8 +53,6 @@ const IngredientsContainer = props => {
     //togglers
     const toggleForm = active ? <Form onSubmit={handleSubmit}>{form}</Form> : <Form><Form.Field>{ingredientList}</Form.Field></Form>
     const toggleViewAddIngredient = viewAddIngredient ? <AddIngredient /> : null
-
-
 
     return(
             
@@ -72,7 +67,7 @@ const IngredientsContainer = props => {
                 { toggleForm }
             </Grid.Column>
             <Grid.Column align='middle' width={6}> 
-                {selectedIngredient ? <ItemInfo header={selectedIngredient.name} item={selectedIngredient} attributes={attributes} /> : null}
+                { selectedIngredient ? <ItemInfo header={selectedIngredient.name} item={selectedIngredient} attributes={attributes} /> : null}
                 { toggleViewAddIngredient }
             </Grid.Column>
         </Grid>

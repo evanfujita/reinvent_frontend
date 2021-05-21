@@ -21,7 +21,6 @@ const PendingOrderItem = props => {
     }
 
     const handleAccept = () => {
-        // debugger
         const item = {ingredient: ingredient, quantity: quantity}
         handleAcceptOrder(ingredient.name)
         handleUpdateIngredient(item)
