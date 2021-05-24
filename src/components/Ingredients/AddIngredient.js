@@ -9,10 +9,9 @@ import DynamicForm from '../Forms/DynamicForm'
 const AddIngredient = props => {
     const [state, setState] = useState({})
     const categories = useSelector(state => state.categories)
-    const ingredients = useSelector(state => state.ingredients)
+    // const ingredients = useSelector(state => state.ingredients)
     const vendors = useSelector(state => state.vendors)
     const dispatch = useDispatch()
-
 
     const handleChange = event => {
         setState({
@@ -23,6 +22,7 @@ const AddIngredient = props => {
 
     const handleCategoryDropdownChange = event => {
         const id = event.target.id
+        debugger
         setState({
             ...state, 
             category_id: id
@@ -50,46 +50,13 @@ const AddIngredient = props => {
         {label: 'Unit of Measurement', name: 'quantity_unit'}, 
         {label: 'Par', name: 'par'}
     ]
-    
-    const categoriesOptions = categories.map(category => {
-        return{
-            key: category.id,
-            text: category.name,
-            id: category.id,
-            value: category.id
-        }
-    })
-
-    const vendorsOptions = vendors.map(vendor => {
-        return{
-            key: vendor.id,
-            text: vendor.name,
-            id: vendor.id,
-            value: vendor.id
-        }
-    })
 
     return(
         <Segment basic inverse align='left'>
             <label position='right'>Add Ingredient:</label><br/><br/>
-            <label>Category</label>
-                <Dropdown 
-                    placeholder='Select a Category'
-                    fluid
-                    selection
-                    options={categoriesOptions}
-                    onChange={handleCategoryDropdownChange}
-                /><br/>
-                <label>Vendor</label>
-                <Dropdown 
-                    placeholder='Select a Vendor'
-                    fluid
-                    selection
-                    options={vendorsOptions}
-                    onChange={handleVendorDropdownChange}
-                />
+            <DynamicDropdown items={vendors} handleChange={handleChange} placeholder='vendors' /><br/>
+            <DynamicDropdown items={categories} handleChange={handleChange} placeholder='categories' />
             <DynamicForm handleSubmit={handleSubmit} fields={attributes} handleChange={handleChange} submit='Create Ingredient' />
-            {/* <DynamicDropdown items={vendors} handleChange={this.handleChange} placeholder='vendors' /> */}
         </Segment>
     )
 }
