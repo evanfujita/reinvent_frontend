@@ -1,9 +1,8 @@
 import React from 'react'
-import { Segment, Dropdown } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 
 const DynamicDropdown = props => {
     const { items, handleChange, placeholder} = props
-    // debugger
 
     const options = items.map(item => {
         return{

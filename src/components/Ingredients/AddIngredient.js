@@ -21,19 +21,16 @@ const AddIngredient = props => {
     }
 
     const handleCategoryDropdownChange = event => {
-        const id = event.target.id
-        debugger
         setState({
             ...state, 
-            category_id: id
+            category_id: event.target.id
         })
     }
 
     const handleVendorDropdownChange = event => {
-        const id = event.target.id
         setState({
             ...state,
-            vendor_id: id
+            vendor_id: event.target.id
         })
     }
 
@@ -54,8 +51,8 @@ const AddIngredient = props => {
     return(
         <Segment basic inverse align='left'>
             <label position='right'>Add Ingredient:</label><br/><br/>
-            <DynamicDropdown items={vendors} handleChange={handleChange} placeholder='vendors' /><br/>
-            <DynamicDropdown items={categories} handleChange={handleChange} placeholder='categories' />
+            <DynamicDropdown items={vendors} handleChange={handleVendorDropdownChange} placeholder='vendors' /><br/>
+            <DynamicDropdown items={categories} handleChange={handleCategoryDropdownChange} placeholder='categories' />
             <DynamicForm handleSubmit={handleSubmit} fields={attributes} handleChange={handleChange} submit='Create Ingredient' />
         </Segment>
     )
