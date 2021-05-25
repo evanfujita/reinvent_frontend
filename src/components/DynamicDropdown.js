@@ -12,9 +12,10 @@ const DynamicDropdown = props => {
             value: item.id
         }
     })
-    // debugger
+    
     return (
         <Dropdown
+            id={placeholder}
             placeholder={placeholder}
             fluid
             selection

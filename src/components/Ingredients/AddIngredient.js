@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addIngredient } from '../../actions/ingredients'
-import { Dropdown, Form, Button, Segment } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 import { handleReqObj, addFetch } from '../../helpers/fetch'
 import DynamicDropdown from '../DynamicDropdown'
 import DynamicForm from '../Forms/DynamicForm'
@@ -14,23 +14,11 @@ const AddIngredient = props => {
     const dispatch = useDispatch()
 
     const handleChange = event => {
+        // debugger
+        
         setState({
             ...state, 
             [event.target.name]: event.target.value
-        })
-    }
-
-    const handleCategoryDropdownChange = event => {
-        setState({
-            ...state, 
-            category_id: event.target.id
-        })
-    }
-
-    const handleVendorDropdownChange = event => {
-        setState({
-            ...state,
-            vendor_id: event.target.id
         })
     }
 
@@ -51,8 +39,8 @@ const AddIngredient = props => {
     return(
         <Segment basic inverse align='left'>
             <label position='right'>Add Ingredient:</label><br/><br/>
-            <DynamicDropdown items={vendors} handleChange={handleVendorDropdownChange} placeholder='vendors' /><br/>
-            <DynamicDropdown items={categories} handleChange={handleCategoryDropdownChange} placeholder='categories' />
+            <DynamicDropdown items={vendors} handleChange={(event)=> setState({...state, vendor_id: event.target.id})} placeholder='Vendors' /><br/>
+            <DynamicDropdown items={categories} handleChange={(event)=> setState({...state, category_id: event.target.id})} placeholder='Categories' />
             <DynamicForm handleSubmit={handleSubmit} fields={attributes} handleChange={handleChange} submit='Create Ingredient' />
         </Segment>
     )

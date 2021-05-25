@@ -17,6 +17,8 @@ import { renderVendors } from './actions/vendors'
 import { renderOrders } from './actions/orders'
 import { fetchIngredients, fetchUser, fetchVendors } from './helpers/fetch'
 
+// incorporate thunk
+
 class App extends React.Component {
   componentDidMount(){
     const token = localStorage.getItem('token')

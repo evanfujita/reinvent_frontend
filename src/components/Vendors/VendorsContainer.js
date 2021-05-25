@@ -16,18 +16,18 @@ const VendorsContainer = props => {
     const vendorInfo = vendors.find(vendor => (vendor.id === vendorId))
     const handleSubmit = event => {console.log('need to build out handleSubmit')}
 
-        return(
-            <Grid>
-                <Grid.Column width='4' align='left'>
-                <DynamicMenu menuItems={vendors} actionItem={selectVendor} />
-                    <Button align='left' onClick={()=> setViewForm(!viewForm)}>Add Vendor</Button><br/><br/>
-                </Grid.Column>
-                <Grid.Column width='6'>
-                    {vendorId ? <ItemInfo item={vendorInfo} header={vendorInfo.name} attributes={itemAttributes}/> : null}
-                    {viewForm ? <DynamicForm fields={formAttributes} submit='Add Vendor' handleSubmit={handleSubmit} /> : null}
-                </Grid.Column>
-            </Grid>
-        )
+    return(
+        <Grid>
+            <Grid.Column width='4' align='left'>
+            <DynamicMenu menuItems={vendors} actionItem={selectVendor} />
+                <Button align='left' onClick={()=> setViewForm(!viewForm)}>Add Vendor</Button><br/><br/>
+            </Grid.Column>
+            <Grid.Column width='6'>
+                {vendorId ? <ItemInfo item={vendorInfo} header={vendorInfo.name} attributes={itemAttributes}/> : null}
+                {viewForm ? <DynamicForm fields={formAttributes} submit='Add Vendor' handleSubmit={handleSubmit} /> : null}
+            </Grid.Column>
+        </Grid>
+    )
 }
 
 export default VendorsContainer
