@@ -2,7 +2,7 @@ import React from 'react'
 import { logout } from '../../actions/user'
 import { useSelector, useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom' 
-import { Menu, Label } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 import NavBarLoggedIn from './NavBarLoggedIn'
 
 const NavBar = props => {

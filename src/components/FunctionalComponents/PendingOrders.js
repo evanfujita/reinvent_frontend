@@ -8,6 +8,9 @@ const PendingOrders = props => {
     const pendingOrder = useSelector(state => state.pendingOrder)
 
     return(
+        
+        pendingOrder.length === 0 ? null :
+
         <Menu.Item 
         name='pendingOrder' 
         onClick={onClick}

@@ -13,7 +13,7 @@ export const fetchUser = (currentUser, reqObj) => {
     .then(resp => resp.json())
     .then(user => {
       currentUser(user)
-})
+    })
 }
 
 export const fetchVendors = (renderVendors) => {
@@ -63,7 +63,6 @@ export const updateInventoryFetch = (reqObj, dispatch) => {
     fetch(`http://localhost:3000/updateInventory`, reqObj)
     .then(resp => resp.json())
     .then(data => {
-        // debugger
         Object.keys(data).forEach(item => dispatch(data[item]))
     })
 }
