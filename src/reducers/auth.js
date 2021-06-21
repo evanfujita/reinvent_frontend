@@ -2,8 +2,7 @@ const auth=(state = {}, action) => {
     switch(action.type) {
         case 'LOGIN_SUCCESS':
         case 'CURRENT_USER':
-            return {id: action.user.id}
-
+            return {id: action.payload.id}
         case 'LOGOUT':
             return {}
         default:

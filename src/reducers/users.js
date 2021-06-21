@@ -2,6 +2,7 @@ function user(state=null, action) {
     switch(action.type) {
         case 'LOGIN_SUCCESS':
         case 'CURRENT_USER':
+            return action.payload
         case 'UPDATE_USER':
             return action.user
             

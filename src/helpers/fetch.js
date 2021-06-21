@@ -8,11 +8,11 @@ export const handleReqObj = (method, object) => {
     }
 }
 
-export const fetchUser = (currentUser, reqObj) => {
+export const fetchUser = (dispatch, reqObj) => {
     fetch('http://localhost:3000/current_user', reqObj)
     .then(resp => resp.json())
     .then(user => {
-      currentUser(user)
+    //   dispatch(currentUser(user))
 })
 }
 

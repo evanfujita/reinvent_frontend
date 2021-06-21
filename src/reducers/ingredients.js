@@ -1,6 +1,9 @@
 const ingredients = (state = [], action) => {
     let updatedIngredients
     switch(action.type){
+        // case 'LOGIN_SUCCESS':
+        // add ingredient fetch action
+        //     debugger
         case 'RENDER_INGREDIENTS':
             return action.ingredients
             

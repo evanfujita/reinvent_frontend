@@ -1,10 +1,10 @@
 import { ADD_INGREDIENT, LOGIN_SUCCESS } from "../helpers/constants"
 
-export const loginIngredients = ingredients => {
-    return{ 
-        type: LOGIN_SUCCESS,
-        ingredients
-    }
+export const loginIngredients = (dispatch) => {
+    fetch('http://localhost:3000/ingredients')
+    .then(resp => resp.json())
+    .then(ingredients => dispatch({type: LOGIN_SUCCESS, payload: ingredients})
+    )
 }
 
 // export const renderIngredients = ingredients => {

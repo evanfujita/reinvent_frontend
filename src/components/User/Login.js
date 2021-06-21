@@ -4,12 +4,14 @@ import { useSelector, useDispatch } from 'react-redux'
 // import { lowIngredient, renderIngredients } from '../../actions/ingredients'
 // import { renderVendors } from '../../actions/vendors'
 // import { renderOrders } from '../../actions/orders'
+import { loginAuth } from '../../actions/user'
 import { handleReqObj } from '../../helpers/fetch'
 import DynamicForm from '../Forms/DynamicForm'
 
 const Login = props => {
 
-    const [state, setState] = useState[{error: ""}] 
+    const dispatch = useDispatch()
+    const [state, setState] = useState({error: ""})
 
     const handleChange = event => {
         setState({
@@ -17,9 +19,10 @@ const Login = props => {
         })
     }
 
-    handleSubmit = (state) => {
+    const handleSubmit = (state) => {
         const reqObj = handleReqObj('POST', state)
-        // loginAuth(reqObj, this.props)
+
+        loginAuth(dispatch, reqObj)
         //need to handle errors
         //consider setting in store?
     }
@@ -33,8 +36,9 @@ const Login = props => {
 // const mapDispatchToProps = {
 //     loginSuccess,
 //     renderIngredients,
-//     lowIngredient,
 //     renderVendors,
+
+//     lowIngredient,
 //     renderOrders
 // }
 
