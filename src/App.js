@@ -12,12 +12,9 @@ import VendorsContainer from './components/Vendors/VendorsContainer'
 import PendingOrderContainer from './components/Orders/PendingOrderContainer'
 import { useDispatch } from 'react-redux'
 import { currentUser } from './actions/index'
-import { lowIngredient, loginIngredients } from './actions/ingredients'
+import { loginIngredients } from './actions/ingredients'
 import { loginVendors } from './actions/vendors'
 import { renderOrders } from './actions/orders'
-import { loginSuccess } from './actions/user';
-import { RENDER_INGREDIENTS } from './helpers/constants';
-// import { fetchIngredients, fetchUser, fetchVendors } from './helpers/fetch'
 
 const App = props => {
   const dispatch = useDispatch()
@@ -40,12 +37,8 @@ const App = props => {
     loginVendors(dispatch)
     renderOrders(dispatch)
     loginIngredients(dispatch)
-    // fetchUser(this.props.currentUser, reqObj)
-    // fetchIngredients(this.props.renderIngredients, this.props.lowIngredient)
-    // fetchVendors(this.props.renderVendors)
-    // this.props.history.push('/ingredients')
-}}, [])
 
+}}, [])
 
   return (
     <div className="App">

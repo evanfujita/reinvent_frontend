@@ -23,7 +23,7 @@ export const loginAuth = (dispatch, reqObj) => {
                 loginVendors(dispatch)
                 loginIngredients(dispatch)
                 renderOrders(dispatch)
-                // props.history.push('/ingredients')
+                
                 // fetchIngredients(props.renderIngredients, props.lowIngredient)
                 
                 localStorage.setItem('token', user.token)

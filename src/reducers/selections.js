@@ -8,7 +8,6 @@ function selections(state={category: 'all', vendor: 'all'}, action) {
             return {...state, ingredient: action.ingredient}
 
         case 'SELECT_CATEGORY':
-            // debugger
             return {...state, category: action.category}
             
         case 'SELECT_VENDOR':

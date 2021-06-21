@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-// import { loginSuccess } from '../../actions/user'
-// import { lowIngredient, renderIngredients } from '../../actions/ingredients'
-// import { renderVendors } from '../../actions/vendors'
-// import { renderOrders } from '../../actions/orders'
+import { useDispatch } from 'react-redux'
 import { loginVendors } from '../../actions/vendors'
 import { loginAuth } from '../../actions/user'
 import { handleReqObj } from '../../helpers/fetch'
@@ -22,7 +18,6 @@ const Login = props => {
 
     const handleSubmit = (state) => {
         const reqObj = handleReqObj('POST', state)
-
         loginAuth(dispatch, reqObj)
         loginVendors(dispatch)
         //need to handle errors
@@ -33,15 +28,6 @@ const Login = props => {
     return(
         <DynamicForm fields={fields} submit='Login' handleSubmit={handleSubmit} error={state.error}/>
     )}   
-    
 
-// const mapDispatchToProps = {
-//     loginSuccess,
-//     renderIngredients,
-//     renderVendors,
-
-//     lowIngredient,
-//     renderOrders
-// }
 
 export default Login
