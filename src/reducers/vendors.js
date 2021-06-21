@@ -1,11 +1,7 @@
 function vendor(state=[], action){
     switch(action.type){
-        case 'LOGIN_SUCCESS':
-            // debugger
-            // return action.payload
-            // add render vendors action fetch
-        // case 'RENDER_VENDORS':
-        //     return action.vendors
+        case 'RENDER_VENDORS':
+            return action.payload
         case 'ADD_VENDOR':
             return [...state, action.vendor]
         case 'DELETE_VENDOR':

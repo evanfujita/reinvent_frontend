@@ -1,10 +1,3 @@
-// export const currentUser = user => {
-//     return {
-//         type: 'CURRENT_USER',
-//         user
-//     }
-// }
-
 import { CURRENT_USER } from '../helpers/constants'
 
 export const currentUser = (dispatch, reqObj) => {

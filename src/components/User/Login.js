@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 // import { lowIngredient, renderIngredients } from '../../actions/ingredients'
 // import { renderVendors } from '../../actions/vendors'
 // import { renderOrders } from '../../actions/orders'
+import { loginVendors } from '../../actions/vendors'
 import { loginAuth } from '../../actions/user'
 import { handleReqObj } from '../../helpers/fetch'
 import DynamicForm from '../Forms/DynamicForm'
@@ -23,6 +24,7 @@ const Login = props => {
         const reqObj = handleReqObj('POST', state)
 
         loginAuth(dispatch, reqObj)
+        loginVendors(dispatch)
         //need to handle errors
         //consider setting in store?
     }

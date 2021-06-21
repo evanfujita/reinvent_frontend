@@ -1,4 +1,7 @@
 import { LOGIN_SUCCESS } from '../helpers/constants'
+import { loginVendors } from '../actions/vendors'
+import { loginIngredients } from './ingredients'
+import { renderOrders } from './orders'
 
 export const loginSuccess = (dispatch, reqObj) => {
     fetch('http://localhost_3000/current_user', reqObj)
@@ -17,11 +20,12 @@ export const loginAuth = (dispatch, reqObj) => {
                 // })
             } else {
                 dispatch({type: LOGIN_SUCCESS, payload: user})
-                // props.loginSuccess(user.user)
+                loginVendors(dispatch)
+                loginIngredients(dispatch)
+                renderOrders(dispatch)
                 // props.history.push('/ingredients')
-
                 // fetchIngredients(props.renderIngredients, props.lowIngredient)
-                // fetchVendors(props.renderVendors)
+                
                 localStorage.setItem('token', user.token)
             }
         })

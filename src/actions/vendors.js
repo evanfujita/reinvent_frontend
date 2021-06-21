@@ -1,18 +1,11 @@
-import { LOGIN_SUCCESS } from '../helpers/constants'
+import { RENDER_VENDORS } from '../helpers/constants'
 
-export const loginVendors = () => {
+export const loginVendors = dispatch => {
     fetch('http://localhost:3000/vendors')
     .then(resp => resp.json())
-    .then(vendors => dispatch({ type: LOGIN_SUCCESS, payload: vendors })
+    .then(vendors => dispatch({ type: RENDER_VENDORS, payload: vendors })
     )    
 }
-
-// export const renderVendors = vendors => {
-//     return {
-//         type: 'RENDER_VENDORS',
-//         vendors
-//     }
-// }
 
 export const addVendor = vendor => {
     return {

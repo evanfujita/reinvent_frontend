@@ -1,7 +1,7 @@
 function orders(state=[], action){
     switch(action.type){
         case 'RENDER_ORDERS':
-            return action.orders
+            return action.payload
         case 'CURRENT_USER':
             return state
         default:

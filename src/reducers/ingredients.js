@@ -1,11 +1,8 @@
 const ingredients = (state = [], action) => {
     let updatedIngredients
     switch(action.type){
-        // case 'LOGIN_SUCCESS':
-        // add ingredient fetch action
-        //     debugger
         case 'RENDER_INGREDIENTS':
-            return action.ingredients
+            return action.payload
             
         case 'UPDATE_INGREDIENT_QUANTITY':
         case 'UPDATE_INGREDIENT':
