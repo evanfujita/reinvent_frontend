@@ -13,7 +13,9 @@ const AddIngredient = props => {
     const vendors = useSelector(state => state.vendors)
     const dispatch = useDispatch()
 
-    const handleChange = event => {    
+    const handleChange = event => {
+        // debugger
+        
         setState({
             ...state, 
             [event.target.name]: event.target.value
@@ -22,7 +24,7 @@ const AddIngredient = props => {
 
     const handleSubmit = () => {
         const reqObj = handleReqObj('POST', state)
-        // dispatch(addIngredient())
+        // dispatch(addIngredient)
         addFetch('ingredients', reqObj)
        setState({})
     }

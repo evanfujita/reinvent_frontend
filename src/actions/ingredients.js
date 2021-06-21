@@ -1,9 +1,18 @@
-export const renderIngredients = ingredients => {
-    return {
-        type: 'RENDER_INGREDIENTS',
+import { ADD_INGREDIENT, LOGIN_SUCCESS } from "../helpers/constants"
+
+export const loginIngredients = ingredients => {
+    return{ 
+        type: LOGIN_SUCCESS,
         ingredients
     }
 }
+
+// export const renderIngredients = ingredients => {
+//     return {
+//         type: 'RENDER_INGREDIENTS',
+//         ingredients
+//     }
+// }
 
 export const updateIngredient = ingredient => {
     return {
@@ -18,6 +27,15 @@ export const updateIngredientQuantity = (ingredient) => {
         ingredient
     }
 }
+
+// export const addIngredient = (dispatch, reqObj) => {
+//     fetch(`http://localhost:3000/ingredients`, reqObj)
+//     .then(resp => resp.json())
+//     .then(ingredient => {
+//         debugger
+//         dispatch({ type: ADD_INGREDIENT, payload: ingredient})
+//     })
+// }
 
 export const addIngredient = ingredient => {
     return {

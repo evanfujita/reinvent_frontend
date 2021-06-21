@@ -17,6 +17,7 @@ const ingredients = (state = [], action) => {
             return updatedIngredients
     
         case 'ADD_INGREDIENT':
+            debugger
             return [...state, action.ingredient]
             
         case 'DELETE_INGREDIENT':

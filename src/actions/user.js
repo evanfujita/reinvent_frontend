@@ -1,6 +1,8 @@
+import { LOGIN_SUCCESS } from '../helpers/constants'
+
 export const loginSuccess = user => {
     return {
-        type: 'LOGIN_SUCCESS',
+        type: LOGIN_SUCCESS,
         user
     }
 }

@@ -1,3 +1,12 @@
+import { LOGIN_SUCCESS } from '../helpers/constants'
+
+export const loginVendors = vendors => {
+    return {
+        type: LOGIN_SUCCESS,
+        vendors
+    }
+}
+
 export const renderVendors = vendors => {
     return {
         type: 'RENDER_VENDORS',
