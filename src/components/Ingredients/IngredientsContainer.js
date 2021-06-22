@@ -32,6 +32,8 @@ const IngredientsContainer = props => {
         setViewAddIngredient(!viewAddIngredient)
     }
 
+
+    // send to action via thunk
     const handleSubmit = () => {
         const reqObj = handleReqObj('PATCH', {ingredients: updatedInventory})
         fetch(`http://localhost:3000/updateInventory`, reqObj)

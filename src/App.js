@@ -15,6 +15,7 @@ import { currentUser } from './actions/index'
 import { loginIngredients } from './actions/ingredients'
 import { loginVendors } from './actions/vendors'
 import { renderOrders } from './actions/orders'
+import { renderCategories } from './actions/categories'
 
 const App = props => {
   const dispatch = useDispatch()
@@ -37,8 +38,8 @@ const App = props => {
     loginVendors(dispatch)
     renderOrders(dispatch)
     loginIngredients(dispatch)
-
-}}, [])
+    renderCategories(dispatch)
+  }}, [])
 
   return (
     <div className="App">

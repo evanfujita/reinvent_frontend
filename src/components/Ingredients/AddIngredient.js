@@ -13,9 +13,7 @@ const AddIngredient = props => {
     const vendors = useSelector(state => state.vendors)
     const dispatch = useDispatch()
 
-    const handleChange = event => {
-        // debugger
-        
+    const handleChange = event => {        
         setState({
             ...state, 
             [event.target.name]: event.target.value
