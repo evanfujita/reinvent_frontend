@@ -35,10 +35,10 @@ const App = props => {
     }
 
     currentUser(dispatch, reqObj)
-    loginVendors(dispatch)
-    renderOrders(dispatch)
-    loginIngredients(dispatch)
-    renderCategories(dispatch)
+    // loginVendors(dispatch)
+    // renderOrders(dispatch)
+    // loginIngredients(dispatch)
+    // renderCategories(dispatch)
   }}, [])
 
   return (

@@ -16,17 +16,13 @@ export const loginAuth = (dispatch, reqObj) => {
         .then(resp => resp.json())
         .then(user => {
             if (user.error) {
-                // this.setState({
-                //     error: user.error
-                // })
+                //error handling
             } else {
-                dispatch({type: LOGIN_SUCCESS, payload: user})
-                loginVendors(dispatch)
-                loginIngredients(dispatch)
-                renderOrders(dispatch)
-                renderCategories(dispatch)
-                // fetchIngredients(props.renderIngredients, props.lowIngredient)
-                
+                dispatch({type: LOGIN_SUCCESS, payload: user.user})
+                // loginVendors(dispatch)
+                // loginIngredients(dispatch)
+                // renderOrders(dispatch)
+                // renderCategories(dispatch)        
                 localStorage.setItem('token', user.token)
             }
         })

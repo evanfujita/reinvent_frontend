@@ -19,9 +19,6 @@ const Login = props => {
     const handleSubmit = (state) => {
         const reqObj = handleReqObj('POST', state)
         loginAuth(dispatch, reqObj)
-        loginVendors(dispatch)
-        //need to handle errors
-        //consider setting in store?
     }
 
     const fields = [{label: 'username', name: 'username'}, {label: 'password', name: 'password'}]

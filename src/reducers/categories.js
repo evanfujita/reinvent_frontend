@@ -1,6 +1,7 @@
 const categories = (state = [], action) => {
     switch(action.type){
-        case 'LOGIN_SUCCESS':
+
+        case 'RENDER_VENDORS':
             return action.payload
         case 'LOGOUT':
             return []
