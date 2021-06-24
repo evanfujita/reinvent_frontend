@@ -14,11 +14,21 @@ export const updateIngredient = ingredient => {
     }
 }
 
-export const updateIngredientQuantity = (ingredient) => {
-    return {
-        type: 'UPDATE_INGREDIENT_QUANTITY',
-        ingredient
-    }
+// export const updateIngredientQuantity = (ingredient) => {
+    
+//     return {
+//         type: 'UPDATE_INGREDIENT_QUANTITY',
+//         ingredient
+//     }
+// }
+
+export const updateIngredientQuantity = (dispatch, reqObj) => {
+    fetch('http://localhost:3000/updateInventory', reqObj)
+    .then(resp => resp.json())
+    .then(ingredients => {
+        let keys = Object.keys(ingredients)
+        keys.forEach(key => dispatch({type: 'UPDATE_INGREDIENT_QUANTITY', payload: ingredients[key]}))
+    })
 }
 
 // export const addIngredient = (dispatch, reqObj) => {
@@ -29,6 +39,8 @@ export const updateIngredientQuantity = (ingredient) => {
 //         dispatch({ type: ADD_INGREDIENT, payload: ingredient})
 //     })
 // }
+
+
 
 export const addIngredient = ingredient => {
     return {

@@ -19,7 +19,7 @@ const IngredientForm = props => {
 
     //functions
     const handleBlur = event => {
-        const updatedIngredient = {id: selectedIngredient.id, quantity: parseInt(event.target.value)}
+        const updatedIngredient = {ingredient: selectedIngredient, newQuantity: parseInt(event.target.value)}
         if(event.target.value !== ''){
             dispatch(updatedInventory(updatedIngredient))
             setState({...state, active: true})

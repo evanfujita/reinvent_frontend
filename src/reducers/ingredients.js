@@ -4,12 +4,13 @@ const ingredients = (state = [], action) => {
         case 'RENDER_INGREDIENTS':
             return action.payload
             
+            
         case 'UPDATE_INGREDIENT_QUANTITY':
         case 'UPDATE_INGREDIENT':
             // debugger
             updatedIngredients = state.map(ingredient => {
-                if(ingredient.id === action.ingredient.id){
-                    return action.ingredient
+                if(ingredient.id === action.payload.id){
+                    return action.payload
                 } else {
                     return ingredient
                 }

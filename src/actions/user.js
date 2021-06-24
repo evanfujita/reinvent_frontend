@@ -19,10 +19,10 @@ export const loginAuth = (dispatch, reqObj) => {
                 //error handling
             } else {
                 dispatch({type: LOGIN_SUCCESS, payload: user.user})
-                // loginVendors(dispatch)
-                // loginIngredients(dispatch)
-                // renderOrders(dispatch)
-                // renderCategories(dispatch)        
+                loginVendors(dispatch)
+                loginIngredients(dispatch)
+                renderCategories(dispatch)        
+                // renderOrders(dispatch)      need to develop orders
                 localStorage.setItem('token', user.token)
             }
         })

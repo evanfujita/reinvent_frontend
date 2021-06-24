@@ -9,6 +9,7 @@ import { handleReqObj } from '../../helpers/fetch'
 import { updateIngredientQuantity } from '../../actions/ingredients'
 import { selectCategory, selectIngredient } from '../../actions/selections'
 import ItemInfo from '../ItemInfo'
+// import { updateIngredientQuantity } from '../../actions/ingredients'
 
 const IngredientsContainer = props => {
     //state
@@ -32,18 +33,18 @@ const IngredientsContainer = props => {
         setViewAddIngredient(!viewAddIngredient)
     }
 
-
-    // send to action via thunk
     const handleSubmit = () => {
         const reqObj = handleReqObj('PATCH', {ingredients: updatedInventory})
-        fetch(`http://localhost:3000/updateInventory`, reqObj)
-        .then(resp => resp.json())
-        .then(ingredients => {
-            let keys = Object.keys(ingredients)
-            keys.forEach(key => {
-                dispatch(updateIngredientQuantity(ingredients[key]))
-            })
-        })
+        updateIngredientQuantity(dispatch, reqObj)
+
+        // fetch(`http://localhost:3000/updateInventory`, reqObj)
+        // .then(resp => resp.json())
+        // .then(ingredients => {
+        //     let keys = Object.keys(ingredients)
+        //     keys.forEach(key => {
+        //         // dispatch(updateIngredientQuantity(ingredients[key]))
+        //     })
+        // })
         setActive(false)       
     }
 
