@@ -15,6 +15,7 @@ export const RENDER_VENDORS = 'RENDER_VENDORS'
 export const RENDER_CATEGORIES = 'RENDER_CATEGORIES'
 
 
-
 // orders
 export const RENDER_ORDERS = 'RENDER_ORDERS'
+export const SEND_ORDER = 'SEND_ORDER'
+export const RECEIVE_ORDER = 'RECEIVE_ORDER'

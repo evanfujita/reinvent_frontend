@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { List, Grid, Form, Button, Segment } from 'semantic-ui-react'
+import { List, Grid, Form, Segment } from 'semantic-ui-react'
 import Email from '../FunctionalComponents/Email'
 import OrderListItem from './OrderListItem'
 import { parMeter } from '../../actions/index'
 import { selectVendor } from '../../actions/selections'
 import DynamicMenu from '../DynamicMenu'
+import { handleReqObj } from '../../helpers/fetch'
+import { sendOrder } from '../../actions/orders'
 
 const OrderList = props => {
     //local state
@@ -25,14 +27,19 @@ const OrderList = props => {
         const meter = parseInt(event.target.value)
         setOrderAbovePar(meter)
         dispatch(parMeter(meter))
-    }   
+    }
+    
+    const handleSubmit = event => {
+        const reqObj = handleReqObj('POST', {order: itemsToOrder})
+        sendOrder(dispatch, reqObj)
+    }
     
     const categorizedIngredients = lowIngredients.filter(ingredient => vendor.id == ingredient.vendor_id || vendor === 'all' ? ingredient : null)
         
     const displayIngredients = categorizedIngredients.map(ingredient => 
         <OrderListItem key={ingredient.id} ingredient={ingredient}  />//addIngredient={addIngredient} />
     )
-    const renderButtons = vendor !== 'all' ?  <Email ingredients={itemsToOrder} /> : null
+    const renderButtons = vendor !== 'all' ?  <Email handleSubmit={handleSubmit} ingredients={itemsToOrder} /> : null
         
     return(
         <Grid>
