@@ -1,7 +1,7 @@
 import { ADD_INGREDIENT, RENDER_INGREDIENTS } from "../helpers/constants"
 
 export const loginIngredients = (dispatch) => {
-    fetch('http://localhost:3000/ingredients')
+    fetch('http://localhost:3000/getIngredients')
     .then(resp => resp.json())
     .then(ingredients => dispatch({type: RENDER_INGREDIENTS, payload: ingredients})
     )
@@ -14,13 +14,6 @@ export const updateIngredient = ingredient => {
     }
 }
 
-// export const updateIngredientQuantity = (ingredient) => {
-    
-//     return {
-//         type: 'UPDATE_INGREDIENT_QUANTITY',
-//         ingredient
-//     }
-// }
 
 export const updateIngredientQuantity = (dispatch, reqObj) => {
     fetch('http://localhost:3000/updateInventory', reqObj)

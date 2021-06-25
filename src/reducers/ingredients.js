@@ -2,12 +2,9 @@ const ingredients = (state = [], action) => {
     let updatedIngredients
     switch(action.type){
         case 'RENDER_INGREDIENTS':
-            return action.payload
-            
-            
+            return action.payload.ingredients
         case 'UPDATE_INGREDIENT_QUANTITY':
         case 'UPDATE_INGREDIENT':
-            // debugger
             updatedIngredients = state.map(ingredient => {
                 if(ingredient.id === action.payload.id){
                     return action.payload

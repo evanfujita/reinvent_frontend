@@ -1,6 +1,9 @@
 const lowIngredients = (state = [], action) => {
     
     switch(action.type){
+        case 'RENDER_INGREDIENTS':       
+            return action.payload.low_ingredients
+                    
         case 'LOW_INGREDIENT':
             return [...state, action.ingredient]
         case 'UPDATE_INGREDIENT_QUANTITY':
