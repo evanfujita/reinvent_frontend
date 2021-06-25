@@ -36,20 +36,11 @@ const IngredientsContainer = props => {
     const handleSubmit = () => {
         const reqObj = handleReqObj('PATCH', {ingredients: updatedInventory})
         updateIngredientQuantity(dispatch, reqObj)
-
-        // fetch(`http://localhost:3000/updateInventory`, reqObj)
-        // .then(resp => resp.json())
-        // .then(ingredients => {
-        //     let keys = Object.keys(ingredients)
-        //     keys.forEach(key => {
-        //         // dispatch(updateIngredientQuantity(ingredients[key]))
-        //     })
-        // })
         setActive(false)       
     }
 
     const ingredientsSelector = category === 'all' ? ingredients : ingredients.filter(ingredient => parseInt(ingredient.category_id) == category.id)
-    const ingredientList = ingredientsSelector.map(ingredient => <Segment onClick={()=> dispatch(selectIngredient(ingredient))}><Ingredient key={ingredient.id} ingredientInfo={ingredient}/></Segment>)
+    const ingredientList = ingredientsSelector.map(ingredient => <Segment key={ingredient.id} onClick={()=> dispatch(selectIngredient(ingredient))}><Ingredient key={ingredient.id} ingredientInfo={ingredient}/></Segment>)
     const form = ingredientsSelector.map(ingredient => <IngredientForm key={ingredient.id} ingredient={ingredient} />)
     const attributes = {'Quantity': 'quantity', 'Par': 'par', 'Unit of Measurement': 'quantity_unit'}
 
@@ -58,7 +49,6 @@ const IngredientsContainer = props => {
     const toggleViewAddIngredient = viewAddIngredient ? <AddIngredient /> : null
 
     return(
-            
         <Grid columns={3} >
             <Grid.Column width={4} align='left'>
                 <DynamicMenu menuItems={categories} actionItem={selectCategory} all={true} />
