@@ -1,4 +1,6 @@
-import { ADD_INGREDIENT, RENDER_INGREDIENTS } from "../helpers/constants"
+import { 
+    // ADD_INGREDIENT, 
+    RENDER_INGREDIENTS } from "../helpers/constants"
 
 export const loginIngredients = (dispatch) => {
     fetch('http://localhost:3000/getIngredients')

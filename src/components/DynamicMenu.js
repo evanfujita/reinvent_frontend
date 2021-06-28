@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Menu } from 'semantic-ui-react'
 import { useDispatch } from 'react-redux'
 
+//lines 14, 30 have double equals--need strict equality
+
 const DynamicMenu = props => {
     const { menuItems, actionItem } = props
     const [id, setId] = useState('all')
@@ -27,7 +29,7 @@ const DynamicMenu = props => {
                 null
             }
             {menuItems.map(item => 
-                <Menu.Item key={item.id} name={item.name}  id={item.id} active={id == item.id} onClick={handleClick} />
+                <Menu.Item key={item.id} name={item.name} id={item.id} active={id == item.id} onClick={handleClick} />
             )}
         </Menu>
     )

@@ -7,7 +7,6 @@ import PendingOrders from './PendingOrders'
 
 const NavBarLoggedIn = props => {
     const { handleClick, handleLogout, page } = props
-    const pendingOrder = useSelector(state => state.pendingOrder)
     const lowIngredients = useSelector(state => state.lowIngredients)
     const label = lowIngredients.length === 0 ? null : <Label floating circular color='red' >{lowIngredients.length}</Label>
 

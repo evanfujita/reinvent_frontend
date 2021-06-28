@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { loginVendors } from '../../actions/vendors'
 import { loginAuth } from '../../actions/user'
 import { handleReqObj } from '../../helpers/fetch'
 import DynamicForm from '../Forms/DynamicForm'
@@ -8,13 +7,9 @@ import DynamicForm from '../Forms/DynamicForm'
 const Login = props => {
 
     const dispatch = useDispatch()
-    const [state, setState] = useState({error: ""})
+    const [state] = useState({error: ""})
 
-    const handleChange = event => {
-        setState({
-            [event.target.name]: event.target.value
-        })
-    }
+    //need to do something with error handling here - maybe send it to action
 
     const handleSubmit = (state) => {
         const reqObj = handleReqObj('POST', state)

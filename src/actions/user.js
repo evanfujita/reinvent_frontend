@@ -1,7 +1,7 @@
 import { LOGIN_SUCCESS } from '../helpers/constants'
 import { loginVendors } from '../actions/vendors'
 import { loginIngredients } from './ingredients'
-import { renderOrders } from './orders'
+// import { renderOrders } from './orders'
 import { renderCategories } from './categories'
 
 export const loginSuccess = (dispatch, reqObj) => {

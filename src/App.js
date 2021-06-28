@@ -14,7 +14,6 @@ import { useDispatch } from 'react-redux'
 import { currentUser } from './actions/index'
 import { loginIngredients } from './actions/ingredients'
 import { loginVendors } from './actions/vendors'
-import { renderOrders } from './actions/orders'
 import { renderCategories } from './actions/categories'
 
 const App = props => {

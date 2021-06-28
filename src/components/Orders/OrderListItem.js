@@ -5,7 +5,7 @@ import { itemsToOrder } from '../../actions/pendingOrder'
 
 const OrderListItem = props => {
 
-    const [ingredient, setIngredient] = useState(props.ingredient)
+    const [ingredient] = useState(props.ingredient)
     const { name, quantity_unit } = ingredient
     const id = parseInt(ingredient.id)
     const [quantity, setQuantity] = useState(Math.ceil(props.ingredient.par - props.ingredient.quantity))

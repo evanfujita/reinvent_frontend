@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { addIngredient } from '../../actions/ingredients'
+import { useSelector, 
+    // useDispatch 
+} from 'react-redux'
 import { Segment } from 'semantic-ui-react'
 import { handleReqObj, addFetch } from '../../helpers/fetch'
 import DynamicDropdown from '../DynamicDropdown'
@@ -9,9 +10,8 @@ import DynamicForm from '../Forms/DynamicForm'
 const AddIngredient = props => {
     const [state, setState] = useState({})
     const categories = useSelector(state => state.categories)
-    // const ingredients = useSelector(state => state.ingredients)
     const vendors = useSelector(state => state.vendors)
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
     const handleChange = event => {        
         setState({
@@ -22,7 +22,6 @@ const AddIngredient = props => {
 
     const handleSubmit = () => {
         const reqObj = handleReqObj('POST', state)
-        // dispatch(addIngredient)
         addFetch('ingredients', reqObj)
        setState({})
     }
