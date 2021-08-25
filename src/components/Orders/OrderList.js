@@ -34,7 +34,7 @@ const OrderList = props => {
         sendOrder(dispatch, reqObj)
     }
     
-    const categorizedIngredients = lowIngredients.filter(ingredient => vendor.id == ingredient.vendor_id || vendor === 'all' ? ingredient : null)
+    const categorizedIngredients = lowIngredients.filter(ingredient => vendor.id == ingredient.vendor_id || vendor === 'all' && ingredient)
         
     const displayIngredients = categorizedIngredients.map(ingredient => 
         <OrderListItem key={ingredient.id} ingredient={ingredient}  />//addIngredient={addIngredient} />

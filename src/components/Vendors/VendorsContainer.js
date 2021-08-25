@@ -23,8 +23,8 @@ const VendorsContainer = props => {
                 <Button align='left' onClick={()=> setViewForm(!viewForm)}>Add Vendor</Button><br/><br/>
             </Grid.Column>
             <Grid.Column width='6'>
-                {vendorId ? <ItemInfo item={vendorInfo} header={vendorInfo.name} attributes={itemAttributes}/> : null}
-                {viewForm ? <DynamicForm fields={formAttributes} submit='Add Vendor' handleSubmit={handleSubmit} /> : null}
+                {vendorId && <ItemInfo item={vendorInfo} header={vendorInfo.name} attributes={itemAttributes}/>}
+                {viewForm && <DynamicForm fields={formAttributes} submit='Add Vendor' handleSubmit={handleSubmit} />}
             </Grid.Column>
         </Grid>
     )

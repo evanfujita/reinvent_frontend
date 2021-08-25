@@ -33,7 +33,7 @@ const PendingOrderContainer = props => {
     }
     
 
-    const categorizedIngredients = pendingOrder.filter(ingredient => (vendor.id == ingredient.ingredient.vendor_id || vendor === 'all' ? ingredient : null))
+    const categorizedIngredients = pendingOrder.filter(ingredient => (vendor.id == ingredient.ingredient.vendor_id || vendor === 'all' && ingredient))
     const displayIngredients = categorizedIngredients.map(ingredient => 
         <PendingOrderItem 
             key={ingredient.ingredient.id} 

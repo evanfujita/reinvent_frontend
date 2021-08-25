@@ -47,7 +47,7 @@ const IngredientForm = props => {
         dispatch(undoUpdatedInventory(id))
     }    
         
-    const active = state.active ? <Icon onClick={handleUndo} id='undo-icon' name='undo' color='yellow' /> : null
+    const active = state.active && <Icon onClick={handleUndo} id='undo-icon' name='undo' color='yellow' />
     
     return(         
         <>

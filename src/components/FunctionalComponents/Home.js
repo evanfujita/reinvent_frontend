@@ -7,7 +7,7 @@ const Home = () => {
     return(
         <div>
             Easy Inventory
-            {user ? null : <Login />}
+            {!user && <Login />}
         </div>
     )
 }

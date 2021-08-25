@@ -8,11 +8,10 @@ const DynamicForm = props => {
     }
     const { handleSubmit, submit } = props
     
-    const formFields = props.fields ? props.fields.map(field => {
+    const formFields = props.fields && props.fields.map(field => {
         const { label, name } = field
         const placeholder = props.placeholder || label
         return (<Form.Input key={name} label={label} name={name} placeholder={placeholder} onChange={props.handleChange || handleChange} value={state.id} />)})
-        : null
     
     return(
         <Form>

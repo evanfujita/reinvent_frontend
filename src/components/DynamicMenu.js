@@ -22,11 +22,9 @@ const DynamicMenu = props => {
     return (
         <Menu align='left' className='text' pointing secondary vertical>
             {
-                props.all 
-                ?
+                props.all &&
                 <Menu.Item key='all' name ='all' id='all' active={id === 'all'} onClick={handleClick} />
-                :
-                null
+                
             }
             {menuItems.map(item => 
                 <Menu.Item key={item.id} name={item.name} id={item.id} active={id == item.id} onClick={handleClick} />

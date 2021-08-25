@@ -28,14 +28,7 @@ const NavBar = props => {
     return(
             <Menu>
 
-            { !user ? 
-            null
-            // <>
-            //     <Menu.Item name='login' onClick={handleClick}  active={page === '/login'} id='login' />
-            //     <Menu.Item name='signup' onClick={handleClick}  active={page === '/signup'} id='signup' />
-            // </>
-            //  does it make sense to have login
-            :
+            { user &&
                 <NavBarLoggedIn 
                 handleClick={handleClick}
                 handleLogout={handleLogout}

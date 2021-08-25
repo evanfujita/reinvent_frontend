@@ -42,7 +42,7 @@ const Email = props => {
     }
 
     const toggleVisibility = () => setVisible(true)
-    const content = emailMessage ? `Success - Your Order Was Sent to ${selectedVendor.name}!` : null
+    const content = emailMessage && `Success - Your Order Was Sent to ${selectedVendor.name}!`
 
       return(
           <>

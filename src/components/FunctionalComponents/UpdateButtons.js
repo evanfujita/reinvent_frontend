@@ -24,19 +24,11 @@ const UpdateButtons = props => {
         <div>
             <Button onClick={handleEdit}>Edit</Button>
             <Button color='red' onClick={handleDelete}>Delete</Button>
-            {confirmDelete ? <Button onClick={handleConfirmDelete}>Are you Sure?</Button> : null}
+            {confirmDelete && <Button onClick={handleConfirmDelete}>Are you Sure?</Button>}
             <br/><br/>
-            {edit ? <DynamicForm fields={fields} handleSubmit={handleSubmit} submit='Update Ingredient' /> : null}
+            {edit && <DynamicForm fields={fields} handleSubmit={handleSubmit} submit='Update Ingredient' />}
         </div>
     )   
 }
 
 export default UpdateButtons
-
-        // const id = props.selectedIngredient.id
-
-        // fetch(`http://localhost:3000/ingredients/${id}`, {method: 'DELETE'})
-        // .then(resp => resp.json())
-        // .then(data => {
-        //     // data.message ? props.deleteIngredient(id) : null
-        // })

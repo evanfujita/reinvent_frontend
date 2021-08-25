@@ -9,8 +9,7 @@ const PendingOrders = props => {
 
     return(
         
-        pendingOrder.length === 0 ? null :
-
+        pendingOrder.length > 0 &&
         <Menu.Item 
         name='pendingOrder' 
         onClick={onClick}

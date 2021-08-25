@@ -9,7 +9,6 @@ import { handleReqObj } from '../../helpers/fetch'
 import { updateIngredientQuantity } from '../../actions/ingredients'
 import { selectCategory, selectIngredient } from '../../actions/selections'
 import ItemInfo from '../ItemInfo'
-// import { updateIngredientQuantity } from '../../actions/ingredients'
 
 const IngredientsContainer = props => {
     //state
@@ -54,13 +53,13 @@ const IngredientsContainer = props => {
                 <DynamicMenu menuItems={categories} actionItem={selectCategory} all={true} />
                 <Button toggle active={active} onClick={handleToggle}>Edit Inventory</Button><br/>
                 <Button onClick={handleAddIngredient}>Add Ingredient</Button><br/><br/>
-                {updatedInventory.length > 0 ? <Button onClick={handleSubmit}>Update Inventory</Button> : null}
+                {updatedInventory.length > 0 && <Button onClick={handleSubmit}>Update Inventory</Button>}
             </Grid.Column>
             <Grid.Column width={6} align='left' className='scrollable'>
                 { toggleForm }
             </Grid.Column>
             <Grid.Column align='middle' width={6}> 
-                { selectedIngredient ? <ItemInfo header={selectedIngredient.name} item={selectedIngredient} attributes={attributes} /> : null}
+                { selectedIngredient && <ItemInfo header={selectedIngredient.name} item={selectedIngredient} attributes={attributes} />}
                 { toggleViewAddIngredient }
             </Grid.Column>
         </Grid>
