@@ -14,7 +14,7 @@ const Profile = props => {
     const { first_name, last_name, username, restaurant_name } = user
     const name = `${first_name} ${last_name}`
     return(
-        <Dropdown icon='user'>
+        <Dropdown icon='user' style={{marginTop: 12, marginLeft: 4}}>
             <Dropdown.Menu>
                 <Dropdown.Item text={name}/>
                 <Dropdown.Item text={username} />
