@@ -10,6 +10,7 @@ import OrderList from './components/Orders/OrderList'
 import ProfileEdit from './components/User/ProfileEdit'
 import VendorsContainer from './components/Vendors/VendorsContainer'
 import PendingOrderContainer from './components/Orders/PendingOrderContainer'
+import OrderHistory from './components/Orders/OrderHistory'
 import { useDispatch } from 'react-redux'
 import { currentUser } from './actions/index'
 import { loginIngredients } from './actions/ingredients'
@@ -56,6 +57,7 @@ const App = props => {
           <Route path='/orderList' component={OrderList} />
           <Route path='/vendors' component={VendorsContainer} />
           <Route path='/pendingOrder' component={PendingOrderContainer} />
+          <Route path='/orderHistory' component={OrderHistory} />
         </Switch>
     </div>
   );

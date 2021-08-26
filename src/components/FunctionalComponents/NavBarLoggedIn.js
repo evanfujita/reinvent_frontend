@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import IngredientsDropdown from '../Ingredients/IngredientsDropdown'
 import ProfileDropdown from '../User/ProfileDropdown'
 import PendingOrders from './PendingOrders'
+import OrderHistory from '../Orders/OrderHistory'
 
 const NavBarLoggedIn = props => {
     const { handleClick, handleLogout, page } = props
@@ -14,6 +15,7 @@ const NavBarLoggedIn = props => {
         <>
         <Menu.Item name='ingredients' onClick={handleClick}  active={page === '/ingredients'} id='ingredients' />
         <Menu.Item name='vendors' onClick={handleClick}  active={page === '/vendors'} id='vendors' />
+        <Menu.Item name='orderHistory' onClick={handleClick}  active={page === '/orderHistory'} id='orderHistory' />
         <Menu.Item name='orderList' onClick={handleClick} active={page === '/orderList'} id='orderList'>
             OrderList 
             { label }
